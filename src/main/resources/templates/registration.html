@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Insert title here</title>
+</head>
+<body>
+	<form method="post" th:action="@{/registration}">
+		<p> Nombre: <input type="text" name = "name"> </p> 
+		<p> Contraseña: <input type="password" name = "pwd"> </p> 
+		<p> Repetir contraseña: <input type="password" name = "cpwd"> </p> 
+		<p> Teléfono: <input type="number" name = "tlf"> </p> 
+		<p> Correo: <input type="text" name = "mail"> </p> 
+		<p> Fecha nacimiento: <input type="date" name = "fnac"> </p> 
+		<p> Sexo: 
+			<label> Hombre </label><input type="radio" id="sex" name = "sex" value="Hombre"> </label>
+			<label> Mujer </label><input type="radio" id="sex" name = "sex" value="Mujer"> </label>
+			<label> No Binario </label><input type="radio" id="sex" name = "sex" value="No Binario"> </label>
+		</p> 
+		<input type="submit">
+	</form>
+</body>
+</html>
