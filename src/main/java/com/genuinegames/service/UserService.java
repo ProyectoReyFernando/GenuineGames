@@ -35,6 +35,9 @@ public class UserService implements IUserService {
 		User user = new User(null, userDTO.getName(), userDTO.getPwd(), userDTO.getPwd(), userDTO.getTlf(),
 				userDTO.getMail(), userDTO.getFnac(), userDTO.getSex(), Arrays.asList(new Role("ROLE_USER")));
 
+		user.setPwd(passwordEncoder.encode(user.getPwd()));
+		user.setCpwd(passwordEncoder.encode(user.getCpwd()));
+
 		return userRepository.save(user);
 	}
 
@@ -42,11 +45,7 @@ public class UserService implements IUserService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userRepository.findByName(username);
 
-		if (user == null) {
-			throw new UsernameNotFoundException("Usuario no ha sido encontrado");
-		}
-
-		return new org.springframework.security.core.userdetails.User(user.getName(), new BCryptPasswordEncoder().encode(user.getPwd()),
+		return new org.springframework.security.core.userdetails.User(user.getName(), user.getPwd(),
 				mapRolesToAuthorities(user.getRoles()));
 	}
 

@@ -13,7 +13,7 @@ public class IndexController {
 	
 	@GetMapping("/")
 	public String home() {
-		return "index";
+		return "user/index";
 	}
 	
 }
