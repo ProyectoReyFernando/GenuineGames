@@ -1,31 +1,23 @@
 package com.genuinegames.dto;
 
 import java.sql.Date;
-import java.time.LocalDate;
 
 import javax.persistence.Column;
 
 public class UserDTO {
 
-	@Column(name = "name")
 	private String name;
 
-	@Column(name = "pwd")
 	private String pwd;
 
-	@Column(name = "cpwd")
 	private String cpwd;
 
-	@Column(name = "tlf")
 	private int tlf;
 
-	@Column(name = "mail")
 	private String mail;
 
-	@Column(name = "fnac")
 	private Date fnac;
 
-	@Column(name = "sex")
 	private String sex;
 
 	public UserDTO() {
