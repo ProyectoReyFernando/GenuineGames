@@ -36,8 +36,8 @@ public class UserService implements IUserService {
 		User user = new User(null, userDTO.getName(), userDTO.getPwd(), userDTO.getCpwd(), userDTO.getTlf(),
 				userDTO.getMail(), userDTO.getFnac(), userDTO.getSex(), Arrays.asList(new Role("ROLE_USER")));
 		
-		//user.setPwd(passwordEncoder.encode(userDTO.getPwd()));
-		//user.setCpwd(passwordEncoder.encode(userDTO.getPwd()));
+		user.setPwd(passwordEncoder.encode(userDTO.getPwd()));
+		user.setCpwd(passwordEncoder.encode(userDTO.getPwd()));
 		
 		return userRepository.save(user);
 	}

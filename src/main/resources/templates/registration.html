@@ -7,9 +7,38 @@
     	<script type="text/javascript" src ="js/jquery-3.6.0.min.js"></script>
     	<link rel="stylesheet" href="css/style.css">
 	</head>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#addNewUser').submit(function(){
+				
+				var redirection = false;
+				
+				var name = $('#name').val();
+				var pwd = $('#pwd').val();
+				var cpwd = $('#cpwd').val();
+				var tlf = $('#tlf').val();
+				var mail = $('#mail').val();
+				var fnac = $('#fnac').val();
+				var sex = $('#sex').val();
+				
+				$.ajax({
+					type: 'POST',
+					url: "/registration",
+					data: {name:name, pwd:pwd, cpwd:cpwd, tlf:tlf, mail:mail, fnac:fnac, sex:sex},
+					dataType: 'json',
+					success : function(result) {
+						window.location.href = "/login";
+					},
+					failure: function(result) {
+						alert(result);
+					}
+				});				
+			});
+		});
+	</script>
 	<body>
-		<form th:action="@{/registration}" id="addUser">
-			 <div class="registro-box">
+		<form th:action="@{/login}" id="addNewUser">
+			 <div class="registro-box" id="addNewUser">
 				 <h1>Registrese Aquí</h1>
 				 <label for="user">Usuario</label>
          			<input type="text" id="name" placeholder="Introduzca Usuario">
@@ -34,45 +63,4 @@
         	</div>
 		</form>
 	</body>
-	<script type="text/javascript">
-	$(document).ready(function() {
-		$('#addUser').submit(function(event) {
-			event.preventDefault();
-			ajaxPost();
-		});
-
-		function ajaxPost() {
-			var name = $('name').val();
-			var pwd = $('pwd').val();
-			var cpwd = $('cpwd').val();
-			var tlf = $('tlf').val();
-			var mail = $('mail').val();
-			var fnac = $('fnac').val();
-			var sex = $('sex').val();
-			
-			$.ajax({
-				type : "POST",
-				contentType: "application/json",
-				url: "/registration",
-				dataType : "json",
-				data : {
-					name : name,
-					pwd: pwd,
-					cpwd: cpwd,
-					tlf: tlf,
-					mail: mail,
-					fnac: fnac,
-					sex: sex
-				},
-				success : function(data) {
-					$("#addUser").html("");
-				},
-
-				error : function(e) {
-					alert("Error al registrar el usuario");
-				}
-			});
-		}
-	});
-	</script>
 </html>

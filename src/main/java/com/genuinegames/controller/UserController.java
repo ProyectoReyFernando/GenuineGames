@@ -21,7 +21,7 @@ public class UserController {
 		super();
 		this.userService = userService;
 	}
-	
+
 	@ModelAttribute("user")
 	public UserDTO userDtoRegistration() {
 		return new UserDTO();
@@ -32,7 +32,7 @@ public class UserController {
 		model.addAttribute("user", new UserDTO());
 		return "registration";
 	}
-	
+
 	@PostMapping
 	public String registerNewUser(@ModelAttribute("user") UserDTO userDTO) {
 		userService.saveUser(userDTO);
