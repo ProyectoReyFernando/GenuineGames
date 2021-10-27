@@ -1,11 +1,10 @@
 package com.genuinegames.service;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
+import com.genuinegames.entity.User;
 
-import com.genuinegames.dto.UserDTO;
-import com.genuinegames.model.entity.User;
+public interface IUserService {
 
-public interface IUserService extends UserDetailsService{
-
-	User saveUser (UserDTO userDTO);
+	public User findByUsername(String username);
+	
+	public User registerUser(User user);
 }

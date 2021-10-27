@@ -1,3 +1,14 @@
+<!DOCTYPE html>
 <html>
-	<h1>Bienvenido a la interfaz de user</h1>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<span th:if="${session.user!=null}">Bienvenido/a</span>
+	
+	<form th:action="@{/logout}" method="post">
+		<button>Salir</button>
+	</form>
+</body>
 </html>
