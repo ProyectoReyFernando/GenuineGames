@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/public")
 public class PublicController {
 
-	@GetMapping("/user/inicio")
+	@GetMapping("/inicio")
 	public String index() {
 		return "logout";
 	}

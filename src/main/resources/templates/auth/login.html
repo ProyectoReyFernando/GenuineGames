@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+	<meta charset="utf-8">
+    <title>GG | Genuine Gamers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 	<form method="POST" th:action="@{/auth/login-post}">
-		<label>Nombre</label>
-			<input type="text" name="username">
-		<label>Contrase�a</label>
-			<input type="text" name="password">
-		
-		<input type="submit" value="Enviar">
+		<div class="login-box">
+			<img src="../img/logo-f.png" class="logo">
+			<h1>Entre Aquí</h1>	
+			<label for="user">Usuario</label> 
+				<input type="text" name="username" placeholder="Introduzca Usuario"> 
+			<label for="pwd">Contraseña</label>
+				<input type="password" name="password" placeholder="Introduzca Contraseña">
+			<input type="submit" value="Log In"> 
+			<a th:href="@{/auth/register}">Todavía no tienes cuenta, <b>Unete!</b> </a>
+		</div>
 	</form>
 </body>
 </html>

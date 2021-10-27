@@ -20,13 +20,13 @@
           		<label for="tlf">Teléfono</label>
           			<input type="number" th:field="*{tlf}" placeholder="Introduzca Teléfono">
           		<label for="mail">E-mail</label>
-          			<input type="text" th:field="*{mail}" placeholder="Introduzca E-mail">
+          			<input type="email" th:field="*{mail}" placeholder="Introduzca E-mail">
           	<!-- 	<label for="fnac">Fecha de Nacimiento</label>
          			<input type="datetime-local" th:field="*{fnac}" placeholder="Introduzca su Fecha de Nacimiento"> -->
          		<label for="sex">Sexo</label> <br>
           			<div class="check">Hombre<input type="radio" th:field="*{sex}" name="sex" value="Hombre"></div>
           			<div class="check">Mujer&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" th:field="*{sex}" name="sex" value="Mujer"></div>
-          			<div class="check">No Binario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" th:field="*{sex}" name="sex" value="Mujer"></div>
+          			<div class="check">No Binario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" th:field="*{sex}" name="sex" value="No Binario"></div>
         	<input type="submit" value="Registrate">
         	<a href="@{/auth/login}">Volver al Login</a>
 		</div>
