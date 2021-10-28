@@ -7,4 +7,5 @@ public interface IUserService {
 	public User findByUsername(String username);
 	
 	public User registerUser(User user);
+	
 }

@@ -4,14 +4,22 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ManyToAny;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -35,17 +43,21 @@ public class User implements Serializable {
 	private String mail;
 
 	@Column(name = "fnac")
-	@DateTimeFormat (pattern="dd-MMM-YYYY")
+	@DateTimeFormat(pattern = "dd-MMM-YYYY")
 	private Date fnac;
 
 	@Column(name = "sex")
 	private String sex;
 
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+	private Set<Role> role;
+
 	public User() {
 
 	}
 
-	public User(String username, String pwd, int tlf, String mail, Date fnac, String sex) {
+	public User(String username, String pwd, int tlf, String mail, Date fnac, String sex, Set<Role> role) {
 		super();
 		this.username = username;
 		this.pwd = pwd;
@@ -53,6 +65,7 @@ public class User implements Serializable {
 		this.mail = mail;
 		this.fnac = fnac;
 		this.sex = sex;
+		this.role = role;
 	}
 
 	public Long getId() {
@@ -111,4 +124,13 @@ public class User implements Serializable {
 		this.sex = sex;
 	}
 
+	public Set<Role> getRole() {
+		return role;
+	}
+
+	public void setRole(Set<Role> role) {
+		this.role = role;
+	}
+
+	
 }

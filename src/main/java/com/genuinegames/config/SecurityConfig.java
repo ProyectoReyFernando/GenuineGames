@@ -32,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 			.antMatchers("/", "/auth/**", "/public/**", "/css/**", "/js/**", "/img/**", "/media/**")
 			.permitAll()
+			.antMatchers("/user/*").access("hasAuthority('USER')")
 			.anyRequest().authenticated()
 			.and()
 				.formLogin().loginPage("/auth/login")
@@ -39,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.failureForwardUrl("/auth/login?error=true")
 				.loginProcessingUrl("/auth/login-post").permitAll()
 			.and()
-				.logout().logoutUrl("/logout")
+				.logout().logoutUrl("/logout?success=true")
 				.logoutSuccessUrl("/public/inicio");
 	}
 	
