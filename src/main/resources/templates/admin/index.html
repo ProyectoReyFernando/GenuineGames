@@ -5,7 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<span>Bienvenido/a</span>
+	<span th:if="${session.user!=null}">Bienvenido/a admin</span>
 	
 	<form th:action="@{/logout}" method="post">
 		<button>Salir</button>
