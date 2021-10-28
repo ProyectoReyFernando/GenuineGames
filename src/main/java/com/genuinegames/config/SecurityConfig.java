@@ -7,11 +7,12 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityUserConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private UserDetailsServiceImpl userDetails;
@@ -23,7 +24,13 @@ public class SecurityUserConfig extends WebSecurityConfigurerAdapter {
 			
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetails).passwordEncoder(passwordEncoder());
+		auth
+			.inMemoryAuthentication()
+			.withUser("admin")
+			.password("admin")
+			.roles("ADMIN");
+		auth
+			.userDetailsService(userDetails).passwordEncoder(passwordEncoder());
 	}
 	
 	@Override
@@ -35,7 +42,10 @@ public class SecurityUserConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 			.antMatchers("/", "/auth/**", "/public/**", "/css/**", "/js/**", "/img/**", "/media/**")
 				.permitAll()
-			.antMatchers("/user/**").access("hasAuthority('USER')")
+			.antMatchers("/user/**")
+				.access("hasAuthority('USER')")
+			.antMatchers("/user/**")
+				.access("hasRole('ADMIN')")
 				.anyRequest()
 				.authenticated()
 			.and()

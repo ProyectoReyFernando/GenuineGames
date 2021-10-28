@@ -23,12 +23,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepository;
-		
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
 		User user = userRepository.findByUsername(username);
-
 		UserBuilder builder = null;
 		
 		if(user != null) {
@@ -38,20 +37,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		} else {
 			throw new UsernameNotFoundException("No se pudo encontrar el usuario");
 		}
-	
+		
 		return builder.build();
 	}
 
 	public List<GrantedAuthority>getGrantedAuthority(User user) {
 		List<GrantedAuthority>roleName = new ArrayList<>();
-	
 		Set<Role>roles = user.getRole();
 		
 		try {
 			for (Role role : roles) {
-				roleName.add(new SimpleGrantedAuthority(role.getName()));
+				roleName.add(new SimpleGrantedAuthority(role.getUsername()));
 			}
-			
 		} catch (Exception io){
 			io.printStackTrace();
 		}

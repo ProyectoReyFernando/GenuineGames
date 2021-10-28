@@ -5,6 +5,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -58,14 +59,14 @@ public class AnonController {
 	public String userIndex(Authentication auth, HttpSession session) {
 
 		String username = auth.getName();
-
+		
 		if (session.getAttribute("user") == null
 				&& auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("USER"))) {
 			User user = userService.findByUsername(username);
 			user.setPwd(null);
 			session.setAttribute("user", user);
 		}
-
+		
 		return "user/index";
 	}
 

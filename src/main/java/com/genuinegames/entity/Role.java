@@ -36,7 +36,7 @@ public class Role {
 		this.id = id;
 	}
 
-	public String getName() {
+	public String getUsername() {
 		return name;
 	}
 

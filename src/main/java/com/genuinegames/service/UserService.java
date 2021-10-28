@@ -32,7 +32,7 @@ public class UserService implements IUserService {
 		Role roleUser = new Role();
 		roleUser.setName("USER");
 		role.add(roleUser);
-			
+	
 		user.setPwd(passwordEncoder.encode(user.getPwd()));
 		user.setRole(role);
 		
