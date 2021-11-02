@@ -16,25 +16,40 @@ public class UserService implements IUserService {
 
 	@Autowired
 	private UserRepository userRepository;
-		
+
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-	
+
 	@Override
 	public User findByUsername(String username) {
 		return userRepository.findByUsername(username);
 	}
+	
+	public User registerAdmin(User user) {
+		HashSet<Role> role = new HashSet<>();
+
+		Role roleAdmin = new Role();
+		roleAdmin.setName("ADMIN");
+		role.add(roleAdmin);
+
+		String pwd = user.getPwd();
+		String encryptPwd = passwordEncoder.encode(pwd);
+		user.setPwd(encryptPwd);
+		user.setRole(roleAdmin);
+		
+		return userRepository.save(user);
+	}
 
 	@Override
 	public User registerUser(User user) {
-		Set<Role>role = new HashSet<Role>();
-		
+		Set<Role> role = new HashSet<Role>();
+
 		Role roleUser = new Role();
 		roleUser.setName("USER");
 		role.add(roleUser);
-	
+
 		user.setPwd(passwordEncoder.encode(user.getPwd()));
-		user.setRole(role);
+		user.setRole(roleUser);
 		
 		return userRepository.save(user);
 	}

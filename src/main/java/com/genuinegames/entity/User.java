@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -17,10 +18,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ManyToAny;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "user")
@@ -49,15 +53,14 @@ public class User implements Serializable {
 	@Column(name = "sex")
 	private String sex;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-	private Set<Role> role;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	private Role role;
 
 	public User() {
 
 	}
 
-	public User(String username, String pwd, int tlf, String mail, Date fnac, String sex, Set<Role> role) {
+	public User(String username, String pwd, int tlf, String mail, Date fnac, String sex) {
 		super();
 		this.username = username;
 		this.pwd = pwd;
@@ -65,7 +68,6 @@ public class User implements Serializable {
 		this.mail = mail;
 		this.fnac = fnac;
 		this.sex = sex;
-		this.role = role;
 	}
 
 	public Long getId() {
@@ -124,13 +126,12 @@ public class User implements Serializable {
 		this.sex = sex;
 	}
 
-	public Set<Role> getRole() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(Set<Role> role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 
-	
 }

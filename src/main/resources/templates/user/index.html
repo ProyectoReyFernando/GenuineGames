@@ -5,9 +5,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<span>Bienvenido/a</span>
-	
-	<form th:action="@{/logout}" method="post">
+	<h1 th:if="${session.user.role?.name == 'ADMIN'}">
+		ADMIN
+	</h1>
+	<h1 th:unless="${session.user.role?.name == 'ADMIN'}">
+		USER
+	</h1>
+	<form method="post" th:action="@{/logout}">
 		<button>Salir</button>
 	</form>
 </body>

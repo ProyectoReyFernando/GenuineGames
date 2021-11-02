@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -42,21 +43,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 			.antMatchers("/", "/auth/**", "/public/**", "/css/**", "/js/**", "/img/**", "/media/**")
 				.permitAll()
-			.antMatchers("/user/**")
-				.access("hasAuthority('USER')")
-			.antMatchers("/user/**")
-				.access("hasRole('ADMIN')")
+			.antMatchers("/user")
+				.access("hasAnyAuthority('USER', 'ADMIN')")
 				.anyRequest()
 				.authenticated()
 			.and()
 				.formLogin()
 				.loginPage("/auth/login")
-				.defaultSuccessUrl("/user/index", true)
+				.defaultSuccessUrl("/user/index/", true)
 				.failureForwardUrl("/auth/login?error=true")
 				.loginProcessingUrl("/auth/login-post").permitAll()
 			.and()
-				.logout().logoutUrl("/logout?success=true")
-				.logoutSuccessUrl("/public/inicio");
+				.logout()
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.deleteCookies("JSESSIONID")
+				.logoutSuccessUrl("/");
 		}
 	}
 
