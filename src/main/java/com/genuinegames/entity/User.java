@@ -47,8 +47,7 @@ public class User implements Serializable {
 	private String mail;
 
 	@Column(name = "fnac")
-	@DateTimeFormat(pattern = "dd-MMM-YYYY")
-	private Date fnac;
+	private String fnac;
 
 	@Column(name = "sex")
 	private String sex;
@@ -60,7 +59,7 @@ public class User implements Serializable {
 
 	}
 
-	public User(String username, String pwd, int tlf, String mail, Date fnac, String sex) {
+	public User(String username, String pwd, int tlf, String mail, String fnac, String sex) {
 		super();
 		this.username = username;
 		this.pwd = pwd;
@@ -110,11 +109,11 @@ public class User implements Serializable {
 		this.mail = mail;
 	}
 
-	public Date getFnac() {
+	public String getFnac() {
 		return fnac;
 	}
 
-	public void setFnac(Date fnac) {
+	public void setFnac(String fnac) {
 		this.fnac = fnac;
 	}
 
