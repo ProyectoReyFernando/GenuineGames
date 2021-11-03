@@ -26,8 +26,8 @@ public class AnonController {
 	private IUserService iUserService;
 
 	@GetMapping("/")
-	public String index(Model model) {
-		return "index";
+	public String index() {
+		return "/index";
 	}
 
 	@GetMapping("/auth/register")
