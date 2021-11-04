@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -12,12 +12,324 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="/css/style.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+        <script type="text/javascript" src="/js/scripts.js"></script>
     </head>
     <body>
     <div th:if="${session.user.role?.name == 'ADMIN'}">
-    ADMIN
+    <!--******ADMIN******-->
+    	<!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href=""><img src="/img/logo.png"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">Contacto</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorías</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#!">MOBA</a></li>
+                                <li><a class="dropdown-item" href="#!">Carreras</a></li>
+                                <li><a class="dropdown-item" href="#!">Shooters</a></li>
+                            </ul>
+                        </li>
+                        <!--Panel del ADMIN-->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin Panel</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item text-center" onclick="adminC()"><img src="/img/create.png" class="admin-btn"> Crear</a></li>
+                                <li><a class="dropdown-item text-center" onclick="adminU()"><img src="/img/update.png" class="admin-btn"> Editar</a></li>
+                                <li><a class="dropdown-item text-center" onclick="adminD()"><img src="/img/delete.png" class="admin-btn"> Borrar</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex" method="post" th:action="@{/logout}">
+                            <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="/img/perfil.png" class="perfil"></a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/user/ajustes"><img class="tab-icon icon-ajustes" src="/img/ajustes.png" > Ajustes</a></li>
+                                <li><a class="dropdown-item" href="/user/perfil"><img class="tab-icon icon-avatar" src="/img/avatar.png"> Perfil</a></li>
+                                <li><hr class="dropdown-divider"/></li>
+                                <li><a class="dropdown-item"><img class="tab-icon icon-logout" src="/img/logout.png"><button>Logout</button></a></li>
+                            </ul>
+                        </li>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Genuine Gamers</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">No cumplimos propositos<br><b>Desbloqueamos Logros</b></p>
+                </div>
+            </div>
+        </header>
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="/img/games/lol.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">League Of Legends</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div><img src="/img/dinamic/star-active.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-deactive.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-deactive.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-deactive.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-deactive.png" class="opinions"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Opiniones</a></div>
+                            </div>
+                            <!--Admin Butons-->
+                            <div class="position-absolute btn">
+                                <img src="/img/create.png" class="admin-btn position-absolute" style="display:none" name="create">
+                                <img src="/img/update.png" class="admin-btn position-absolute" style="display:none" name="update">
+                                <img src="/img/delete.png" class="admin-btn position-absolute" style="display:none" name="delete">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            
+                            <!-- Product image-->
+                            <img class="card-img-top" src="/img/games/csgo.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">CSGO</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div><img src="/img/dinamic/star-active.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-active.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-active.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-deactive.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-deactive.png" class="opinions"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Opiniones</a></div>
+                            </div>
+                            <!--Admin Butons-->
+                            <div class="position-absolute btn">
+                                <img src="/img/create.png" class="admin-btn position-absolute" style="display:none" name="create">
+                                <img src="/img/update.png" class="admin-btn position-absolute" style="display:none" name="update">
+                                <img src="/img/delete.png" class="admin-btn position-absolute" style="display:none" name="delete">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="/img/games/GTA_5.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">GTA V</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div><img src="/img/dinamic/star-active.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-active.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-active.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-active.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-active.png" class="opinions"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Opiniones</a></div>
+                            </div>
+                            <!--Admin Butons-->
+                            <div class="position-absolute btn">
+                                <img src="/img/create.png" class="admin-btn position-absolute" style="display:none" name="create">
+                                <img src="/img/update.png" class="admin-btn position-absolute" style="display:none" name="update">
+                                <img src="/img/delete.png" class="admin-btn position-absolute" style="display:none" name="delete">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="/img/games/rocket.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Rocket League</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div><img src="/img/dinamic/star-active.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-active.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-active.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-active.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-deactive.png" class="opinions"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Opiniones</a></div>
+                            </div>
+                            <!--Admin Butons-->
+                            <div class="position-absolute btn">
+                                <img src="/img/create.png" class="admin-btn position-absolute" style="display:none" name="create">
+                                <img src="/img/update.png" class="admin-btn position-absolute" style="display:none" name="update">
+                                <img src="/img/delete.png" class="admin-btn position-absolute" style="display:none" name="delete">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="/img/games/gt_sport.jpg" alt="..."/>
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Gran Turismo Sport</h5>
+                                </div>
+                                <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div><img src="/img/dinamic/star-active.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-active.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-deactive.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-deactive.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-deactive.png" class="opinions"></div>
+                                    </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Opiniones</a></div>
+                            </div>
+                            <!--Admin Butons-->
+                            <div class="position-absolute btn">
+                                <img src="/img/create.png" class="admin-btn position-absolute" style="display:none" name="create">
+                                <img src="/img/update.png" class="admin-btn position-absolute" style="display:none" name="update">
+                                <img src="/img/delete.png" class="admin-btn position-absolute" style="display:none" name="delete">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="/img/games/dota.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Dota 2</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div><img src="/img/dinamic/star-active.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-active.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-deactive.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-deactive.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-deactive.png" class="opinions"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Opiniones</a></div>
+                            </div>
+                            <!--Admin Butons-->
+                            <div class="position-absolute btn">
+                                <img src="/img/create.png" class="admin-btn position-absolute" style="display:none" name="create">
+                                <img src="/img/update.png" class="admin-btn position-absolute" style="display:none" name="update">
+                                <img src="/img/delete.png" class="admin-btn position-absolute" style="display:none" name="delete">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="/img/games/saints.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Saints Row</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div><img src="/img/dinamic/star-active.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-active.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-active.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-deactive.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-deactive.png" class="opinions"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Opiniones</a></div>
+                            </div>
+                            <!--Admin Butons-->
+                            <div class="position-absolute btn">
+                                <img src="/img/create.png" class="admin-btn position-absolute" style="display:none" name="create">
+                                <img src="/img/update.png" class="admin-btn position-absolute" style="display:none" name="update">
+                                <img src="/img/delete.png" class="admin-btn position-absolute" style="display:none" name="delete">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="/img/games/iracing.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">iRacing</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div><img src="/img/dinamic/star-active.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-active.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-active.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-active.png" class="opinions"></div>
+                                        <div><img src="/img/dinamic/star-active.png" class="opinions"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Opiniones</a></div>
+                            </div>
+                            <!--Admin Butons-->
+                            <div class="position-absolute btn">
+                                <img src="/img/create.png" class="admin-btn position-absolute" style="display:none" name="create">
+                                <img src="/img/update.png" class="admin-btn position-absolute" style="display:none" name="update">
+                                <img src="/img/delete.png" class="admin-btn position-absolute" style="display:none" name="delete">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View More</a></div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
     <div th:unless="${session.user.role?.name == 'ADMIN'}">
+    <!--******USER******-->
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
@@ -86,6 +398,12 @@
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Opiniones</a></div>
                             </div>
+                            <!--Admin Butons-->
+                            <div class="position-absolute btn">
+                                <img src="/img/create.png" class="admin-btn position-absolute" style="display:none" name="create">
+                                <img src="/img/update.png" class="admin-btn position-absolute" style="display:none" name="update">
+                                <img src="/img/delete.png" class="admin-btn position-absolute" style="display:none" name="delete">
+                            </div>
                         </div>
                     </div>
                     <div class="col mb-5">
@@ -112,6 +430,12 @@
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Opiniones</a></div>
                             </div>
+                            <!--Admin Butons-->
+                            <div class="position-absolute btn">
+                                <img src="/img/create.png" class="admin-btn position-absolute" style="display:none" name="create">
+                                <img src="/img/update.png" class="admin-btn position-absolute" style="display:none" name="update">
+                                <img src="/img/delete.png" class="admin-btn position-absolute" style="display:none" name="delete">
+                            </div>
                         </div>
                     </div>
                     <div class="col mb-5">
@@ -136,6 +460,12 @@
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Opiniones</a></div>
+                            </div>
+                            <!--Admin Butons-->
+                            <div class="position-absolute btn">
+                                <img src="/img/create.png" class="admin-btn position-absolute" style="display:none" name="create">
+                                <img src="/img/update.png" class="admin-btn position-absolute" style="display:none" name="update">
+                                <img src="/img/delete.png" class="admin-btn position-absolute" style="display:none" name="delete">
                             </div>
                         </div>
                     </div>
@@ -162,6 +492,12 @@
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Opiniones</a></div>
                             </div>
+                            <!--Admin Butons-->
+                            <div class="position-absolute btn">
+                                <img src="/img/create.png" class="admin-btn position-absolute" style="display:none" name="create">
+                                <img src="/img/update.png" class="admin-btn position-absolute" style="display:none" name="update">
+                                <img src="/img/delete.png" class="admin-btn position-absolute" style="display:none" name="delete">
+                            </div>
                         </div>
                     </div>
                     <div class="col mb-5">
@@ -186,6 +522,12 @@
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Opiniones</a></div>
+                            </div>
+                            <!--Admin Butons-->
+                            <div class="position-absolute btn">
+                                <img src="/img/create.png" class="admin-btn position-absolute" style="display:none" name="create">
+                                <img src="/img/update.png" class="admin-btn position-absolute" style="display:none" name="update">
+                                <img src="/img/delete.png" class="admin-btn position-absolute" style="display:none" name="delete">
                             </div>
                         </div>
                     </div>
@@ -212,6 +554,12 @@
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Opiniones</a></div>
                             </div>
+                            <!--Admin Butons-->
+                            <div class="position-absolute btn">
+                                <img src="/img/create.png" class="admin-btn position-absolute" style="display:none" name="create">
+                                <img src="/img/update.png" class="admin-btn position-absolute" style="display:none" name="update">
+                                <img src="/img/delete.png" class="admin-btn position-absolute" style="display:none" name="delete">
+                            </div>
                         </div>
                     </div>
                     <div class="col mb-5">
@@ -236,6 +584,12 @@
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Opiniones</a></div>
+                            </div>
+                            <!--Admin Butons-->
+                            <div class="position-absolute btn">
+                                <img src="/img/create.png" class="admin-btn position-absolute" style="display:none" name="create">
+                                <img src="/img/update.png" class="admin-btn position-absolute" style="display:none" name="update">
+                                <img src="/img/delete.png" class="admin-btn position-absolute" style="display:none" name="delete">
                             </div>
                         </div>
                     </div>
@@ -262,6 +616,12 @@
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Opiniones</a></div>
                             </div>
+                            <!--Admin Butons-->
+                            <div class="position-absolute btn">
+                                <img src="/img/create.png" class="admin-btn position-absolute" style="display:none" name="create">
+                                <img src="/img/update.png" class="admin-btn position-absolute" style="display:none" name="update">
+                                <img src="/img/delete.png" class="admin-btn position-absolute" style="display:none" name="delete">
+                            </div>
                         </div>
                     </div>
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
@@ -270,14 +630,19 @@
                 </div>
             </div>
         </section>
+      </div>
         <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; GG Team 2021</p></div>
+            <div class="container">
+                <p class="m-0 text-center text-white">
+                    Copyright &copy; GG Team 2021<br>
+                    <a href="https://github.com/ProyectoReyFernando/GenuineGames" title="github" class="fab fa-github" target="_blank"></a>
+                </p>
+            </div>
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="/js/scripts.js"></script>
-    </div>
     </body>
 </html>
