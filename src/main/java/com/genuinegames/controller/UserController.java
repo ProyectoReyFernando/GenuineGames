@@ -10,10 +10,9 @@ public class UserController {
 	public String ajustes() {
 		return "/user/ajustes";
 	}
-
 	@GetMapping("/user/perfil")
 	public String perfil() {
 		return "/user/perfil";
 	}
-
+	
 }
