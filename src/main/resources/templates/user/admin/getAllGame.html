@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>GG - Genuine Gamers</title>
+<!-- Favicon-->
+<link rel="icon" type="image/x-icon" href="/img/logo.png" />
+<!-- Bootstrap icons-->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+	rel="stylesheet" />
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="/css/style.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+<script type="text/javascript" src="/js/scripts.js"></script>
+</head>
+<body>
+	<table class="table table-dark">
+		<thead>
+			<tr>
+				<th scope="col">ID</th>
+				<th scope="col">Name</th>
+				<th scope="col">Category</th>
+				<th scope="col">Description</th>
+				<th scope="col">Image</th>
+				<th scope="col">Update</th>
+				<th scope="col">Delete</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="game:${games}">
+				<td th:text="${game.id}"></td>
+				<td th:text="${game.name}"></td>
+				<td th:text="${game.category}"></td>
+				<td th:text="${game.description}"></td>
+				<td th:text="${game.img}"></td>
+				<td>
+					<a href="/user/admin/updateGame" class="btn btn-warning">Update</a>
+				</td>
+				<td>
+					<a href="/user/admin/deleteGame" class="btn btn-danger">Delete</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<a href="/user/admin/createGame" class="btn btn-primary">Create</a>	
+</body>
+</html>

@@ -11358,3 +11358,16 @@ textarea.form-control-lg {
   margin: 0.7%;
   border-radius: 10px;
 }
+.admin-btn{
+  height: 35px;
+ -webkit-transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  margin-right: 10px;
+}
+.admin-btn:hover{
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}

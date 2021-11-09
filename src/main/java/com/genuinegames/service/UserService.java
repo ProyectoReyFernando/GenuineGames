@@ -1,22 +1,36 @@
 package com.genuinegames.service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.genuinegames.entity.Game;
 import com.genuinegames.entity.Role;
 import com.genuinegames.entity.User;
+import com.genuinegames.repository.GameRepository;
 import com.genuinegames.repository.UserRepository;
 
+/**
+ * @author CGonz
+ *
+ */
 @Service
-public class UserService implements IUserService {
+public class UserService implements IUserService, IGameService {
 
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private GameRepository gameRepository;
+	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
@@ -52,6 +66,34 @@ public class UserService implements IUserService {
 		user.setRole(roleUser);
 		
 		return userRepository.save(user);
+	}
+
+	// GAMES
+	@Override
+	public Game createGame(Game game) {
+		return gameRepository.save(game);
+	}
+	
+	@Transactional
+	@Override
+	public String deleteGame(Long id) {
+		if(gameRepository.findById(id).isPresent()) {
+			gameRepository.deleteById(id);
+			return "redirect:/";
+		} else {
+			return "No se pudo realizar la acción";
+		}
+	}
+
+	@Override
+	public String updateGame(Long id, Game game) {
+		if(gameRepository.findById(id).isPresent()) {
+			game.setName(game.getName());
+			gameRepository.save(game);
+			return "redirect:/";
+		} else {
+			return "No se pudo realizar la acción";
+		}
 	}
 
 }

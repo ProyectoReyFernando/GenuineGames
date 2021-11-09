@@ -1,5 +1,6 @@
 package com.genuinegames.service;
 
+import com.genuinegames.entity.Game;
 import com.genuinegames.entity.User;
 
 public interface IUserService {

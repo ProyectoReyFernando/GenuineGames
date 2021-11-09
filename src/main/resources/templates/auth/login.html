@@ -10,41 +10,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
 	<link rel="stylesheet" href="../css/style-log.css">
-	<script type="text/javascript">
-		var comUser = false;
-		var comPwd = false;
-		function valuser() {
-			var user = document.getElementById('user').value;
-			var userER = /^([a-zA-Z]|[0-9]){6,50}/;
-			if (userER.test(user)) {
-				document.getElementById('user').style.color = "white";
-			}
-			else {
-				document.getElementById('user').style.color = "red";
-				document.getElementById('caja_error').hidden = false;
-			}
-		}
-		function valpwd() {
-			var pwd = document.getElementById('pwd').value;
-			var pwdER = /^^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{6,14}$/;
-			if (pwdER.test(pwd)) {
-				document.getElementById('pwd').style.color = "white";
-				comPwd = true;
-			}
-			else {
-				document.getElementById('pwd').style.color = "red";
-				document.getElementById('caja_error').hidden = false;
-			}
-		}
-		function valf() {
-			if ((comUser == true) && (comPwd == true)) {
-				document.loginform.submit();
-			}
-			else {
-				document.getElementById('caja_error').hidden = false;
-			}
-		}      
-	</script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+    <script type="text/javascript" src="../js/scripts.js"></script>
 </head>
 
 <body>
@@ -64,12 +31,8 @@
 				<br>
 				<a th:href="@{/auth/register}">Todavía no tienes cuenta, <b>Unete!</b></a>
 				<br><br>
-				<div class="card alert-warning" hidden="true" id="caja_error">
-					<object type="text/html" data="/interfaz_amigable.html" width="100" height="100"></object>
-				</div>
 			</form>
 		</div>
 </body>
 </div>
-
 </html>
