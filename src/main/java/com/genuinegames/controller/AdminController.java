@@ -68,14 +68,15 @@ public class AdminController {
 	}
 	
 	@GetMapping("/user/admin/updateGame/{id}")
-	public String updateGame(ModelMap model) {
+	public String updateGame(@PathVariable Long id, ModelMap model) {
+		model.addAttribute("game", gameRepository.findById(id));
 		return "/user/admin/updateGame";
 	}
 	
 	@PostMapping("/user/admin/updateGame/{id}")
 	public String updateGame(Long id, Game game) {
 		new ResponseEntity<>(iGameService.updateGame(id, game), HttpStatus.OK);
-		return "redirect:/user/index";
+		return "redirect:/user/admin/getAllGame";
 	}
 
 }

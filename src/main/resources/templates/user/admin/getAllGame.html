@@ -39,7 +39,8 @@
 				<td th:text="${game.category}"></td>
 				<td th:text="${game.description}"></td>
 				<td th:text="${game.img}"></td>
-				<td></td>
+				<td><a th:href="@{/user/admin/updateGame/{id}(id=${game.id})}"
+					class="btn btn-warning">Update</a></td>
 				<td><a th:href="@{/user/admin/deleteGame/{id}(id=${game.id})}"
 					class="btn btn-danger">Delete</a></td>
 			</tr>

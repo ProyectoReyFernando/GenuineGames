@@ -6,9 +6,14 @@
 </head>
 <body>
 	<h1>Update Game</h1>	
-	<form method="post">
+	<form method="post" th:object="${game}">
+		<input type="hidden" th:field="*{id}">
 		<label>Nuevo nombre</label>
 			<input type="text" name="name">
+		<label>Category</label>
+			<input type="text" id="category" name="category">
+		<label>Description</label>
+			<input type="text" id="description" name="description"> 
 		<input type="submit" value="Enviar">
 	</form>
 </body>
