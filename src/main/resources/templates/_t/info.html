@@ -1,0 +1,8 @@
+<div class="container">
+	<h4 th:class="|alert alert-${severity}|" th:text="${mensaje}">
+	</h4>
+
+	<form th:action="${link}" method="get">
+		<input class="button" type="submit" value="Volver" autofocus="autofocus">
+	</form>
+</div>
