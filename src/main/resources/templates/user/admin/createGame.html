@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>GG - Genuine Gamers</title>
+<!-- Favicon-->
+<link rel="icon" type="image/x-icon" href="/img/logo.png" />
+<!-- Bootstrap icons-->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+	rel="stylesheet" />
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="/css/style.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script>
+	$(document).ready(function() {
+		$('#addNewGame').click(function() {
+			var name = $('#name').val();
+			var category = $('#category').val();
+			var description = $('#description').val();
+			var img = $('#img').val();
+			
+			$.ajax({
+				method : 'POST',
+				url: '/user/admin/createGame',
+				data : JSON.stringify({name:name, category:category, description:description, img:img}),
+				contentType: 'application/json; charset=utf-8',
+				success: function() {
+					alert("Saved successfully");
+					window.location	= "/user/admin/getAllGame";
+				},
+				error: function() {
+					alert("No se pudo crear");
+				}
+			})
+		})
+	});
+</script>
+</head>
+<body>
+	<h1>Create Game</h1>
+	<form enctype="multipart/form-data">
+		<label>Name</label> 
+			<input type="text" id="name" name="name">
+		<label>Category</label>
+			<input type="text" id="category" name="category">
+		<label>Description</label>
+			<input type="text" id="description" name="description"> 
+<!-- 		<label>Upload Image</label> -->
+<!-- 			<input type="file" id="img" name="img"> -->
+		<input type="button" id="addNewGame" value="Enviar">
+	</form>
+</body>
+</html>
