@@ -33,8 +33,10 @@
           <input type="date" th:field="*{fnac}" placeholder="Introduzca su Fecha de Nacimiento" onblur="valdate()" id="date" required value="1999-12-04">
         <label for="sex">Sexo</label>
         <br>
-          <div class="check">Hombre<input type="radio" value="Hombre" name="sex" onchange="valsex()" required></div>
-          <div class="check">Mujer&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="Mujer" name="sex" onchange="valsex()" required></div>
+        <!--
+          <div class="check">Hombre<input type="radio" value="h" name="sex" value="h" onchange="valsex()" required></div>
+          <div class="check">Mujer&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="f" name="sex" onchange="valsex()" required></div>
+         -->
         <button id="submit" value="Registrate" onclick="valf()">Registrate</button>
         <a th:href="@{/auth/login}">Volver al Login</a>
       </form>

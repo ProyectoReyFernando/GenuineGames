@@ -2,6 +2,15 @@ package com.genuinegames.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.SQLException;
+import java.util.Base64;
+import java.util.HashMap;
+
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -44,29 +53,32 @@ public class AdminController {
 		return "redirect:/auth/login";
 	}
 	
-	/* GAMES */
+	/* GAMES */ 
 	@GetMapping("/user/admin/getAllGame")
 	public String getAllGame(Long id, ModelMap model) {
 		model.put("games", gameRepository.findAll());
 		return "/user/admin/getAllGame";
 	}
 	
+	// CREATE 
 	@GetMapping("/user/admin/createGame")
 	public String createGame() {
 		return "/user/admin/createGame";
 	}
 	
 	@PostMapping("/user/admin/createGame")
-	public void createGame(@RequestBody Game game){
+	public void createGame(@RequestBody Game game) {
 		new ResponseEntity<>(iGameService.createGame(game), HttpStatus.OK);
 	}
 	
+	//DELETE
 	@GetMapping("/user/admin/deleteGame/{id}")
 	public String deleteGame(@PathVariable Long id) {
 		new ResponseEntity<>(iGameService.deleteGame(id), HttpStatus.OK);
 		return "redirect:/user/admin/getAllGame";
 	}
 	
+	//UPDATE
 	@GetMapping("/user/admin/updateGame/{id}")
 	public String updateGame(@PathVariable Long id, ModelMap model) {
 		model.addAttribute("game", gameRepository.findById(id));

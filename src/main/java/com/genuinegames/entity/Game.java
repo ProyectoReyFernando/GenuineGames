@@ -8,9 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
-import org.apache.tomcat.jni.File;
-import org.springframework.web.multipart.MultipartFile;
-
 @Entity
 @Table(name = "game")
 public class Game {
@@ -24,7 +21,7 @@ public class Game {
 
 	@Column(name = "img")
 	@Lob
-	private MultipartFile img;
+	private String img;
 
 	@Column(name = "category")
 	private String category;
@@ -59,11 +56,11 @@ public class Game {
 		this.name = name;
 	}
 
-	public MultipartFile getImg() {
+	public String getImg() {
 		return img;
 	}
 
-	public void setImg(MultipartFile img) {
+	public void setImg(String img) {
 		this.img = img;
 	}
 

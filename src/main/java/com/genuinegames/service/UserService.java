@@ -1,5 +1,7 @@
 package com.genuinegames.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,6 +13,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.genuinegames.entity.Game;
 import com.genuinegames.entity.Role;
@@ -30,7 +33,7 @@ public class UserService implements IUserService, IGameService {
 
 	@Autowired
 	private GameRepository gameRepository;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
@@ -38,7 +41,7 @@ public class UserService implements IUserService, IGameService {
 	public User findByUsername(String username) {
 		return userRepository.findByUsername(username);
 	}
-	
+
 	public User registerAdmin(User user) {
 		HashSet<Role> role = new HashSet<>();
 
@@ -50,7 +53,7 @@ public class UserService implements IUserService, IGameService {
 		String encryptPwd = passwordEncoder.encode(pwd);
 		user.setPwd(encryptPwd);
 		user.setRole(roleAdmin);
-		
+
 		return userRepository.save(user);
 	}
 
@@ -64,20 +67,20 @@ public class UserService implements IUserService, IGameService {
 
 		user.setPwd(passwordEncoder.encode(user.getPwd()));
 		user.setRole(roleUser);
-		
+
 		return userRepository.save(user);
 	}
 
 	// GAMES
 	@Override
-	public Game createGame(Game game) {
+	public Game createGame(Game game){
 		return gameRepository.save(game);
 	}
-	
+
 	@Transactional
 	@Override
 	public String deleteGame(Long id) {
-		if(gameRepository.findById(id).isPresent()) {
+		if (gameRepository.findById(id).isPresent()) {
 			gameRepository.deleteById(id);
 			return "redirect:/";
 		} else {
@@ -87,7 +90,7 @@ public class UserService implements IUserService, IGameService {
 
 	@Override
 	public String updateGame(Long id, Game game) {
-		if(gameRepository.findById(id).isPresent()) {
+		if (gameRepository.findById(id).isPresent()) {
 			game.setName(game.getName());
 			gameRepository.save(game);
 			return "redirect:/";
