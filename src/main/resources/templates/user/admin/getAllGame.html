@@ -15,7 +15,8 @@
 	rel="stylesheet" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/css/style.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
 <script type="text/javascript" src="/js/scripts.js"></script>
 </head>
 <body>
@@ -38,15 +39,12 @@
 				<td th:text="${game.category}"></td>
 				<td th:text="${game.description}"></td>
 				<td th:text="${game.img}"></td>
-				<td>
-					<a href="/user/admin/updateGame" class="btn btn-warning">Update</a>
-				</td>
-				<td>
-					<a href="/user/admin/deleteGame" class="btn btn-danger">Delete</a>
-				</td>
+				<td></td>
+				<td><a th:href="@{/user/admin/deleteGame/{id}(id=${game.id})}"
+					class="btn btn-danger">Delete</a></td>
 			</tr>
 		</tbody>
 	</table>
-	<a href="/user/admin/createGame" class="btn btn-primary">Create</a>	
+	<a href="/user/admin/createGame" class="btn btn-primary">Create</a>
 </body>
 </html>

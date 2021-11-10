@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,23 +61,18 @@ public class AdminController {
 		new ResponseEntity<>(iGameService.createGame(game), HttpStatus.OK);
 	}
 	
-	@GetMapping("/user/admin/deleteGame")
-	public String deleteGame() {
-		return "/user/admin/deleteGame";
-	}
-	
-	@PostMapping("/user/admin/deleteGame")
-	public String deleteGame(Long id) {
+	@GetMapping("/user/admin/deleteGame/{id}")
+	public String deleteGame(@PathVariable Long id) {
 		new ResponseEntity<>(iGameService.deleteGame(id), HttpStatus.OK);
-		return "redirect:/user/index";
+		return "redirect:/user/admin/getAllGame";
 	}
 	
-	@GetMapping("/user/admin/updateGame")
+	@GetMapping("/user/admin/updateGame/{id}")
 	public String updateGame(ModelMap model) {
 		return "/user/admin/updateGame";
 	}
 	
-	@PostMapping("/user/admin/updateGame")
+	@PostMapping("/user/admin/updateGame/{id}")
 	public String updateGame(Long id, Game game) {
 		new ResponseEntity<>(iGameService.updateGame(id, game), HttpStatus.OK);
 		return "redirect:/user/index";
