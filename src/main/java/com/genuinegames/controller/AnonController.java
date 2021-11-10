@@ -1,5 +1,7 @@
 package com.genuinegames.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -7,12 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.genuinegames.entity.Game;
 import com.genuinegames.entity.User;
+import com.genuinegames.repository.GameRepository;
 import com.genuinegames.service.IUserService;
 import com.genuinegames.service.UserService;
 
@@ -21,6 +26,8 @@ public class AnonController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private GameRepository Gamerepository;
 
 	@Autowired
 	private IUserService iUserService;
@@ -53,10 +60,11 @@ public class AnonController {
 	}
 
 	@GetMapping("/user/index")
-	public String userIndex(Authentication auth, HttpSession session) {
+	public String userIndex(Authentication auth, HttpSession session, ModelMap model) {
 
 		String username = auth.getName();
 		String redirect = null;
+		model.put("games", Gamerepository.findAll());
 		
 		if (session.getAttribute("user") == null) {
 			User user = userService.findByUsername(username);
