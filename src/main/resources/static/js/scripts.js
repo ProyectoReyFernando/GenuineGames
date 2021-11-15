@@ -197,64 +197,86 @@ function valf() {
 }
 /*--------- ------------------------------------------------------------------------------------*/
 var j = 0;
+var auxiliar = false;
+var GG = true;
+$(document).ready(function() {
+	caja3();
+});
+function caja3() {
+	if (GG == true) {
+		caja2();
+		GG = false;
+	}
+}
 function caja2() {
-	cajas();
-	cajas();
+	console.log("entra");
+	if (auxiliar == false) {
+		for (var y = 0; y < 8; y++) {
+			cajas();
+		}
+		auxiliar = true;
 
+	}
+	else if (auxiliar == true) {
+		for (var z = 0; z < 2; z++) {
+			cajas();
+			console.log(auxiliar);
+		}
+
+	}
+	else {
+	}
 };
 function cajas() {
 	var name = document.getElementsByTagName("td");
-	for (var h = 0; h < 4; h++){ 
-	console.log(h);
-		for (j; j < name.length; j = j + 5) {
-			console.log(h);
-			var nombre = name[j + 1].innerHTML;
-			var col = document.createElement("div");
-			var carta = document.createElement("div");
-			var img = document.createElement("img");
-			var cartab = document.createElement("div");
-			var tcenter = document.createElement("div");
-			var name = document.createElement("h5");
-			var title = document.createTextNode(nombre);
-			var rev = document.createElement("div");
-			var opi = document.createElement("div");
-			var opiC = document.createElement("div");
-			var opiA = document.createElement("a");
-			var opiTn = document.createTextNode("Opiniones");
-			opiA.href = "#";
-			opiA.className = "btn btn-outline-dark mt-auto";
-			opiC.className = "text-center";
-			opi.className = "card-footer p-4 pt-0 border-top-0 bg-transparent";
-			rev.className = "d-flex justify-content-center small text-warning mb-2";
-			opiTn.className = name[j];
-			name.className = "fw-bolder";
-			name.text = "League of Legends";
-			tcenter.className = "text-center";
-			cartab.className = "card-body p-4";
-			img.className = "card-img-top";
-			img.src = "/img/games/lol.jpg";
-			col.className = "col mb-5";
-			carta.className = "card h-100";
-			name.appendChild(title);
-			tcenter.appendChild(name);
-			for (var i = 0; i < 5; i++) {
-				var divV = document.createElement("div");
-				var punt = document.createElement("img");
-				punt.className = "opinions";
-				punt.src = "/img/dinamic/star-active.png";
-				divV.appendChild(punt);
-				rev.appendChild(divV);
-			}
-			tcenter.appendChild(rev);
-			cartab.appendChild(tcenter);
-			carta.appendChild(img);
-			carta.appendChild(cartab);
-			opiA.appendChild(opiTn);
-			opiC.appendChild(opiA);
-			opi.appendChild(opiC);
-			carta.appendChild(opi);
-			col.appendChild(carta);
-			caja.appendChild(col);
+	for (j; j < name.length; j = j + 5) {
+		var nombre = name[j + 1].innerHTML;
+		var col = document.createElement("div");
+		var carta = document.createElement("div");
+		var img = document.createElement("img");
+		var cartab = document.createElement("div");
+		var tcenter = document.createElement("div");
+		var name = document.createElement("h5");
+		var title = document.createTextNode(nombre);
+		var rev = document.createElement("div");
+		var opi = document.createElement("div");
+		var opiC = document.createElement("div");
+		var opiA = document.createElement("a");
+		var opiTn = document.createTextNode("Opiniones");
+		var caja = document.getElementById("caja");
+		opiA.href = "#";
+		opiA.className = "btn btn-outline-dark mt-auto";
+		opiC.className = "text-center";
+		opi.className = "card-footer p-4 pt-0 border-top-0 bg-transparent";
+		rev.className = "d-flex justify-content-center small text-warning mb-2";
+		opiTn.className = name[j];
+		name.className = "fw-bolder";
+		name.text = "League of Legends";
+		tcenter.className = "text-center";
+		cartab.className = "card-body p-4";
+		img.className = "card-img-top";
+		img.src = "/img/games/lol.jpg";
+		col.className = "col mb-5";
+		carta.className = "card h-100";
+		name.appendChild(title);
+		tcenter.appendChild(name);
+		for (var i = 0; i < 5; i++) {
+			var divV = document.createElement("div");
+			var punt = document.createElement("img");
+			punt.className = "opinions";
+			punt.src = "/img/dinamic/star-active.png";
+			divV.appendChild(punt);
+			rev.appendChild(divV);
 		}
+		tcenter.appendChild(rev);
+		cartab.appendChild(tcenter);
+		carta.appendChild(img);
+		carta.appendChild(cartab);
+		opiA.appendChild(opiTn);
+		opiC.appendChild(opiA);
+		opi.appendChild(opiC);
+		carta.appendChild(opi);
+		col.appendChild(carta);
+		caja.appendChild(col);
 	}
 }

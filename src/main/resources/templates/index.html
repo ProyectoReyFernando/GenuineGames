@@ -1,6 +1,18 @@
+
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+<table class="table table-dark" style="display:none">
+				<tbody>
+					<tr th:each="game:${games}">
+						<td th:text="${game.id}" id="idjuego" th:value="${game.id}"></td>
+						<td th:text="${game.name}" id="namejuego"th:value="${game.name}"></td>
+						<td th:text="${game.category}" id="catjuego"th:value="${game.category}"></td>
+						<td th:text="${game.description}" id="descjuego"th:value="${game.description}"></td>
+						<td th:text="${game.img}" id="imgjuego"th:value="${game.id}"></td>
+					</tr>
+				</tbody>
+			</table>
+    <head >
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -13,6 +25,7 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/style.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+        <script type="text/javascript" src="/js/jquery.js"></script>
         <script type="text/javascript" src="/js/scripts.js"></script>
     </head>
     <body>
@@ -57,210 +70,12 @@
         <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="img/games/lol.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">League Of Legends</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div><img src="img/dinamic/star-active.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-deactive.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-deactive.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-deactive.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-deactive.png" class="opinions"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Opiniones</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            
-                            <!-- Product image-->
-                            <img class="card-img-top" src="img/games/csgo.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">CSGO</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div><img src="img/dinamic/star-active.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-active.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-active.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-deactive.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-deactive.png" class="opinions"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Opiniones</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="img/games/GTA_5.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">GTA V</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div><img src="img/dinamic/star-active.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-active.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-active.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-active.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-active.png" class="opinions"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Opiniones</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="img/games/rocket.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Rocket League</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div><img src="img/dinamic/star-active.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-active.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-active.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-active.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-deactive.png" class="opinions"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Opiniones</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="img/games/gt_sport.jpg" alt="..."/>
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Gran Turismo Sport</h5>
-                                </div>
-                                <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div><img src="img/dinamic/star-active.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-active.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-deactive.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-deactive.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-deactive.png" class="opinions"></div>
-                                    </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Opiniones</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="img/games/dota.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Dota 2</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div><img src="img/dinamic/star-active.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-active.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-deactive.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-deactive.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-deactive.png" class="opinions"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Opiniones</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="img/games/saints.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Saints Row</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div><img src="img/dinamic/star-active.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-active.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-active.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-deactive.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-deactive.png" class="opinions"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Opiniones</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="img/games/iracing.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">iRacing</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div><img src="img/dinamic/star-active.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-active.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-active.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-active.png" class="opinions"></div>
-                                        <div><img src="img/dinamic/star-active.png" class="opinions"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Opiniones</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View More</a></div>
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" id="caja" onload="caja2()">
+                
+   
+                       </div> 
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" >
+                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" onclick="caja2()">View More</a></div>
                     </div>
                 </div>
             </div>
