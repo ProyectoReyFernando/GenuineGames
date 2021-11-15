@@ -27,13 +27,14 @@ public class AnonController {
 	@Autowired
 	private UserService userService;
 	@Autowired
-	private GameRepository Gamerepository;
+	private GameRepository gameRepository;
 
 	@Autowired
 	private IUserService iUserService;
 
 	@GetMapping("/")
-	public String index() {
+	public String index(Model model) {
+		model.addAttribute("games", gameRepository.findAll());
 		return "/index";
 	}
 
@@ -64,7 +65,7 @@ public class AnonController {
 
 		String username = auth.getName();
 		String redirect = null;
-		model.put("games", Gamerepository.findAll());
+		model.put("games", gameRepository.findAll());
 		
 		if (session.getAttribute("user") == null) {
 			User user = userService.findByUsername(username);
