@@ -50,6 +50,16 @@
             </div>
         </nav>
         <!-- Section-->
+        				<tbody>
+					<tr th:each="sesiones:session">
+						<td th:text="${game.id}" id="idjuego" th:value="${game.id}"></td>
+						<td th:text="${game.name}" id="namejuego"th:value="${game.name}"></td>
+						<td th:text="${game.category}" id="catjuego"th:value="${game.category}"></td>
+						<td th:text="${game.description}" id="descjuego"th:value="${game.description}"></td>
+						<td th:text="${game.img}" id="imgjuego"th:value="${game.id}"></td>
+					</tr>
+				</tbody>
+			</table>
         <section class="bg-dark py-perfil d-flex flex-row justify-content-center alig-items-center">
             <div class="container card col-lg-11 col-md-6">
                 <div class="row container">

@@ -23,8 +23,7 @@ public class Game {
 	private String name;
 
 	@Column(name = "img")
-	@Lob
-	private MultipartFile img;
+	private String img;
 
 	@Column(name = "category")
 	private String category;
@@ -36,11 +35,12 @@ public class Game {
 		super();
 	}
 
-	public Game(String name, String category, String description) {
+	public Game(String name, String category,String img, String description) {
 		super();
 		this.name = name;
 		this.category = category;
 		this.description = description;
+		this.img = img;
 	}
 
 	public Long getId() {
@@ -59,11 +59,11 @@ public class Game {
 		this.name = name;
 	}
 
-	public MultipartFile getImg() {
+	public String getImg() {
 		return img;
 	}
 
-	public void setImg(MultipartFile img) {
+	public void setImg(String img) {
 		this.img = img;
 	}
 
