@@ -19,12 +19,11 @@ public class Game {
 	@Column(name = "name")
 	private String name;
 
-	@Column(name = "img")
-	@Lob
-	private String img;
-
 	@Column(name = "category")
 	private String category;
+
+	@Column(name = "img")
+	private String img;
 
 	@Column(name = "description")
 	private String description;
@@ -33,10 +32,11 @@ public class Game {
 		super();
 	}
 
-	public Game(String name, String category, String description) {
+	public Game(String name, String category, String img, String description) {
 		super();
 		this.name = name;
 		this.category = category;
+		this.img = img;
 		this.description = description;
 	}
 
@@ -56,20 +56,20 @@ public class Game {
 		this.name = name;
 	}
 
-	public String getImg() {
-		return img;
-	}
-
-	public void setImg(String img) {
-		this.img = img;
-	}
-
 	public String getCategory() {
 		return category;
 	}
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 	public String getDescription() {

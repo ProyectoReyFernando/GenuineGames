@@ -24,12 +24,11 @@
 			var name = $('#name').val();
 			var category = $('#category').val();
 			var description = $('#description').val();
-			var img = $('#img').val();
 			
 			$.ajax({
 				method : 'POST',
 				url: '/user/admin/createGame',
-				data : JSON.stringify({name:name, category:category, description:description, img:img}),
+				data : JSON.stringify({name:name, category:category, description:description}),
 				contentType: 'application/json; charset=utf-8',
 				success: function() {
 					alert("Saved successfully");
@@ -45,15 +44,13 @@
 </head>
 <body>
 	<h1>Create Game</h1>
-	<form enctype="multipart/form-data">
+	<form>
 		<label>Name</label> 
 			<input type="text" id="name" name="name">
 		<label>Category</label>
 			<input type="text" id="category" name="category">
 		<label>Description</label>
 			<input type="text" id="description" name="description"> 
-<!-- 		<label>Upload Image</label> -->
-<!-- 			<input type="file" id="img" name="img"> -->
 		<input type="button" id="addNewGame" value="Enviar">
 	</form>
 </body>

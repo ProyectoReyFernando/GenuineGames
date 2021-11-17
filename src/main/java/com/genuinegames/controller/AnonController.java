@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.genuinegames.entity.Game;
 import com.genuinegames.entity.User;
 import com.genuinegames.repository.GameRepository;
 import com.genuinegames.service.IUserService;
@@ -26,6 +25,7 @@ public class AnonController {
 
 	@Autowired
 	private UserService userService;
+
 	@Autowired
 	private GameRepository gameRepository;
 
@@ -66,17 +66,17 @@ public class AnonController {
 		String username = auth.getName();
 		String redirect = null;
 		model.put("games", gameRepository.findAll());
-		
+
 		if (session.getAttribute("user") == null) {
 			User user = userService.findByUsername(username);
 			user.setPwd(null);
 			session.setAttribute("user", user);
 			redirect = "/user/index";
-		} 
-		
+		}
+
 		return redirect;
 	}
-	
+
 	@PostMapping("/logout")
 	public String logout() {
 		return "/";

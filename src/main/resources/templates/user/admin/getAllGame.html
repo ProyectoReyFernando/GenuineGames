@@ -28,6 +28,7 @@
 				<th scope="col">Category</th>
 				<th scope="col">Description</th>
 				<th scope="col">Image</th>
+				<th scope="col">Upload Image</th>
 				<th scope="col">Update</th>
 				<th scope="col">Delete</th>
 			</tr>
@@ -38,7 +39,10 @@
 				<td th:text="${game.name}"></td>
 				<td th:text="${game.category}"></td>
 				<td th:text="${game.description}"></td>
-				<td th:text="${game.img}"></td>
+				<td><img th:src="@{'/img/'+${game.img}}" th:alt="${game.img}"
+					style=max-width:15%></td>
+				<td><a th:href="@{/user/admin/uploadImage/{id}(id=${game.id})}"
+					class="btn btn-primary">Upload Image</a>
 				<td><a th:href="@{/user/admin/updateGame/{id}(id=${game.id})}"
 					class="btn btn-warning">Update</a></td>
 				<td><a th:href="@{/user/admin/deleteGame/{id}(id=${game.id})}"
