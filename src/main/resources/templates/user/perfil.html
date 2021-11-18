@@ -46,20 +46,6 @@
 							<li><a class="dropdown-item" href="#!">Shooters</a></li>
 						</ul></li>
 				</ul>
-				<table>
-					<thead>
-						<tr>
-							<th scope="col">Name</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="usuario:${user}">
-							<td th:text="${usuario.username}"></td>
-							<td th:text="${usuario.fnac}"></td>
-							<td th:text="${usuario.mail}"></td>
-						</tr>
-					</tbody>
-				</table>
 				<form class="d-flex">
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
@@ -82,21 +68,20 @@
 		</div>
 	</nav>
 	<!-- Section-->
-	<section
-		class="bg-dark py-perfil d-flex flex-row justify-content-center alig-items-center">
+	<section class="bg-dark py-perfil d-flex flex-row justify-content-center alig-items-center" th:each="usuario:${user}">
 		<div class="container card col-lg-11 col-md-6">
 			<div class="row container">
 				<div class="col-lg-3 col-md-6 m-3">
 					<div class="card" style="width: 18rem;">
 						<img src="/img/perfil.png" class="card-img-top" alt="...">
 						<div class="card-body">
-							<h5 class="card-title">Manolito34</h5>
+							<h5 class="card-title" th:text="${usuario.username}"></h5>
 						</div>
 						<ul class="list-group list-group-flush">
-							<li class="list-group-item">68549027</li>
-							<li class="list-group-item">manolito34@yahoo.es</li>
-							<li class="list-group-item">01/08/1969</li>
-							<li class="list-group-item">Hombre</li>
+							<li class="list-group-item" th:text="${usuario.tlf}"></li>
+							<li class="list-group-item" th:text="${usuario.mail}"></li>
+							<li class="list-group-item" th:text="${usuario.fnac}"></li>
+							<li class="list-group-item" th:text="${usuario.sex}"></li>
 						</ul>
 					</div>
 				</div>

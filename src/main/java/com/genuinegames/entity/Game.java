@@ -19,11 +19,11 @@ public class Game {
 	@Column(name = "name")
 	private String name;
 
-	@Column(name = "category")
-	private String category;
-
 	@Column(name = "img")
 	private String img;
+
+	@Column(name = "category")
+	private String category;
 
 	@Column(name = "description")
 	private String description;
@@ -32,12 +32,13 @@ public class Game {
 		super();
 	}
 
-	public Game(String name, String category, String img, String description) {
+	public Game(String name, String category,String img, String description) {
 		super();
 		this.name = name;
 		this.category = category;
 		this.img = img;
 		this.description = description;
+		this.img = img;
 	}
 
 	public Long getId() {

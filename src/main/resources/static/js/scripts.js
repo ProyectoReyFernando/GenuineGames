@@ -193,7 +193,6 @@ $(document).ready(function() {
 function caja3() {
 	if (GG == true) {
 		caja2();
-		console.log("entra aqui")
 		GG = false;
 	}
 }
@@ -202,7 +201,6 @@ function caja2() {
 	if (auxiliar == false) {
 		console.log("y va 8");
 		for (var y = 0; y < 2; y++) {
-			console.log(y);
 			cajas();
 		}
 		auxiliar = true;
