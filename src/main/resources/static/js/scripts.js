@@ -205,20 +205,24 @@ $(document).ready(function() {
 function caja3() {
 	if (GG == true) {
 		caja2();
+		console.log("entra aqui")
 		GG = false;
 	}
 }
 function caja2() {
 	console.log("entra");
 	if (auxiliar == false) {
-		for (var y = 0; y < 8; y++) {
+	console.log("y va 8");
+		for (var y = 0; y < 2; y++) {
+		console.log(y);
 			cajas();
 		}
 		auxiliar = true;
 
 	}
 	else if (auxiliar == true) {
-		for (var z = 0; z < 2; z++) {
+	console.log("y con esta 2");
+		for (var z = 0; z < 1; z++) {
 			cajas();
 			console.log(auxiliar);
 		}
@@ -228,9 +232,11 @@ function caja2() {
 	}
 };
 function cajas() {
-	var name = document.getElementsByTagName("td");
-	for (j; j < name.length; j = j + 5) {
-		var nombre = name[j + 1].innerHTML;
+x=0;
+	var tds = document.getElementsByTagName("td");
+	for (j; x<4; j = j + 5, x++) {
+	console.log("../img/"+tds[j+4].innerHTML);
+		var nombre = tds[j + 1].innerHTML;
 		var col = document.createElement("div");
 		var carta = document.createElement("div");
 		var img = document.createElement("img");
@@ -249,13 +255,14 @@ function cajas() {
 		opiC.className = "text-center";
 		opi.className = "card-footer p-4 pt-0 border-top-0 bg-transparent";
 		rev.className = "d-flex justify-content-center small text-warning mb-2";
-		opiTn.className = name[j];
+		opiTn.className = tds[j];
 		name.className = "fw-bolder";
 		name.text = "League of Legends";
 		tcenter.className = "text-center";
 		cartab.className = "card-body p-4";
 		img.className = "card-img-top";
-		img.src = "/img/games/lol.jpg";
+		img.src = "../../img/"+tds[j+4].innerHTML;
+		console.log( );
 		col.className = "col mb-5";
 		carta.className = "card h-100";
 		name.appendChild(title);

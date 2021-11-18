@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form th:action="@{/user/admin/uploadImage}" th:object="${game}" method="post" enctype="multipart/form-data">
+		<input type="hidden" th:field="*{id}">
+		<input type="hidden" th:field="*{name}">
+		<input type="hidden" th:field="*{category}">
+		<input type="hidden" th:field="*{description}">
+		<label>Upload Image Game</label>
+			<input type="file" name="file">
+		<input type="submit" value="Enviar">
+	</form>
+</body>
+</html>
