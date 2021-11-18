@@ -35,6 +35,8 @@
         <br>
           <div class="check">Hombre<input type="radio" value="Hombre" name="sex" onchange="valsex()" required></div>
           <div class="check">Mujer&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="Mujer" name="sex" onchange="valsex()" required></div>
+         <label for="img">Image</label>
+         	<input type="file" th:field="*{img}">
         <button id="submit" value="Registrate" onclick="valf()">Registrate</button>
         <a th:href="@{/auth/login}">Volver al Login</a>
       </form>

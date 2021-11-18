@@ -8,9 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
-import org.apache.tomcat.jni.File;
-import org.springframework.web.multipart.MultipartFile;
-
 @Entity
 @Table(name = "game")
 public class Game {
@@ -39,6 +36,7 @@ public class Game {
 		super();
 		this.name = name;
 		this.category = category;
+		this.img = img;
 		this.description = description;
 		this.img = img;
 	}
@@ -59,20 +57,20 @@ public class Game {
 		this.name = name;
 	}
 
-	public String getImg() {
-		return img;
-	}
-
-	public void setImg(String img) {
-		this.img = img;
-	}
-
 	public String getCategory() {
 		return category;
 	}
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 	public String getDescription() {

@@ -2,9 +2,6 @@ package com.genuinegames.controller;
 
 import java.io.File;
 import java.io.IOException;
-
-import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -58,6 +55,7 @@ public class AdminController {
 		return "/user/admin/getAllGame";
 	}
 
+	// CREATE
 	@GetMapping("/user/admin/createGame")
 	public String createGame() {
 		return "/user/admin/createGame";
@@ -68,12 +66,14 @@ public class AdminController {
 		new ResponseEntity<>(iGameService.createGame(game), HttpStatus.OK);
 	}
 
+	// DELETE
 	@GetMapping("/user/admin/deleteGame/{id}")
 	public String deleteGame(@PathVariable Long id) {
 		new ResponseEntity<>(iGameService.deleteGame(id), HttpStatus.OK);
 		return "redirect:/user/admin/getAllGame";
 	}
 
+	// UPDATE
 	@GetMapping("/user/admin/updateGame/{id}")
 	public String updateGame(@PathVariable Long id, ModelMap model) {
 		model.addAttribute("game", gameRepository.findById(id));
@@ -85,33 +85,34 @@ public class AdminController {
 		new ResponseEntity<>(iGameService.updateGame(id, game), HttpStatus.OK);
 		return "redirect:/user/admin/getAllGame";
 	}
-
+	
+	/* UPLOAD IMAGE */
 	@GetMapping("/user/admin/uploadImage/{id}")
 	public String uploadImage(@PathVariable Long id, ModelMap model) {
 		model.addAttribute("game", gameRepository.findById(id));
 		return "/user/admin/uploadImage";
 	}
-
+	
 	@PostMapping("/user/admin/uploadImage")
 	public String uploadImage(@RequestPart("file") MultipartFile img, Game game) {
-		if (!img.isEmpty()) {
+		if(!img.isEmpty()) {
 			Path directory = Paths.get("src//main//resources//static/img/");
 			String absoluteRute = directory.toFile().getAbsolutePath();
-
+			
 			try {
 				byte[] bytes = img.getBytes();
-				Path completeRute = Paths.get(absoluteRute + "//" + img.getOriginalFilename());
+				Path completeRute = Paths.get(absoluteRute+"//"+img.getOriginalFilename());
 				Files.write(completeRute, bytes);
-
+				
 				game.setImg(img.getOriginalFilename());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
+			
 			gameRepository.save(game);
 		}
-
-		return "redirect:/user/admin/getAllGame";
+		
+		return "redirect:/user/admin/getAllGame";	
 	}
 
 }
