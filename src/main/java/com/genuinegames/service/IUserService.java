@@ -11,4 +11,6 @@ public interface IUserService {
 	
 	public User registerAdmin(User user);
 	
+	public String updateUser(Long id, User User);
+	
 }

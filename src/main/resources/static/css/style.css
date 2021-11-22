@@ -11371,3 +11371,17 @@ textarea.form-control-lg {
   -ms-transform: scale(1.2);
   transform: scale(1.2);
 }
+.table-games{
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+.games-button{
+	margin:10px;
+}
+.table-games-img{
+	height:60px;
+}
+.create-games{
+	margin:0.5rem;
+}

@@ -17,7 +17,6 @@
 <link href="/css/style.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
 <script type="text/javascript" src="/js/jquery.js"></script>
-<script type="text/javascript" src="/js/jquery.js"></script>
 <script>
 	$(document).ready(function() {
 		$('#addNewGame').click(function() {
@@ -43,15 +42,25 @@
 </script>
 </head>
 <body>
-	<h1>Create Game</h1>
+<div th:replace="/_t/nav" />
+	
+	<div class="container card col-lg-12 col-md-6 bg-dark text-light mb-2">
+	<h1 class="display-1">Crear Juego</h1>
 	<form>
-		<label>Name</label> 
-			<input type="text" id="name" name="name">
-		<label>Category</label>
-			<input type="text" id="category" name="category">
-		<label>Description</label>
-			<input type="text" id="description" name="description"> 
-		<input type="button" id="addNewGame" value="Enviar">
+		<div class="form-group create-games">
+			<label>Nombre</label> 
+				<input type="text" id="name" name="name" class="form-control">
+		</div>
+		<div class="form-group create-games">
+			<label>Categoría</label>
+				<input type="text" id="category" name="category" class="form-control">
+		</div>
+		<div class="form-group create-games">
+			<label>Descripción</label>
+				<input type="text" id="description" name="description" class="form-control">
+		</div>
+		<input type="button" id="addNewGame" value="Enviar" class="btn btn-primary games-button">
 	</form>
-</body>
-</html>
+	</div>
+<div th:replace="/_t/footer" />
+<div th:replace="/_t/end" />

@@ -27,18 +27,21 @@ public class Game {
 
 	@Column(name = "description")
 	private String description;
+	@Column(name = "punctuation")
+	private Float punctuation;
 
 	public Game() {
 		super();
 	}
 
-	public Game(String name, String category,String img, String description) {
+	public Game(String name, String category,String img, String description,Float punctuation) {
 		super();
 		this.name = name;
 		this.category = category;
 		this.img = img;
 		this.description = description;
 		this.img = img;
+		this.punctuation = punctuation;
 	}
 
 	public Long getId() {
@@ -80,5 +83,14 @@ public class Game {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public Float getPunctuation() {
+		return punctuation;
+	}
+
+	public void setPunctuation(Float punctuation) {
+		this.punctuation = punctuation;
+	}
+	
 
 }

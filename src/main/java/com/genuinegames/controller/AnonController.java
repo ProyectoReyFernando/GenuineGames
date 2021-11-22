@@ -70,6 +70,7 @@ public class AnonController {
 			User user = userService.findByUsername(username);
 			user.setPwd(null);
 			session.setAttribute("user", user);
+			model.put("usuario", user);
 			redirect = "/user/index";
 		}
 
