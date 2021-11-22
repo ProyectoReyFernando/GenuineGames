@@ -1,18 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+<div th:replace="/_t/head" />
+<div th:replace="/_t/nav" />
+    <!--Juegos-->
+	<div class="container card col-lg-12 col-md-6 bg-dark text-light mb-2">
+	<h1 class="display-1">Subir imagen del juego</h1>
 	<form th:action="@{/user/admin/uploadImage}" th:object="${game}" method="post" enctype="multipart/form-data">
 		<input type="hidden" th:field="*{id}">
 		<input type="hidden" th:field="*{name}">
 		<input type="hidden" th:field="*{category}">
 		<input type="hidden" th:field="*{description}">
-		<label>Upload Image Game</label>
-			<input type="file" name="file">
-		<input type="submit" value="Enviar">
+		<label class="form-label" for="customFile">Seleccionar imagen del juego</label>
+		<input type="file" name="file" class="form-control">
+		<input type="submit" value="Enviar" class="btn btn-primary games-button">
 	</form>
-</body>
-</html>
+	</div>
+<div th:replace="/_t/footer" />
+<div th:replace="/_t/end" />

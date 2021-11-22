@@ -38,7 +38,7 @@ public class UserService implements IUserService, IGameService {
 	public User findByUsername(String username) {
 		return userRepository.findByUsername(username);
 	}
-	
+
 	public User registerAdmin(User user) {
 		HashSet<Role> role = new HashSet<>();
 
@@ -94,6 +94,20 @@ public class UserService implements IUserService, IGameService {
 		} else {
 			return "No se pudo realizar la acción";
 		}
+	}
+	@Override
+	public String updateUser(Long id, User user) {
+		if(userRepository.findById(id).isPresent()) {
+			user.setUsername(user.getUsername());
+			userRepository.save(user);
+			return "redirect:/";
+		} else {
+			return "No se pudo realizar la acción";
+		}
+	}
+	@Override
+	public Game findByGameName(String game) {
+		return gameRepository.findByName(game);
 	}
 
 }

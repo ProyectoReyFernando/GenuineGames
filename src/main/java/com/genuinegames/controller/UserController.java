@@ -1,14 +1,14 @@
 package com.genuinegames.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
-import org.springframework.security.core.Authentication;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.genuinegames.entity.Game;
 import com.genuinegames.entity.User;
@@ -18,17 +18,36 @@ import com.genuinegames.service.UserService;
 
 @Controller
 public class UserController {
-	private GameRepository Gamerepository;
-	private UserRepository Userrepository;
-
+	@Autowired
+	private GameRepository gameRepository;
+	@Autowired
+	private UserRepository userRepository;
+	
 	@GetMapping("/user/ajustes")
-	public String ajustes() {
+	public String ajustes(ModelMap model,HttpSession session) {
+		model.put("user", session.getAttribute("user"));
 		return "/user/ajustes";
 	}
 
 	@GetMapping("/user/perfil")
 	public String perfil(HttpSession session, ModelMap model) {
-		User patata=(User) session.getAttribute("id");
+		model.put("user", session.getAttribute("user"));
+		return "/user/perfil";
+	}
+	@GetMapping("/user/opinion/{name}")
+	public String opinion(HttpSession session, ModelMap model,@PathVariable String name) {
+		model.put("games", gameRepository.findByName(name));
+		return "/user/opinion";
+	}
+	@PostMapping("/user/intermedio")
+	public String intermedio(HttpSession session, ModelMap model,@RequestParam("user")String user) {
+		User usuario=(User) session.getAttribute("user");
+		if(user!=null) {
+			usuario.setUsername(user); 
+			}
+		
+		userRepository.save(usuario);
+		model.put("user", session.getAttribute("user"));
 		return "/user/perfil";
 	}
 
