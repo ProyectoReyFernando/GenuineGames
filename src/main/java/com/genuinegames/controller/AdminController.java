@@ -25,6 +25,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.genuinegames.entity.Game;
 import com.genuinegames.entity.User;
+import com.genuinegames.exception.DangerException;
+import com.genuinegames.helper.PRG;
 import com.genuinegames.repository.GameRepository;
 import com.genuinegames.service.IGameService;
 import com.genuinegames.service.IUserService;
@@ -62,7 +64,7 @@ public class AdminController {
 	}
 
 	@PostMapping("/user/admin/createGame")
-	public void createGame(@RequestBody Game game) {
+	public void createGame(@RequestBody Game game) throws DangerException {
 		new ResponseEntity<>(iGameService.createGame(game), HttpStatus.OK);
 	}
 
@@ -85,34 +87,34 @@ public class AdminController {
 		new ResponseEntity<>(iGameService.updateGame(id, game), HttpStatus.OK);
 		return "redirect:/user/admin/getAllGame";
 	}
-	
+
 	/* UPLOAD IMAGE */
 	@GetMapping("/user/admin/uploadImage/{id}")
 	public String uploadImage(@PathVariable Long id, ModelMap model) {
 		model.addAttribute("game", gameRepository.findById(id));
 		return "/user/admin/uploadImage";
 	}
-	
+
 	@PostMapping("/user/admin/uploadImage")
 	public String uploadImage(@RequestPart("file") MultipartFile img, Game game) {
-		if(!img.isEmpty()) {
+		if (!img.isEmpty()) {
 			Path directory = Paths.get("src//main//resources//static/img/");
 			String absoluteRute = directory.toFile().getAbsolutePath();
-			
+
 			try {
 				byte[] bytes = img.getBytes();
-				Path completeRute = Paths.get(absoluteRute+"//"+img.getOriginalFilename());
+				Path completeRute = Paths.get(absoluteRute + "//" + img.getOriginalFilename());
 				Files.write(completeRute, bytes);
-				
+
 				game.setImg(img.getOriginalFilename());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+
 			gameRepository.save(game);
 		}
-		
-		return "redirect:/user/admin/getAllGame";	
+
+		return "redirect:/user/admin/getAllGame";
 	}
 
 }

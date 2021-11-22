@@ -38,9 +38,6 @@ public class User implements Serializable {
 	@Column(name = "sex")
 	private String sex;
 
-	@Column(name = "img")
-	private String img;
-
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Role role;
 
@@ -48,7 +45,7 @@ public class User implements Serializable {
 
 	}
 
-	public User(String username, String pwd, int tlf, String mail, String fnac, String sex, String img) {
+	public User(String username, String pwd, int tlf, String mail, String fnac, String sex) {
 		super();
 		this.username = username;
 		this.pwd = pwd;
@@ -56,7 +53,6 @@ public class User implements Serializable {
 		this.mail = mail;
 		this.fnac = fnac;
 		this.sex = sex;
-		this.img = img;
 	}
 
 	public Long getId() {
@@ -121,14 +117,6 @@ public class User implements Serializable {
 
 	public void setRole(Role role) {
 		this.role = role;
-	}
-
-	public String getImg() {
-		return img;
-	}
-
-	public void setImg(String img) {
-		this.img = img;
 	}
 
 }

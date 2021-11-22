@@ -246,7 +246,6 @@ function cajas() {
 		cartab.className = "card-body p-4";
 		img.className = "card-img-top";
 		img.src = "../../img/" + tds[j + 4].innerHTML;
-		console.log();
 		col.className = "col mb-5";
 		carta.className = "card h-100";
 		name.appendChild(title);
