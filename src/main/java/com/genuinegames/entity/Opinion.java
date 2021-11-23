@@ -16,7 +16,10 @@ public class Opinion {
 	private Long id;
 
 	@Column(name = "user")
-	private User user;
+	private String user;
+	
+	@Column(name = "game")
+	private String game;
 
 	@Column(name = "description")
 	private String description;
@@ -25,9 +28,10 @@ public class Opinion {
 		super();
 	}
 
-	public Opinion(String name, String description) {
+	public Opinion(String user, String game, String description) {
 		super();
 		this.user = user;
+		this.game = game;
 		this.description = description;
 	}
 
@@ -37,6 +41,22 @@ public class Opinion {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public String getGame() {
+		return game;
+	}
+
+	public void setGame(String game) {
+		this.game = game;
 	}
 
 	public String getDescription() {
