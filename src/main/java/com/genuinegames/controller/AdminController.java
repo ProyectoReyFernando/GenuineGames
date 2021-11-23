@@ -26,6 +26,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.genuinegames.entity.Game;
 import com.genuinegames.entity.User;
 import com.genuinegames.repository.GameRepository;
+import com.genuinegames.repository.UserRepository;
+import com.genuinegames.repository.OpinionRepository;
 import com.genuinegames.service.IGameService;
 import com.genuinegames.service.IUserService;
 
@@ -38,6 +40,12 @@ public class AdminController {
 	@Autowired
 	private IGameService iGameService;
 
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private OpinionRepository opinionRepository;
+	
 	@Autowired
 	private GameRepository gameRepository;
 
@@ -53,6 +61,15 @@ public class AdminController {
 	public String getAllGame(Long id, ModelMap model) {
 		model.put("games", gameRepository.findAll());
 		return "/user/admin/getAllGame";
+	}
+	
+	/* OPINIONES */
+	@GetMapping("/user/admin/getGameOpinion")
+	public String getAllOpinion(Long id, ModelMap model) {
+		model.put("user", userRepository.findAll());
+		model.put("opinion", opinionRepository.findAll());
+		model.put("games", gameRepository.findAll());
+		return "/user/admin/getGameOpinion";
 	}
 
 	// CREATE
