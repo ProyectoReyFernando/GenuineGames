@@ -43,7 +43,6 @@ function adminD() {
 }
 /*---------------------------------------------------------------------------------------*/
 /*Login y Registro*/
-/*L*/
 var comUser = false;
 var comPwd = false;
 function valuser() {
@@ -245,7 +244,7 @@ function cajas() {
 		var divpunt=document.createElement("div");
 		var h5=document.createElement("h5");
 		var carta = document.createElement("div");
-		form.action = "/user/opinion/"+name;
+		form.action = "/user/infoGame/"+name;
 		submit.className="btn btn-outline-dark mt-auto";
 		col.className = "col mb-5";
 		img.className = "card-img-top";

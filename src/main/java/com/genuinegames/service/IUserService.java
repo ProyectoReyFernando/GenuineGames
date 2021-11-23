@@ -1,5 +1,6 @@
 package com.genuinegames.service;
 
+import com.genuinegames.entity.Comments;
 import com.genuinegames.entity.Game;
 import com.genuinegames.entity.User;
 
@@ -12,5 +13,7 @@ public interface IUserService {
 	public User registerAdmin(User user);
 	
 	public String updateUser(Long id, User User);
+	
+	public Comments createComment(Comments comment);
 	
 }

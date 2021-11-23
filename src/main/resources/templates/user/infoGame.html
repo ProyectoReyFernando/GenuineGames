@@ -1,0 +1,36 @@
+<div th:replace="/_t/head" />
+<div th:replace="/_t/nav" />
+<!-- Section-->
+<section
+	class="bg-dark py-perfil d-flex flex-row justify-content-center alig-items-center">
+	<div class="container card col-lg-11 col-md-6">
+		<div class="row container align-items-center justify-content-center">
+			<div class="col-lg-12 m-3 text-center">
+				<div class="card mt-1" style="width: 70%;" th:each="game:${games}">
+					<img th:src="@{'/img/'+${game.img}}" th:alt="${game.img}"
+						class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title" th:text="${game.name}"></h5>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item" th:text="${game.category}"></li>
+						<li class="list-group-item" th:text="${game.description}"></li>
+						<li class="list-group-item" th:text="${game.punctuation}"></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div>
+		<div class="card mt-1" style="width: 70%;" th:each="game:${games}">
+			Escribe tu comentario
+			<form action="/user/comment" method="POST">
+				<input type="hidden" name="nombre" th:value="${game.name}"> <input
+					type="text" name="texto"> <input type="submit"
+					value="Commentar">
+			</form>
+		</div>
+	</div>
+</section>
+<div th:replace="/_t/footer" />
+<div th:replace="/_t/end" />

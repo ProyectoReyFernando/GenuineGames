@@ -1,11 +1,16 @@
 package com.genuinegames.entity;
 
+import java.util.Collection;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.apache.tomcat.jni.File;
@@ -33,18 +38,25 @@ public class Game {
 	@Column(name = "punctuation")
 	private Float punctuation;
 
+	@OneToMany(mappedBy = "game")
+	private Collection<Comments> comments;
+
 	public Game() {
 		super();
 	}
 
-	public Game(String name, String category,String img, String description,Float punctuation) {
+
+	public Game(String name, String img, String category, String description, Float punctuation,
+			Collection<Comments> comments) {
 		super();
 		this.name = name;
+		this.img = img;
 		this.category = category;
 		this.description = description;
-		this.img = img;
 		this.punctuation = punctuation;
+		this.comments = comments;
 	}
+
 
 	public Long getId() {
 		return id;
@@ -92,6 +104,16 @@ public class Game {
 
 	public void setPunctuation(Float punctuation) {
 		this.punctuation = punctuation;
+	}
+
+
+	public Collection<Comments> getComments() {
+		return comments;
+	}
+
+
+	public void setComments(Collection<Comments> comments) {
+		this.comments = comments;
 	}
 	
 
