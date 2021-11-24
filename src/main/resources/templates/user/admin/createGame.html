@@ -15,7 +15,8 @@
 	rel="stylesheet" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/css/style.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script>
 	$(document).ready(function() {
@@ -23,17 +24,21 @@
 			var name = $('#name').val();
 			var category = $('#category').val();
 			var description = $('#description').val();
-			
+
 			$.ajax({
 				method : 'POST',
-				url: '/user/admin/createGame',
-				data : JSON.stringify({name:name, category:category, description:description}),
-				contentType: 'application/json; charset=utf-8',
-				success: function() {
+				url : '/user/admin/createGame',
+				data : JSON.stringify({
+					name : name,
+					category : category,
+					description : description
+				}),
+				contentType : 'application/json; charset=utf-8',
+				success : function() {
 					alert("Saved successfully");
-					window.location	= "/user/admin/getAllGame";
+					window.location = "/user/admin/getAllGame";
 				},
-				error: function() {
+				error : function() {
 					alert("No se pudo crear");
 				}
 			})
@@ -42,25 +47,24 @@
 </script>
 </head>
 <body>
-<div th:replace="/_t/nav" />
-	
+	<div th:replace="/_t/nav" />
 	<div class="container card col-lg-12 col-md-6 bg-dark text-light mb-2">
-	<h1 class="display-1">Crear Juego</h1>
-	<form>
-		<div class="form-group create-games">
-			<label>Nombre</label> 
-				<input type="text" id="name" name="name" class="form-control">
-		</div>
-		<div class="form-group create-games">
-			<label>Categoría</label>
-				<input type="text" id="category" name="category" class="form-control">
-		</div>
-		<div class="form-group create-games">
-			<label>Descripción</label>
-				<input type="text" id="description" name="description" class="form-control">
-		</div>
-		<input type="button" id="addNewGame" value="Enviar" class="btn btn-primary games-button">
-	</form>
+		<h1 class="display-1">Crear Juego</h1>
+		<form>
+			<div class="form-group create-games">
+				<label>Nombre</label> <input type="text" id="name" name="name"
+					class="form-control">
+			</div>
+			<div class="form-group create-games">
+				<label>Categoría</label> <input type="text" id="category"
+					name="category" class="form-control">
+			</div>
+			<div class="form-group create-games">
+				<label>Descripción</label> <input type="text" id="description"
+					name="description" class="form-control">
+			</div>
+			<input type="button" id="addNewGame" value="Enviar"
+				class="btn btn-primary games-button">
 	</div>
-<div th:replace="/_t/footer" />
-<div th:replace="/_t/end" />
+	<div th:replace="/_t/footer" />
+	<div th:replace="/_t/end" />

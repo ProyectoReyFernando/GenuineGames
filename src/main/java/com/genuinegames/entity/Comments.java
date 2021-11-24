@@ -1,5 +1,6 @@
 package com.genuinegames.entity;
 
+import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;

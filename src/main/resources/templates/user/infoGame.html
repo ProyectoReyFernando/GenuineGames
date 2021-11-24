@@ -19,27 +19,29 @@
 					</ul>
 				</div>
 			</div>
+			<div class="col-lg-12 m-3">
+				<h2>Comenta tu opinion</h2>
+				<div class="card mt-1" style="width: 70%;" th:each="game:${games}">
+					<form action="/user/comment" method="POST">
+						<div class="form-group">
+							<input type="text" name="texto" class="form-control" placeholder="Comenta tus ideas">
+						</div>
+						<input type="hidden" name="nombre" th:value="${game.name}">
+						<input type="submit" value="Comentar" class="btn btn-primary games-button">
+					</form>
+				</div>
+				<div class="card mt-2" th:each="comment:${comments}">
+					<h5 class="card-header" th:text="${comment.user.username}">Comentario</h5>
+					<div class="card-body">
+						<p class="card-text" th:text="${comment.text}"></p>
+					</div>
+				</div>
+
+			</div>
 		</div>
 	</div>
-	<div>
-		<div class="card mt-1" style="width: 70%;" th:each="game:${games}">
-			Escribe tu comentario
-			<form action="/user/comment" method="POST">
-				<input type="hidden" name="nombre" th:value="${game.name}">
-				<input type="text" name="texto"> <input type="submit"
-					value="Commentar">
-			</form>
-			<table>
-				<tbody>
-					<tr th:each="comment:${comments}">
-						<td th:text="${comment.text}"></td>
-						<td th:text="${comment.game.name}"></td>
-						<td th:text="${comment.user.username}"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
+
+	<div></div>
 </section>
 <div th:replace="/_t/footer" />
 <div th:replace="/_t/end" />

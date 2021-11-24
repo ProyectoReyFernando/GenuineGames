@@ -2,7 +2,11 @@ package com.genuinegames.entity;
 
 import java.io.Serializable;
 import java.util.Collection;
-
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -62,14 +66,7 @@ public class User implements Serializable {
 		this.sex = sex;
 		this.role = role;
 		this.comments = comments;
-	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getUsername() {

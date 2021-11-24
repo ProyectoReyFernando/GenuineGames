@@ -27,34 +27,33 @@
 				</form>
 			</div>
 			<div class="card col-lg-6 ajustes-form">
-				<form th:object="${user}" method="post">
-					<input action="/user/ajustes" type="hidden" th:field="*{id}">		
-					Cambiar Usuario <br> <input type="text" name="username"
+				<form action="/user/intermedio" method="post">
+					Cambiar Usuario <br> <input type="text" name="user"
 						placeholder="Introduzca su nuevo nombre de usuario"
-						class="col-lg-12 ajustes-cajas" th:value="${user.username}" onkeyup="valuser()"> <br>
+						class="col-lg-12 ajustes-cajas" onkeyup="valuser()"> <br>
 					<input type="submit" value="Confirmar cambio" class="btn btn-dark">
 				</form>
-				<form action="/user/updateDataUser" method="post">
+				<form action="/user/intermedio" method="post">
 					Cambiar de contraseña <br> <input type="pwd" name="pwd"
 						placeholder="Introduzca su nueva contraseña"
 						class="col-lg-12 ajustes-cajas" onkeyup="valpwd()"> <br>
 					<input type="text" name="pwd"
 						placeholder="Repita su nueva contraseña"
-						class="col-lg-12 ajustes-cajas" th:value="${user.pwd}" onblur="pwdError()"> <br>
+						class="col-lg-12 ajustes-cajas" onblur="pwdError()"> <br>
 					<br> <input type="submit" value="Confirmar cambio"
 						class="btn btn-dark">
 				</form>
 				<form action="/user/intermedio" method="post">
 					Cambiar de correo <br> <input type="text" name="mail"
 						placeholder="Introduzca su nuevo correo"
-						class="col-lg-12 ajustes-cajas" onkeyup="valmail()"> <br> <input
-						type="submit" value="Confirmar cambio" class="btn btn-dark">
+						class="col-lg-12 ajustes-cajas" onkeyup="valmail()"> <br>
+					<input type="submit" value="Confirmar cambio" class="btn btn-dark">
 				</form>
 				<form action="/user/intermedio" method="post">
 					Cambiar de Telefono <br> <input type="text" name="tel"
 						placeholder="Introduzca su nuevo correo"
-						class="col-lg-12 ajustes-cajas"  onclick="valf()"> <br> <input
-						type="submit" value="Confirmar cambio" class="btn btn-dark">
+						class="col-lg-12 ajustes-cajas" onclick="valf()"> <br>
+					<input type="submit" value="Confirmar cambio" class="btn btn-dark">
 				</form>
 			</div>
 		</div>
