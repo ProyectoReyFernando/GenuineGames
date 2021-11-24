@@ -38,12 +38,17 @@ public class UserController {
 
 	@GetMapping("/user/perfil")
 	public String perfil(HttpSession session, ModelMap model) {
+		User usuario=(User) session.getAttribute("user");
 		model.put("user", session.getAttribute("user"));
+		model.put("comments", commentRepository.findByUser(usuario));
+
 		return "/user/perfil";
 	}
 	@GetMapping("/user/infoGame/{name}")
 	public String opinion(HttpSession session, ModelMap model,@PathVariable String name) {
 		model.put("games", gameRepository.findByName(name));
+		Game game=gameRepository.findByName(name);
+		model.put("comments", commentRepository.findByGame(game));
 		return "/user/infoGame";
 	}
 	@PostMapping("/user/intermedio")
@@ -67,9 +72,8 @@ public class UserController {
 		comment.setGame(game);
 		game=gameRepository.findByName(name);
 		new ResponseEntity<>(iUserService.createComment(comment),HttpStatus.OK);
-		model.put("games", gameRepository.findByName(name));
+		model.put("games", gameRepository.findAll());
 		model.put("user", session.getAttribute("user"));
-		model.put("comments",commentRepository.findAll());
 		return "/user/index";
 	}
 

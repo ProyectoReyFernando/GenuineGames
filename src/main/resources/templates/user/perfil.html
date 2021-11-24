@@ -1,45 +1,36 @@
-<div th:replace="/_t/head"/>
-<div th:replace="/_t/nav"/>
-	<!-- Section-->
-	<section class="bg-dark py-perfil d-flex flex-row justify-content-center alig-items-center" th:each="usuario:${user}">
-		<div class="container card col-lg-11 col-md-6">
-			<div class="row container">
-				<div class="col-lg-3 col-md-6 m-3">
-					<div class="card" style="width: 18rem;">
-						<img src="/img/perfil.png" class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title" th:text="${usuario.username}"></h5>
-						</div>
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item" th:text="${usuario.tlf}"></li>
-							<li class="list-group-item" th:text="${usuario.mail}"></li>
-							<li class="list-group-item" th:text="${usuario.fnac}"></li>
-							<li class="list-group-item" th:text="${usuario.sex}"></li>
-						</ul>
+<div th:replace="/_t/head" />
+<div th:replace="/_t/nav" />
+<!-- Section-->
+<section
+	class="bg-dark py-perfil d-flex flex-row justify-content-center alig-items-center"
+	th:each="usuario:${user}">
+	<div class="container card col-lg-11 col-md-6">
+		<div class="row container">
+			<div class="col-lg-3 col-md-6 m-3">
+				<div class="card" style="width: 18rem;">
+					<img src="/img/perfil.png" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title" th:text="${usuario.username}"></h5>
 					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item" th:text="${usuario.tlf}"></li>
+						<li class="list-group-item" th:text="${usuario.mail}"></li>
+						<li class="list-group-item" th:text="${usuario.fnac}"></li>
+						<li class="list-group-item" th:text="${usuario.sex}"></li>
+					</ul>
 				</div>
-				<div class="col-lg-8 col-md-6 m-3">
-					<h2>Interacciones</h2>
-					<div class="card mt-2">
-						<h5 class="card-header">Comentario</h5>
+			</div>
+			<div class="col-lg-8 col-md-6 m-3">
+				<h2>Interacciones</h2>
+					<div class="card mt-2" th:each="comment:${comments}">
+						<h5 class="card-header" th:text="${comment.game.name}">Comentario</h5>
 						<div class="card-body">
-							<h5 class="card-title">League of Legends</h5>
-							<p class="card-text">Es un juego en el que la gente siempre
-								trata de ayudar, me encanta por su comunidad</p>
+							<p class="card-text" th:text="${comment.text}"></p>
 						</div>
 					</div>
-					<div class="card mt-2">
-						<h5 class="card-header">Comentario</h5>
-						<div class="card-body">
-							<h5 class="card-title">Rocket League</h5>
-							<p class="card-text">No me ha gustado por que
-								askjnfcijsdnfijsdbijcdbsjaihdijsabndjbasjidnasijdn y no se puede
-								volar. MALDITOS HACKERS DE M*****</p>
-						</div>
-					</div>
-
 				</div>
 			</div>
 		</div>
-	</section>
-<div th:replace="/_t/footer"/>
+</section>
+<div th:replace="/_t/footer" />
+<div th:replace="/_t/end" />
