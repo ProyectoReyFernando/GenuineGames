@@ -10,8 +10,10 @@ import com.genuinegames.entity.Game;
 import com.genuinegames.entity.User;
 
 @Repository
-public interface CommentRepository extends JpaRepository<Comments, Long>{
+public interface CommentRepository extends JpaRepository<Comments, Long> {
+
 	Collection<Comments> findByGame(Game game);
+
 	Collection<Comments> findByUser(User user);
 
 }

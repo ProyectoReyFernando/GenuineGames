@@ -1,16 +1,4 @@
 
-<table class="table table-dark" style="display:none">
-				<tbody>
-					<tr th:each="game:${games}">
-						<td th:text="${game.id}" id="idjuego" th:value="${game.id}"></td>
-						<td th:text="${game.name}" id="namejuego"th:value="${game.name}"></td>
-						<td th:text="${game.category}" id="catjuego"th:value="${game.category}"></td>
-						<td th:text="${game.description}" id="descjuego"th:value="${game.description}"></td>
-						<td th:text="${game.img}" id="imgjuego"th:value="${game.img}"></td>
-						<td th:text="${game.punctuation}" id="puncjuego"th:value="${game.punctuation}"></td>
-					</tr>
-				</tbody>
-			</table>
 <table class="table table-dark" style="display: none">
 	<tbody>
 		<tr th:each="game:${games}">
@@ -21,6 +9,8 @@
 			<td th:text="${game.description}" id="descjuego"
 				th:value="${game.description}"></td>
 			<td th:text="${game.img}" id="imgjuego" th:value="${game.img}"></td>
+			<td th:text="${game.punctuation}" id="puncjuego"
+				th:value="${game.punctuation}"></td>
 		</tr>
 	</tbody>
 </table>

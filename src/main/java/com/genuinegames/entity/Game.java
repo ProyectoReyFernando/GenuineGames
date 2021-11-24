@@ -1,7 +1,6 @@
 package com.genuinegames.entity;
 
 import java.util.Collection;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,6 +31,7 @@ public class Game {
 
 	@Column(name = "description")
 	private String description;
+
 	@Column(name = "punctuation")
 	private Float punctuation;
 
@@ -42,19 +42,17 @@ public class Game {
 		super();
 	}
 
-
 	public Game(String name, String img, String category, String description, Float punctuation,
 			Collection<Comments> comments) {
 		super();
 		this.name = name;
 		this.img = img;
 		this.category = category;
-		this.img = img;
+		this.category = category;
 		this.description = description;
 		this.punctuation = punctuation;
 		this.comments = comments;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -104,15 +102,12 @@ public class Game {
 		this.punctuation = punctuation;
 	}
 
-
 	public Collection<Comments> getComments() {
 		return comments;
 	}
 
-
 	public void setComments(Collection<Comments> comments) {
 		this.comments = comments;
 	}
-	
 
 }

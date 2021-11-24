@@ -11,9 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
         <script type="text/javascript" src="../js/jquery.js"></script>
     <script type="text/javascript" src="../js/scripts.js"></script>
-   <script type="text/javascript">
-        
-    </script>
+   <script type="text/javascript"></script>
   </head>
   <body>
     <div class="registro-box">
@@ -36,8 +34,6 @@
         <br>
           <div class="check">Hombre<input type="radio" value="Hombre" name="sex" onchange="valsex()" required></div>
           <div class="check">Mujer&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="Mujer" name="sex" onchange="valsex()" required></div>
-         <label for="img">Image</label>
-         	<input type="file" th:field="*{img}">
         <button id="submit" value="Registrate" onclick="valf()">Registrate</button>
         <a th:href="@{/auth/login}">Volver al Login</a>
       </form>

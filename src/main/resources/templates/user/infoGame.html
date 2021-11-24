@@ -24,13 +24,10 @@
 				<div class="card mt-1" style="width: 70%;" th:each="game:${games}">
 					<form action="/user/comment" method="POST">
 						<div class="form-group">
-		
 							<input type="text" name="texto" class="form-control" placeholder="Comenta tus ideas">
 						</div>
 						<input type="hidden" name="nombre" th:value="${game.name}">
 						<input type="submit" value="Comentar" class="btn btn-primary games-button">
-
-
 					</form>
 				</div>
 				<div class="card mt-2" th:each="comment:${comments}">

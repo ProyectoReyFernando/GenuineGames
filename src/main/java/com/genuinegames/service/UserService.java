@@ -40,7 +40,7 @@ public class UserService implements IUserService, IGameService {
 
 	@Autowired
 	private CommentRepository commentRepository;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
@@ -78,9 +78,21 @@ public class UserService implements IUserService, IGameService {
 		return userRepository.save(user);
 	}
 
+	@Override
+	public String updateUser(Long id, User user) {
+		if (userRepository.findById(id).isPresent()) {
+			user.setUsername(user.getUsername());
+			user.setPwd(passwordEncoder.encode(user.getPwd()));
+			userRepository.save(user);
+			return "redirect:/";
+		} else {
+			return "No se pudo realizar la acción";
+		}
+	}
+
 	// GAMES
 	@Override
-	public Game createGame(Game game){
+	public Game createGame(Game game) {
 		return gameRepository.save(game);
 	}
 
@@ -105,25 +117,16 @@ public class UserService implements IUserService, IGameService {
 			return "No se pudo realizar la acción";
 		}
 	}
-	@Override
-	public String updateUser(Long id, User user) {
-		if(userRepository.findById(id).isPresent()) {
-			user.setUsername(user.getUsername());
-			userRepository.save(user);
-			return "redirect:/";
-		} else {
-			return "No se pudo realizar la acción";
-		}
-	}
+
 	@Override
 	public Game findByGameName(String game) {
 		return gameRepository.findByName(game);
 	}
 
+	/* COMMENTS */
 	@Override
 	public Comments createComment(Comments comment) {
 		return commentRepository.save(comment);
 	}
-	
 
 }
