@@ -13,9 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.apache.tomcat.jni.File;
-import org.springframework.web.multipart.MultipartFile;
-
 @Entity
 @Table(name = "game")
 public class Game {
@@ -52,6 +49,7 @@ public class Game {
 		this.name = name;
 		this.img = img;
 		this.category = category;
+		this.img = img;
 		this.description = description;
 		this.punctuation = punctuation;
 		this.comments = comments;
@@ -74,20 +72,20 @@ public class Game {
 		this.name = name;
 	}
 
-	public String getImg() {
-		return img;
-	}
-
-	public void setImg(String img) {
-		this.img = img;
-	}
-
 	public String getCategory() {
 		return category;
 	}
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 	public String getDescription() {

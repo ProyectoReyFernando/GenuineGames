@@ -7,30 +7,21 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.ManyToAny;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
+
+	private static final long serialVersionUID = -2903057787229786019L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -53,6 +44,9 @@ public class User implements Serializable {
 
 	@Column(name = "sex")
 	private String sex;
+
+	@Column(name = "img")
+	private String img;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Role role;
@@ -77,6 +71,7 @@ public class User implements Serializable {
 		this.sex = sex;
 		this.role = role;
 		this.comments = comments;
+		this.img = img;
 	}
 
 
@@ -167,6 +162,15 @@ public class User implements Serializable {
 
 	public void setComments(Collection<Comments> comments) {
 		this.comments = comments;
+	}
+
+}
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 }

@@ -42,7 +42,6 @@ function adminD() {
 	}
 }
 /*---------------------------------------------------------------------------------------*/
-/*Login y Registro*/
 var comUser = false;
 var comPwd = false;
 function valuser() {
@@ -50,8 +49,7 @@ function valuser() {
 	var userER = /^([a-zA-Z]|[0-9]){6,50}/;
 	if (userER.test(user)) {
 		document.getElementById('user').style.color = "white";
-	}
-	else {
+	} else {
 		document.getElementById('user').style.color = "red";
 		document.getElementById('caja_error').hidden = false;
 	}
@@ -62,20 +60,18 @@ function valpwd() {
 	if (pwdER.test(pwd)) {
 		document.getElementById('pwd').style.color = "white";
 		comPwd = true;
-	}
-	else {
+	} else {
 		document.getElementById('pwd').style.color = "red";
 	}
 }
 function valf() {
 	if ((comUser == true) && (comPwd == true)) {
 		document.loginform.submit();
-	}
-	else {
+	} else {
 		alert("Algo terrible esta a punto de ocurrir");
 	}
 }
-/*R*/
+/* R */
 var comUser = false;
 var comPwd = false;
 var comCpwd = false;
@@ -89,8 +85,7 @@ function valuser() {
 	if (userER.test(user)) {
 		document.getElementById('user').style.color = "white";
 		comUser = true;
-	}
-	else {
+	} else {
 		document.getElementById('user').style.color = "red";
 	}
 }
@@ -100,8 +95,7 @@ function valpwd() {
 	if (pwdER.test(pwd)) {
 		document.getElementById('pwd').style.color = "white";
 		comPwd = true;
-	}
-	else {
+	} else {
 		document.getElementById('pwd').style.color = "red";
 	}
 }
@@ -112,8 +106,7 @@ function valcpwd() {
 		document.getElementById('cpwd').style.color = "white";
 		comCpwd = true;
 		valpwds();
-	}
-	else {
+	} else {
 		document.getElementById('cpwd').style.color = "red";
 	}
 }
@@ -124,16 +117,14 @@ function valpwds() {
 		comPwd = true;
 		comCpwd = true;
 		console.log('todo flama');
-	}
-	else {
+	} else {
 		alert('No coinciden las dos contraseñas. Asegurese de que es una contraseña que podrá recordar');
 	}
 }
 function pwdError() {
 	if ((comPwd == true) && (comCpwd == true)) {
 		console.log("tamos bien");
-	}
-	else {
+	} else {
 		console.log("No se lo pongamos tan facil a los malos")
 	}
 }
@@ -143,8 +134,7 @@ function valtlf() {
 	if (tlfER.test(tlf)) {
 		document.getElementById('tlf').style.color = "white";
 		comTlf = true;
-	}
-	else {
+	} else {
 		document.getElementById('tlf').style.color = "red";
 	}
 }
@@ -160,8 +150,7 @@ function valdate() {
 	if (hoy > date) {
 		console.log("OK");
 		comDate = true;
-	}
-	else {
+	} else {
 		console.log("Fatal error");
 	}
 }
@@ -172,8 +161,7 @@ function valmail() {
 	if (mailER.test(mail)) {
 		document.getElementById('mail').style.color = "white";
 		comMail = true;
-	}
-	else {
+	} else {
 		document.getElementById('mail').style.color = "red";
 	}
 }
@@ -181,16 +169,15 @@ function valsex() {
 	var sex = document.querySelectorAll('input[name="sex"]');
 	if (sex[0].checked == false && sex[1].checked == false) {
 		return alert("Completa el campo sexo.");
-	}
-	else {
+	} else {
 		comSex = true;
 	}
 }
 function valf() {
-	if ((comUser == true) && (comPwd == true) && (comCpwd == true) && (comTlf == true) && (comMail == true) && (comDate == true)) {
+	if ((comUser == true) && (comPwd == true) && (comCpwd == true)
+			&& (comTlf == true) && (comMail == true) && (comDate == true)) {
 		document.registroform.submit();
-	}
-	else {
+	} else {
 		return false;
 	}
 }
@@ -217,12 +204,12 @@ function caja2() {
 
 	}
 	else if (auxiliar == true) {
+	} else if (auxiliar == true) {
 		for (var z = 0; z < 1; z++) {
 			cajas();
 		}
 
-	}
-	else {
+	} else {
 	}
 };
 function cajas() {
@@ -232,6 +219,7 @@ function cajas() {
 
 	for (j; x < 4; j = j + 6, x++) {
 		var name=tds[j + 1].innerHTML;
+	for (j; x < 4; j = j + 5, x++) {
 		var nombre = tds[j + 1].innerHTML;
 		var punt = parseInt(tds[j + 5].innerHTML);
 		var form = document.createElement("form");
@@ -246,6 +234,24 @@ function cajas() {
 		var carta = document.createElement("div");
 		form.action = "/user/infoGame/"+name;
 		submit.className="btn btn-outline-dark mt-auto";
+		var rev = document.createElement("div");
+		var opi = document.createElement("div");
+		var opiC = document.createElement("div");
+		var opiA = document.createElement("a");
+		var opiTn = document.createTextNode("Opiniones");
+		var caja = document.getElementById("caja");
+		opiA.href = "#";
+		opiA.className = "btn btn-outline-dark mt-auto";
+		opiC.className = "text-center";
+		opi.className = "card-footer p-4 pt-0 border-top-0 bg-transparent";
+		rev.className = "d-flex justify-content-center small text-warning mb-2";
+		opiTn.className = tds[j];
+		name.className = "fw-bolder";
+		name.text = "League of Legends";
+		tcenter.className = "text-center";
+		cartab.className = "card-body p-4";
+		img.className = "card-img-top";
+		img.src = "../../img/" + tds[j + 4].innerHTML;
 		col.className = "col mb-5";
 		img.className = "card-img-top";
 		h5.name="juego";

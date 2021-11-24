@@ -1,4 +1,4 @@
- 	package com.genuinegames.controller;
+package com.genuinegames.controller;
 
 import javax.servlet.http.HttpSession;
 
@@ -29,6 +29,15 @@ public class UserController {
 	private UserRepository userRepository;
 	@Autowired
 	private CommentRepository commentRepository;
+package com.genuinegames.controller;
+
+import javax.servlet.http.HttpSession;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class UserController {
 	
 	@GetMapping("/user/ajustes")
 	public String ajustes(ModelMap model,HttpSession session) {
@@ -42,6 +51,8 @@ public class UserController {
 		model.put("user", session.getAttribute("user"));
 		model.put("comments", commentRepository.findByUser(usuario));
 
+
+		model.put("user", session.getAttribute("user"));
 		return "/user/perfil";
 	}
 	@GetMapping("/user/infoGame/{name}")
