@@ -257,7 +257,7 @@ function cajas() {
 		carta.className = "card h-100";
 		submit.type="submit";
 		img.src = "../../img/" + tds[j + 4].innerHTML;
-		submit.value = "opiniones";
+		submit.value = "Opiniones";
 		for (var i = 0; i < 5; i++) {
 			var divstar = document.createElement("div");
 			var puntstar = document.createElement("img");

@@ -27,7 +27,8 @@
 				</form>
 			</div>
 			<div class="card col-lg-6 ajustes-form">
-				<form action="/user/updateDataUser" method="post">
+				<form th:object="${user}" method="post">
+					<input action="/user/ajustes" type="hidden" th:field="*{id}">		
 					Cambiar Usuario <br> <input type="text" name="username"
 						placeholder="Introduzca su nuevo nombre de usuario"
 						class="col-lg-12 ajustes-cajas" th:value="${user.username}" onkeyup="valuser()"> <br>

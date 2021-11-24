@@ -1,15 +1,18 @@
-<table class="table table-dark" style="display:none">
-				<tbody>
-					<tr th:each="game:${games}">
-						<td th:text="${game.id}" id="idjuego" th:value="${game.id}"></td>
-						<td th:text="${game.name}" id="namejuego"th:value="${game.name}"></td>
-						<td th:text="${game.category}" id="catjuego"th:value="${game.category}"></td>
-						<td th:text="${game.description}" id="descjuego"th:value="${game.description}"></td>
-						<td th:text="${game.img}" id="imgjuego"th:value="${game.img}"></td>
-						<td th:text="${game.punctuation}" id="puncjuego"th:value="${game.punctuation}"></td>
-					</tr>
-				</tbody>
-			</table>
+<table class="table table-dark" style="display: none">
+	<tbody>
+		<tr th:each="game:${games}">
+			<td th:text="${game.id}" id="idjuego" th:value="${game.id}"></td>
+			<td th:text="${game.name}" id="namejuego" th:value="${game.name}"></td>
+			<td th:text="${game.category}" id="catjuego"
+				th:value="${game.category}"></td>
+			<td th:text="${game.description}" id="descjuego"
+				th:value="${game.description}"></td>
+			<td th:text="${game.img}" id="imgjuego" th:value="${game.img}"></td>
+			<td th:text="${game.punctuation}" id="puncjuego"
+				th:value="${game.punctuation}"></td>
+		</tr>
+	</tbody>
+</table>
 <header class="bg-dark py-5" onload="caja2()">
 	<div class="container px-4 px-lg-5 my-5">
 		<div class="text-center text-white">
@@ -17,13 +20,13 @@
 			<p class="lead fw-normal text-white-50 mb-0">
 				No cumplimos propositos<br> <b>Desbloqueamos Logros</b>
 			</p>
-			
+
 		</div>
 	</div>
 </header>
 <!-- Section-->
 <section class="py-5">
-	<div class="container px-4 px-lg-5 mt-5" >
+	<div class="container px-4 px-lg-5 mt-5">
 		<div
 			class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
 			id="caja"></div>
@@ -32,8 +35,6 @@
 				<a class="btn btn-outline-dark mt-auto" onclick="caja2()">View
 					More</a>
 			</div>
-			
 		</div>
-	</div>
 	</div>
 </section>
