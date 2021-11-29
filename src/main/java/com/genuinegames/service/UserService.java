@@ -89,6 +89,15 @@ public class UserService implements IUserService, IGameService {
 			return "No se pudo realizar la acción";
 		}
 	}
+	
+	public String deleteUser(Long id) {
+		if(userRepository.findById(id).isPresent()) {
+			userRepository.deleteById(id);
+			return "redirect:/";
+		} else {
+			return "No se pudo realizar la acción";
+		}
+	}
 
 	// GAMES
 	@Override
