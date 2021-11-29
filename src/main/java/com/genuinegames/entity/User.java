@@ -1,6 +1,12 @@
 package com.genuinegames.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -38,17 +45,18 @@ public class User implements Serializable {
 	@Column(name = "sex")
 	private String sex;
 
-	@Column(name = "img")
-	private String img;
-
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Role role;
+
+	@OneToMany(mappedBy = "user")
+	private Collection<Comments> comments;
 
 	public User() {
 
 	}
 
-	public User(String username, String pwd, int tlf, String mail, String fnac, String sex, String img) {
+	public User(String username, String pwd, int tlf, String mail, String fnac, String sex, Role role,
+			Collection<Comments> comments) {
 		super();
 		this.username = username;
 		this.pwd = pwd;
@@ -56,15 +64,9 @@ public class User implements Serializable {
 		this.mail = mail;
 		this.fnac = fnac;
 		this.sex = sex;
-		this.img = img;
-	}
+		this.role = role;
+		this.comments = comments;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getUsername() {
@@ -123,12 +125,12 @@ public class User implements Serializable {
 		this.role = role;
 	}
 
-	public String getImg() {
-		return img;
+	public Collection<Comments> getComments() {
+		return comments;
 	}
 
-	public void setImg(String img) {
-		this.img = img;
+	public void setComments(Collection<Comments> comments) {
+		this.comments = comments;
 	}
 
 }

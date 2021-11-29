@@ -1,11 +1,15 @@
 package com.genuinegames.entity;
 
+import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,17 +32,26 @@ public class Game {
 	@Column(name = "description")
 	private String description;
 
+	@Column(name = "punctuation")
+	private Float punctuation;
+
+	@OneToMany(mappedBy = "game")
+	private Collection<Comments> comments;
+
 	public Game() {
 		super();
 	}
 
-	public Game(String name, String category,String img, String description) {
+	public Game(String name, String img, String category, String description, Float punctuation,
+			Collection<Comments> comments) {
 		super();
 		this.name = name;
+		this.img = img;
 		this.category = category;
-		this.img = img;
+		this.category = category;
 		this.description = description;
-		this.img = img;
+		this.punctuation = punctuation;
+		this.comments = comments;
 	}
 
 	public Long getId() {
@@ -79,6 +92,22 @@ public class Game {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Float getPunctuation() {
+		return punctuation;
+	}
+
+	public void setPunctuation(Float punctuation) {
+		this.punctuation = punctuation;
+	}
+
+	public Collection<Comments> getComments() {
+		return comments;
+	}
+
+	public void setComments(Collection<Comments> comments) {
+		this.comments = comments;
 	}
 
 }

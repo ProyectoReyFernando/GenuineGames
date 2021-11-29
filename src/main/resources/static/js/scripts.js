@@ -43,7 +43,6 @@ function adminD() {
 }
 /*---------------------------------------------------------------------------------------*/
 /* Login y Registro */
-/* L */
 var comUser = false;
 var comPwd = false;
 function valuser() {
@@ -199,17 +198,14 @@ function caja3() {
 function caja2() {
 	console.log("entra");
 	if (auxiliar == false) {
-		console.log("y va 8");
 		for (var y = 0; y < 2; y++) {
 			cajas();
 		}
 		auxiliar = true;
 
 	} else if (auxiliar == true) {
-		console.log("y con esta 2");
 		for (var z = 0; z < 1; z++) {
 			cajas();
-			console.log(auxiliar);
 		}
 
 	} else {
@@ -218,56 +214,59 @@ function caja2() {
 function cajas() {
 	x = 0;
 	var tds = document.getElementsByTagName("td");
-	for (j; x < 4; j = j + 5, x++) {
-		console.log("../img/" + tds[j + 4].innerHTML);
+	var caja = document.getElementById("caja");
+
+	for (j; x < 4; j = j + 6, x++) {
+		var name = tds[j + 1].innerHTML;
 		var nombre = tds[j + 1].innerHTML;
-		var col = document.createElement("div");
-		var carta = document.createElement("div");
+		var punt = parseInt(tds[j + 5].innerHTML);
+		var form = document.createElement("form");
 		var img = document.createElement("img");
+		var col = document.createElement("div");
 		var cartab = document.createElement("div");
-		var tcenter = document.createElement("div");
-		var name = document.createElement("h5");
 		var title = document.createTextNode(nombre);
-		var rev = document.createElement("div");
-		var opi = document.createElement("div");
-		var opiC = document.createElement("div");
-		var opiA = document.createElement("a");
-		var opiTn = document.createTextNode("Opiniones");
-		var caja = document.getElementById("caja");
-		opiA.href = "#";
-		opiA.className = "btn btn-outline-dark mt-auto";
-		opiC.className = "text-center";
-		opi.className = "card-footer p-4 pt-0 border-top-0 bg-transparent";
-		rev.className = "d-flex justify-content-center small text-warning mb-2";
-		opiTn.className = tds[j];
-		name.className = "fw-bolder";
-		name.text = "League of Legends";
-		tcenter.className = "text-center";
-		cartab.className = "card-body p-4";
-		img.className = "card-img-top";
-		img.src = "../../img/" + tds[j + 4].innerHTML;
-		console.log();
+		var submit = document.createElement("input");
+		var textcenter = document.createElement("div");
+		var divpunt = document.createElement("div");
+		var h5 = document.createElement("h5");
+		var carta = document.createElement("div");
+		form.action = "/user/infoGame/" + name;
+		submit.className = "btn btn-outline-dark mt-auto";
 		col.className = "col mb-5";
+		img.className = "card-img-top";
+		h5.name = "juego";
+		textcenter.className = "text-center";
+		divpunt.className = "d-flex justify-content-center small text-warning mb-2";
+		h5.className = "fw-bolder";
+		cartab.className = "card-body p-4";
 		carta.className = "card h-100";
-		name.appendChild(title);
-		tcenter.appendChild(name);
+		submit.type = "submit";
+		img.src = "../../img/" + tds[j + 4].innerHTML;
+		submit.value = "Opiniones";
+		form.className="mt-2";
 		for (var i = 0; i < 5; i++) {
-			var divV = document.createElement("div");
-			var punt = document.createElement("img");
-			punt.className = "opinions";
-			punt.src = "/img/dinamic/star-active.png";
-			divV.appendChild(punt);
-			rev.appendChild(divV);
+			var divstar = document.createElement("div");
+			var puntstar = document.createElement("img");
+			if (i < punt) {
+				puntstar.src = "/img/dinamic/star-active.png";
+				puntstar.className = "opinions";
+				divstar.appendChild(puntstar);
+				divpunt.appendChild(divstar);
+			} else {
+				puntstar.src = null;
+			}
+
+			h5.appendChild(title);
+			textcenter.appendChild(h5);
+			textcenter.appendChild(divpunt);
+			cartab.appendChild(textcenter);
+			carta.appendChild(img);
+
+			carta.appendChild(cartab);
+			carta.appendChild(submit);
+			form.appendChild(carta);
+			caja.appendChild(form);
 		}
-		tcenter.appendChild(rev);
-		cartab.appendChild(tcenter);
-		carta.appendChild(img);
-		carta.appendChild(cartab);
-		opiA.appendChild(opiTn);
-		opiC.appendChild(opiA);
-		opi.appendChild(opiC);
-		carta.appendChild(opi);
-		col.appendChild(carta);
-		caja.appendChild(col);
+
 	}
 }

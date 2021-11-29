@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>GG | Genuine Gamers</title>
     <link rel="icon" type="image/x-icon" href="/img/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -9,15 +10,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style-log.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+        <script type="text/javascript" src="../js/jquery.js"></script>
     <script type="text/javascript" src="../js/scripts.js"></script>
-   <script type="text/javascript">
-        
-    </script>
+   <script type="text/javascript"></script>
   </head>
   <body>
-    <div class="registro-box">
+    <div class="registro-box col-auto">
       <img src="../img/logo-f.png" class="logo">
-      <h1>Registrese Aquí</h1>
+      <h2>Registrese Aquí</h2>
       <form method="post" name="registroform" th:action="@{/auth/register}" th:object="${user}">
         <label for="user">Usuario</label>
          <input type="text" th:field="*{username}" placeholder="Introduzca Usuario" id="user" onkeyup="valuser()" required minlength="6" maxlength="50" value="Antonio">
@@ -35,10 +35,9 @@
         <br>
           <div class="check">Hombre<input type="radio" value="Hombre" name="sex" onchange="valsex()" required></div>
           <div class="check">Mujer&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="Mujer" name="sex" onchange="valsex()" required></div>
-         <label for="img">Image</label>
-         	<input type="file" th:field="*{img}">
         <button id="submit" value="Registrate" onclick="valf()">Registrate</button>
-        <a th:href="@{/auth/login}">Volver al Login</a>
+        <br>
+        <a th:href="@{/auth/login}" class="mt-2">Volver al Login</a>
       </form>
     </div>
   </body>

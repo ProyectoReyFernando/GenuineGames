@@ -15,7 +15,8 @@
 	rel="stylesheet" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/css/style.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script>
 	$(document).ready(function() {
@@ -23,17 +24,21 @@
 			var name = $('#name').val();
 			var category = $('#category').val();
 			var description = $('#description').val();
-			
+
 			$.ajax({
 				method : 'POST',
-				url: '/user/admin/createGame',
-				data : JSON.stringify({name:name, category:category, description:description}),
-				contentType: 'application/json; charset=utf-8',
-				success: function() {
+				url : '/user/admin/createGame',
+				data : JSON.stringify({
+					name : name,
+					category : category,
+					description : description
+				}),
+				contentType : 'application/json; charset=utf-8',
+				success : function() {
 					alert("Saved successfully");
-					window.location	= "/user/admin/getAllGame";
+					window.location = "/user/admin/getAllGame";
 				},
-				error: function() {
+				error : function() {
 					alert("No se pudo crear");
 				}
 			})
@@ -42,64 +47,24 @@
 </script>
 </head>
 <body>
-	<!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href=""><img src="/img/logo.png"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Inicio</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorías</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">MOBA</a></li>
-                            <li><a class="dropdown-item" href="#!">Carreras</a></li>
-                            <li><a class="dropdown-item" href="#!">Shooters</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="/user/admin/getAllGame">Listado Juegos</a></li>
-                </ul>
-                <form class="d-flex">
-                        <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="/img/perfil.png" class="perfil"></a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="ajustes.html"><img class="tab-icon icon-ajustes" src="/img/ajustes.png" > Ajustes</a></li>
-                            <li><a class="dropdown-item" href="#!"><img class="tab-icon icon-avatar" src="/img/avatar.png"> Perfil</a></li>
-                            <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item" href="#!"><img class="tab-icon icon-logout" src="/img/logout.png"> Logout</a></li>
-                        </ul>
-                    </li>
-                </form>
-            </div>
-        </div>
-    </nav>
+	<div th:replace="/_t/nav" />
 	<div class="container card col-lg-12 col-md-6 bg-dark text-light mb-2">
-	<h1 class="display-1">Crear Juego</h1>
-	<form>
-		<div class="form-group create-games">
-			<label>Nombre</label> 
-				<input type="text" id="name" name="name" class="form-control">
-		</div>
-		<div class="form-group create-games">
-			<label>Categoría</label>
-				<input type="text" id="category" name="category" class="form-control">
-		</div>
-		<div class="form-group create-games">
-			<label>Descripción</label>
-				<input type="text" id="description" name="description" class="form-control">
-		</div>
-		<input type="button" id="addNewGame" value="Enviar" class="btn btn-primary games-button">
-	</form>
+		<h1 class="display-1">Crear Juego</h1>
+		<form>
+			<div class="form-group create-games">
+				<label>Nombre</label> <input type="text" id="name" name="name"
+					class="form-control">
+			</div>
+			<div class="form-group create-games">
+				<label>Categoría</label> <input type="text" id="category"
+					name="category" class="form-control">
+			</div>
+			<div class="form-group create-games">
+				<label>Descripción</label> <input type="text" id="description"
+					name="description" class="form-control">
+			</div>
+			<input type="button" id="addNewGame" value="Enviar"
+				class="btn btn-primary games-button">
 	</div>
-	<footer class="py-5 bg-dark">
-        <div class="container">
-            <p class="m-0 text-center text-white">
-                Copyright &copy; GG Team 2021<br>
-                <a href="https://github.com/ProyectoReyFernando/GenuineGames" title="github" class="fab fa-github" target="_blank"></a>
-                <a href="mailto:gg-team@genuinegamers.aaritmendi.es" title="mail" class="fas fa-mail-bulk" target="_blank"></a>
-            </p>
-        </div>
-    </footer>
-</body>
-</html>
+	<div th:replace="/_t/footer" />
+	<div th:replace="/_t/end" />
