@@ -62,6 +62,7 @@ public class UserController {
 		Game game = gameRepository.findByName(name);
 
 		model.put("games", gameRepository.findByName(name));
+		model.put("gamer", gameRepository.findAllByCategory(name));
 		model.put("comments", commentRepository.findByGame(game));
 		
 		return "/user/infoGame";

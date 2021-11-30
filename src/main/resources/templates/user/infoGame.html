@@ -1,14 +1,40 @@
 <div th:replace="/_t/head" />
 <div th:replace="/_t/nav" />
 <!-- Section-->
-<section class="bg-dark py-perfil d-flex flex-row justify-content-center alig-items-center">
+<table class="table table-dark" style="display: none">
+	<tbody>
+		<tr th:each="game:${games}">
+			<td th:text="${game.id}" id="idjuego" th:value="${game.id}"
+				class="Sfiltrar"></td>
+			<td th:text="${game.name}" id="namejuego" th:value="${game.name}"
+				class="Sfiltrar"></td>
+			<td th:text="${game.category}" id="catjuego"
+				th:value="${game.category}" class="Sfiltrar cat"></td>
+			<td th:text="${game.description}" id="descjuego"
+				th:value="${game.description}" class="Sfiltrar"></td>
+			<td th:text="${game.img}" id="imgjuego" th:value="${game.img}"
+				class="Sfiltrar"></td>
+			<td th:text="${game.punctuation}" id="puncjuego"
+				th:value="${game.punctuation}" class="Sfiltrar"></td>
+		</tr>
+	</tbody>
+</table>
+<section
+	class="bg-dark py-perfil d-flex flex-row justify-content-center alig-items-center">
 	<div class="container card col-lg-11 col-md-6">
 		<div class="row container align-items-center justify-content-center">
 			<div class="col-lg-12 m-3 text-center">
 				<div class="container" th:each="game:${games}">
 					<div class="row align-items-start d-flex">
-						<div class="col-lg-6 col-md-12"><img th:src="@{'/img/'+${game.img}}" th:alt="${game.img}" class="img-fluid"></div>
-						<div class="col-lg-4 col-md-9"><h2 class="card-title" th:text="${game.name}"></h2><br><h4 th:text="${game.category}"></h4></div>
+						<div class="col-lg-6 col-md-12">
+							<img th:src="@{'/img/'+${game.img}}" th:alt="${game.img}"
+								class="img-fluid">
+						</div>
+						<div class="col-lg-4 col-md-9">
+							<h2 class="card-title" th:text="${game.name}"></h2>
+							<br>
+							<h4 th:text="${game.category}"></h4>
+						</div>
 						<!-- *****ESTE ES EL DIV QUE DEBERÍA DE IR PERO COMO NO TENEMOS PUNTUACIÓN SINO, NO LO MUESTRA*****
 							<div class="col-lg-2 col-md-3" th:text="${game.punctuation}"></div
 						>-->
@@ -26,10 +52,12 @@
 				<div class="card mt-1" th:each="game:${games}">
 					<form action="/user/comment" method="POST">
 						<div class="form-group">
-							<input type="text" name="texto" class="form-control" placeholder="Comenta tus ideas">
+							<input type="text" name="texto" class="form-control"
+								placeholder="Comenta tus ideas">
 						</div>
 						<input type="hidden" name="nombre" th:value="${game.name}">
-						<input type="submit" value="Comentar" class="btn btn-primary games-button">
+						<input type="submit" value="Comentar"
+							class="btn btn-primary games-button">
 					</form>
 				</div>
 				<div class="card mt-2" th:each="comment:${comments}">
@@ -38,7 +66,6 @@
 						<p class="card-text" th:text="${comment.text}"></p>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
