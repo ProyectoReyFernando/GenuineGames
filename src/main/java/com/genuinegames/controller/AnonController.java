@@ -37,13 +37,13 @@ public class AnonController {
 		return "index";
 	}
 
-	@GetMapping("/auth/register")
+	@GetMapping("auth/register")
 	public String registroForm(Model model) {
 		model.addAttribute("user", new User());
 		return "auth/register";
 	}
 
-	@PostMapping("/auth/register")
+	@PostMapping("auth/register")
 	public String registerUser(@Valid @ModelAttribute User user, BindingResult result, Model model) throws DangerException {
 		if (result.hasErrors()) {
 			return "redirect:/auth/register";

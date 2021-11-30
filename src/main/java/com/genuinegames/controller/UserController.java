@@ -33,7 +33,7 @@ public class UserController {
 	private IUserService iUserService;
 
 	/* SETTINGS */
-	@GetMapping("/user/ajustes")
+	@GetMapping("user/ajustes")
 	public String ajustes(ModelMap model, HttpSession session) {
 		model.put("user", session.getAttribute("user"));
 		model.put("games", gameRepository.findAll());
@@ -47,7 +47,7 @@ public class UserController {
 		return "/user/perfil";
 	}*/
 
-	@GetMapping("/user/perfil")
+	@GetMapping("user/perfil")
 	public String perfil(HttpSession session, ModelMap model) {
 		User usuario = (User) session.getAttribute("user");
 
@@ -59,7 +59,7 @@ public class UserController {
 	}
 
 	/* OPINION GAMES */
-	@GetMapping("/user/infoGame/{name}")
+	@GetMapping("user/infoGame/{name}")
 	public String opinion(HttpSession session, ModelMap model, @PathVariable String name) {
 		Game game = gameRepository.findByName(name);
 
@@ -70,7 +70,7 @@ public class UserController {
 		return "user/infoGame";
 	}
 
-	@PostMapping("/user/comment")
+	@PostMapping("user/comment")
 	public String commentGame(HttpSession session, @RequestParam("texto") String text,
 			@RequestParam("nombre") String name, ModelMap model, Long id) {
 		User user = (User) session.getAttribute("user");
@@ -89,7 +89,7 @@ public class UserController {
 		return "redirect:user/perfil";
 	}
 	
-	@GetMapping("/user/categoria/{name}")
+	@GetMapping("user/categoria/{name}")
 	public String categoriaGame(HttpSession session,@PathVariable String name, ModelMap model) {
 		model.put("games", gameRepository.findAll());
 		model.put("gamer", gameRepository.findAllByCategory(name));
