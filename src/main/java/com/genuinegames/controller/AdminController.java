@@ -55,7 +55,7 @@ public class AdminController {
 	public String getAllUser(Long id, ModelMap model) {
 		model.put("user", userRepository.findAll());
 		model.put("games", gameRepository.findAll());
-		return "/user/adminPanel/getAllUser";
+		return "user/adminPanel/getAllUser";
 	}
 	
 	@GetMapping("/user/adminPanel/deleteUser/{id}")
@@ -68,13 +68,13 @@ public class AdminController {
 	@GetMapping("/user/admin/getAllGame")
 	public String getAllGame(Long id, ModelMap model) {
 		model.put("games", gameRepository.findAll());
-		return "/user/admin/getAllGame";
+		return "user/admin/getAllGame";
 	}
 
 	// CREATE
 	@GetMapping("/user/admin/createGame")
 	public String createGame() {
-		return "/user/admin/createGame";
+		return "user/admin/createGame";
 	}
 
 	@PostMapping("/user/admin/createGame")
@@ -94,7 +94,7 @@ public class AdminController {
 	public String updateGame(@PathVariable Long id, ModelMap model) {
 		model.put("games", gameRepository.findAll());
 		model.addAttribute("game", gameRepository.findById(id));
-		return "/user/admin/updateGame";
+		return "user/admin/updateGame";
 	}
 
 	@PostMapping("/user/admin/updateGame/{id}")
@@ -109,7 +109,7 @@ public class AdminController {
 	public String uploadImage(@PathVariable Long id, ModelMap model) {
 		model.addAttribute("game", gameRepository.findById(id));
 		model.put("games", gameRepository.findAll());
-		return "/user/admin/uploadImage";
+		return "user/admin/uploadImage";
 	}
 
 	@PostMapping("/user/admin/uploadImage")
@@ -131,7 +131,7 @@ public class AdminController {
 			gameRepository.save(game);
 		}
 
-		return "redirect:/user/admin/getAllGame";
+		return "redirect:user/admin/getAllGame";
 	}
 
 }
