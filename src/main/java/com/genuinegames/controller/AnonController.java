@@ -34,13 +34,13 @@ public class AnonController {
 	@GetMapping("/")
 	public String index(Model model) {
 		model.addAttribute("games", gameRepository.findAll());
-		return "/index";
+		return "index";
 	}
 
 	@GetMapping("/auth/register")
 	public String registroForm(Model model) {
 		model.addAttribute("user", new User());
-		return "/auth/register";
+		return "auth/register";
 	}
 
 	@PostMapping("/auth/register")
@@ -51,7 +51,7 @@ public class AnonController {
 			model.addAttribute("user", iUserService.registerUser(user));
 		}
 
-		return "redirect:/auth/login";
+		return "redirect:auth/login";
 	}
 
 	@GetMapping("/auth/login")

@@ -55,7 +55,7 @@ public class UserController {
 		model.put("comments", commentRepository.findByUser(usuario));
 		model.put("games", gameRepository.findAll());
 
-		return "/user/perfil";
+		return "user/perfil";
 	}
 
 	/* OPINION GAMES */
@@ -67,7 +67,7 @@ public class UserController {
 		model.put("gamers", gameRepository.findByName(name));
 		model.put("comments", commentRepository.findByGame(game));
 		
-		return "/user/infoGame";
+		return "user/infoGame";
 	}
 
 	@PostMapping("/user/comment")
@@ -86,14 +86,14 @@ public class UserController {
 
 		new ResponseEntity<>(iUserService.createComment(comment), HttpStatus.OK);
 
-		return "redirect:/user/perfil";
+		return "redirect:user/perfil";
 	}
 	
 	@GetMapping("/user/categoria/{name}")
 	public String categoriaGame(HttpSession session,@PathVariable String name, ModelMap model) {
 		model.put("games", gameRepository.findAll());
 		model.put("gamer", gameRepository.findAllByCategory(name));
-		return "/user/index";
+		return "user/index";
 	}
 
 }
