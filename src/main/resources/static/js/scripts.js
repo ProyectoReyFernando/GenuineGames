@@ -186,14 +186,14 @@ function valf() {
 var j = 0;
 var auxiliar = false;
 var GG = true;
+var exit = false;
 $(document).ready(function() {
-	caja3();
+	categoria();
+	caja2();
 });
-function caja3() {
-	if (GG == true) {
-		caja2();
-		GG = false;
-	}
+function start() {
+	categoria();
+	caja2();
 }
 function caja2() {
 	console.log("entra");
@@ -207,16 +207,24 @@ function caja2() {
 		for (var z = 0; z < 1; z++) {
 			cajas();
 		}
-
-	} else {
 	}
 };
 function cajas() {
 	x = 0;
-	var tds = document.getElementsByTagName("td");
+
+	if (document.getElementsByClassName("filtrado").length != 0) {
+		var tds = document.getElementsByClassName("filtrado");
+	} else {
+		var tds = document.getElementsByClassName("Sfiltrar");
+	}
 	var caja = document.getElementById("caja");
 
-	for (j; x < 4; j = j + 6, x++) {
+	for (j; x < 4 && exit == false; j = j + 6, x++) {
+		if (j + 7 > tds.length) {
+			x = 4;
+			exit = true;
+		}
+		console.log(x);
 		var name = tds[j + 1].innerHTML;
 		var nombre = tds[j + 1].innerHTML;
 		var punt = parseInt(tds[j + 5].innerHTML);
@@ -243,6 +251,7 @@ function cajas() {
 		submit.type = "submit";
 		img.src = "../../img/" + tds[j + 4].innerHTML;
 		submit.value = "Opiniones";
+		form.className = "mt-2";
 		for (var i = 0; i < 5; i++) {
 			var divstar = document.createElement("div");
 			var puntstar = document.createElement("img");
@@ -266,6 +275,37 @@ function cajas() {
 			form.appendChild(carta);
 			caja.appendChild(form);
 		}
+	}
+
+}
+function categoria() {
+	var salir = false;
+	var elementos = document.getElementsByClassName("Sfiltrar cat");
+	console.log(elementos.length);
+	let lista = [];
+	for (var j = 0; j < elementos.length; j++) {
+		salir = false;
+		for (var k = 0; k < lista.length && salir == false; k++) {
+			if (elementos[j].innerHTML == lista[k] && j != k) {
+
+				salir = true;
+			}
+		}
+		if (salir == false) {
+			lista.push(elementos[j].innerHTML);
+		}
+	}
+	var ul = document.getElementById("categoria");
+	console.log(lista.length);
+	for (var l = 0; l < lista.length; l++) {
+		var a = document.createElement("a");
+		var li = document.createElement("li");
+		var text = document.createTextNode(lista[l]);
+		li.className = "dropdown-item";
+		a.href = "/user/categoria/" + lista[l];
+		a.appendChild(text);
+		li.appendChild(a);
+		ul.appendChild(li);
 
 	}
 }

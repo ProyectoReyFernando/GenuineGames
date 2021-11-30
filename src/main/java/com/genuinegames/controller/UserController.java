@@ -36,16 +36,24 @@ public class UserController {
 	@GetMapping("/user/ajustes")
 	public String ajustes(ModelMap model, HttpSession session) {
 		model.put("user", session.getAttribute("user"));
+		model.put("games", gameRepository.findAll());
 		return "/user/ajustes";
 	}
 
 	/* PROFILE */
+	/* UPDATE USER */
+	/* @PostMapping("/user/ajustes")
+	public String intermedio(HttpSession session, ModelMap model, @RequestParam("user") String user) {
+		return "/user/perfil";
+	}*/
+
 	@GetMapping("/user/perfil")
 	public String perfil(HttpSession session, ModelMap model) {
 		User usuario = (User) session.getAttribute("user");
 
 		model.put("user", session.getAttribute("user"));
 		model.put("comments", commentRepository.findByUser(usuario));
+		model.put("games", gameRepository.findAll());
 
 		return "/user/perfil";
 	}
@@ -55,7 +63,8 @@ public class UserController {
 	public String opinion(HttpSession session, ModelMap model, @PathVariable String name) {
 		Game game = gameRepository.findByName(name);
 
-		model.put("games", gameRepository.findByName(name));
+		model.put("games", gameRepository.findAll());
+		model.put("gamers", gameRepository.findByName(name));
 		model.put("comments", commentRepository.findByGame(game));
 		
 		return "/user/infoGame";
@@ -78,6 +87,13 @@ public class UserController {
 		new ResponseEntity<>(iUserService.createComment(comment), HttpStatus.OK);
 
 		return "redirect:/user/perfil";
+	}
+	
+	@GetMapping("/user/categoria/{name}")
+	public String categoriaGame(HttpSession session,@PathVariable String name, ModelMap model) {
+		model.put("games", gameRepository.findAll());
+		model.put("gamer", gameRepository.findAllByCategory(name));
+		return "/user/index";
 	}
 
 }

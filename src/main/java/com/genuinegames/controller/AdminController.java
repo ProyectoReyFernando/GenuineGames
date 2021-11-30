@@ -1,5 +1,7 @@
 package com.genuinegames.controller;
 
+import java.io.File;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -36,22 +38,23 @@ public class AdminController {
 	private IGameService iGameService;
 
 	@Autowired
-	private GameRepository gameRepository;
+	private UserRepository userRepository;
 	
 	@Autowired
-	private UserRepository userRepository;
-
+	private GameRepository gameRepository;
+	
 	/* REGISTER ADMIN */
 	@PostMapping("/auth/register/admin")
 	public String addUserAdmin(@RequestBody User user, Model model) {
 		model.addAttribute("user", iUserService.registerAdmin(user));
 		return "redirect:/auth/login";
 	}
-	
+
 	/* USERS */
 	@GetMapping("/user/adminPanel/getAllUser")
 	public String getAllUser(Long id, ModelMap model) {
 		model.put("user", userRepository.findAll());
+		model.put("games", gameRepository.findAll());
 		return "/user/adminPanel/getAllUser";
 	}
 	
@@ -89,13 +92,15 @@ public class AdminController {
 	// UPDATE
 	@GetMapping("/user/admin/updateGame/{id}")
 	public String updateGame(@PathVariable Long id, ModelMap model) {
+		model.put("games", gameRepository.findAll());
 		model.addAttribute("game", gameRepository.findById(id));
 		return "/user/admin/updateGame";
 	}
 
 	@PostMapping("/user/admin/updateGame/{id}")
-	public String updateGame(Long id, Game game) {
+	public String updateGame(ModelMap model,Long id, Game game) {
 		new ResponseEntity<>(iGameService.updateGame(id, game), HttpStatus.OK);
+		model.put("games", gameRepository.findAll());
 		return "redirect:/user/admin/getAllGame";
 	}
 
@@ -103,6 +108,7 @@ public class AdminController {
 	@GetMapping("/user/admin/uploadImage/{id}")
 	public String uploadImage(@PathVariable Long id, ModelMap model) {
 		model.addAttribute("game", gameRepository.findById(id));
+		model.put("games", gameRepository.findAll());
 		return "/user/admin/uploadImage";
 	}
 
