@@ -1,0 +1,36 @@
+<div th:replace="/_t/head" />
+<div th:replace="/_t/nav" />
+<table class="table table-dark" style="display: none">
+	<tbody>
+		<tr th:each="game:${games}">
+			<td th:text="${game.id}" id="idjuego" th:value="${game.id}"
+				class="Sfiltrar"></td>
+			<td th:text="${game.name}" id="namejuego" th:value="${game.name}"
+				class="Sfiltrar"></td>
+			<td th:text="${game.category}" id="catjuego"
+				th:value="${game.category}" class="Sfiltrar cat"></td>
+			<td th:text="${game.description}" id="descjuego"
+				th:value="${game.description}" class="Sfiltrar"></td>
+			<td th:text="${game.img}" id="imgjuego" th:value="${game.img}"
+				class="Sfiltrar"></td>
+			<td th:text="${game.punctuation}" id="puncjuego"
+				th:value="${game.punctuation}" class="Sfiltrar"></td>
+		</tr>
+	</tbody>
+</table>
+
+    <!--Juegos-->
+	<div class="container card col-lg-12 col-md-6 bg-dark text-light mb-2">
+	<h1 class="display-1">Subir imagen del juego</h1>
+	<form th:action="@{/user/admin/uploadImage}" th:object="${game}" method="post" enctype="multipart/form-data">
+		<input type="hidden" th:field="*{id}">
+		<input type="hidden" th:field="*{name}">
+		<input type="hidden" th:field="*{category}">
+		<input type="hidden" th:field="*{description}">
+		<label class="form-label" for="customFile">Seleccionar imagen del juego</label>
+		<input type="file" name="file" class="form-control">
+		<input type="submit" value="Enviar" class="btn btn-primary games-button">
+	</form>
+	</div>
+<div th:replace="/_t/footer" />
+<div th:replace="/_t/end" />

@@ -1,0 +1,66 @@
+<div th:replace="/_t/head" />
+<div th:replace="/_t/nav" />
+<!--Juegos-->
+<table class="table table-dark" style="display: none">
+	<tbody>
+		<tr th:each="game:${games}">
+			<td th:text="${game.id}" id="idjuego" th:value="${game.id}"
+				class="Sfiltrar"></td>
+			<td th:text="${game.name}" id="namejuego" th:value="${game.name}"
+				class="Sfiltrar"></td>
+			<td th:text="${game.category}" id="catjuego"
+				th:value="${game.category}" class="Sfiltrar cat"></td>
+			<td th:text="${game.description}" id="descjuego"
+				th:value="${game.description}" class="Sfiltrar"></td>
+			<td th:text="${game.img}" id="imgjuego" th:value="${game.img}"
+				class="Sfiltrar"></td>
+			<td th:text="${game.punctuation}" id="puncjuego"
+				th:value="${game.punctuation}" class="Sfiltrar"></td>
+		</tr>
+	</tbody>
+</table>
+
+<div
+	class="container card col-lg-12 col-md-6 table-games bg-dark text-light">
+	<h1 class="display-1">Listado de Juegos</h1>
+	<div
+		class="bg-dark table-responsive-xl table-responsive-lg table-responsive-md">
+		<table class="table table-dark">
+			<thead>
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Name</th>
+					<th scope="col">Category</th>
+					<th scope="col">Description</th>
+					<th scope="col">Image</th>
+					<th scope="col">Upload Image</th>
+					<th scope="col">Update</th>
+					<th scope="col">Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="game:${games}">
+					<td th:text="${game.id}"></td>
+					<td th:text="${game.name}"></td>
+					<td th:text="${game.category}"></td>
+					<td th:text="${game.description}"></td>
+					<td><img th:src="@{'/img/'+${game.img}}" th:alt="${game.img}"
+						class="table-games-img"></td>
+					<td><a
+						th:href="@{/user/admin/uploadImage/{id}(id=${game.id})}"
+						class="btn btn-primary">Upload Image</a>
+					<td><a th:href="@{/user/admin/updateGame/{id}(id=${game.id})}"
+						class="btn btn-warning">Update</a></td>
+					<td><a th:href="@{/user/admin/deleteGame/{id}(id=${game.id})}"
+						class="btn btn-danger">Delete</a></td>
+				</tr>
+				<tr>
+					<td colspan="8"><a href="/user/admin/createGame"
+						class="btn btn-primary games-button">Crear</a><a
+						href="/user/index" class="btn btn-primary table-games-button">Volver</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+<div th:replace="/_t/footer" />
+<div th:replace="/_t/end" />

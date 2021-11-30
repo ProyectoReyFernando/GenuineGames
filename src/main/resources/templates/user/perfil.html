@@ -1,0 +1,55 @@
+<div th:replace="/_t/head" />
+<div th:replace="/_t/nav" />
+<table class="table table-dark" style="display: none">
+	<tbody>
+		<tr th:each="game:${games}">
+			<td th:text="${game.id}" id="idjuego" th:value="${game.id}"
+				class="Sfiltrar"></td>
+			<td th:text="${game.name}" id="namejuego" th:value="${game.name}"
+				class="Sfiltrar"></td>
+			<td th:text="${game.category}" id="catjuego"
+				th:value="${game.category}" class="Sfiltrar cat"></td>
+			<td th:text="${game.description}" id="descjuego"
+				th:value="${game.description}" class="Sfiltrar"></td>
+			<td th:text="${game.img}" id="imgjuego" th:value="${game.img}"
+				class="Sfiltrar"></td>
+			<td th:text="${game.punctuation}" id="puncjuego"
+				th:value="${game.punctuation}" class="Sfiltrar"></td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- Section-->
+<section
+	class="bg-dark py-perfil d-flex flex-row justify-content-center alig-items-center"
+	th:each="usuario:${user}">
+	<div class="container card col-lg-11 col-md-6">
+		<div class="row container">
+			<div class="col-lg-3 col-md-6 m-3">
+				<div class="card" style="width: 18rem;">
+					<img src="/img/perfil.png" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title" th:text="${usuario.username}"></h5>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item" th:text="${usuario.tlf}"></li>
+						<li class="list-group-item" th:text="${usuario.mail}"></li>
+						<li class="list-group-item" th:text="${usuario.fnac}"></li>
+						<li class="list-group-item" th:text="${usuario.sex}"></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-8 col-md-6 m-3">
+				<h2>Interacciones</h2>
+				<div class="card mt-2" th:each="comment:${comments}">
+					<h5 class="card-header" th:text="${comment.game.name}">Comentario</h5>
+					<div class="card-body">
+						<p class="card-text" th:text="${comment.text}"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<div th:replace="/_t/footer" />
+<div th:replace="/_t/end" />

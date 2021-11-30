@@ -1,0 +1,25 @@
+<div th:replace="/_t/head" />
+<div th:replace="/_t/nav" />
+	<div class="container card col-lg-12 col-md-6 bg-dark text-light mb-2">
+		<h1 class="display-1">Actualizar Juego</h1>
+		<form method="post" th:object="${game}">
+			<input type="hidden" th:field="*{id}">
+			<div class="form-group create-games">
+				<label>Nuevo nombre</label> <input type="text" name="name"
+					class="form-control" placeholder="*{name}">
+			</div>
+			<div class="form-group create-games">
+				<label>Category</label> <input type="text" id="category"
+					name="category" class="form-control" placeholder=${game.category}>
+			</div>
+			<div class="form-group create-games">
+				<label>Description</label> <input type="text" id="description"
+					name="description" class="form-control"
+					placeholder="${game.description}">
+			</div>
+			<input type="submit" value="Enviar"
+				class="btn btn-primary games-button">
+		</form>
+	</div>
+<div th:replace="/_t/footer" />
+<div th:replace="/_t/end" />

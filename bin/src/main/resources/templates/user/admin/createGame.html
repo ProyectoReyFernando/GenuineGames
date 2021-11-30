@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>GG - Genuine Gamers</title>
+<!-- Favicon-->
+<link rel="icon" type="image/x-icon" href="/img/logo.png" />
+<!-- Bootstrap icons-->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+	rel="stylesheet" />
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="/css/style.css" rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script>
+	$(document).ready(function() {
+		$('#addNewGame').click(function() {
+			var name = $('#name').val();
+			var category = $('#category').val();
+			var description = $('#description').val();
+
+			$.ajax({
+				method : 'POST',
+				url : '/user/admin/createGame',
+				data : JSON.stringify({
+					name : name,
+					category : category,
+					description : description
+				}),
+				contentType : 'application/json; charset=utf-8',
+				success : function() {
+					alert("Saved successfully");
+					window.location = "/user/admin/getAllGame";
+				},
+				error : function() {
+					alert("No se pudo crear");
+				}
+			})
+		})
+	});
+</script>
+</head>
+<body>
+	<div th:replace="/_t/nav" />
+	<div class="container card col-lg-12 col-md-6 bg-dark text-light mb-2">
+		<h1 class="display-1">Crear Juego</h1>
+		<form>
+			<div class="form-group create-games">
+				<label>Nombre</label> <input type="text" id="name" name="name"
+					class="form-control">
+			</div>
+			<div class="form-group create-games">
+				<label>Categoría</label> <input type="text" id="category"
+					name="category" class="form-control">
+			</div>
+			<div class="form-group create-games">
+				<label>Descripción</label> <input type="text" id="description"
+					name="description" class="form-control">
+			</div>
+			<input type="button" id="addNewGame" value="Enviar"
+				class="btn btn-primary games-button">
+	</div>
+	<div th:replace="/_t/footer" />
+	<div th:replace="/_t/end" />
