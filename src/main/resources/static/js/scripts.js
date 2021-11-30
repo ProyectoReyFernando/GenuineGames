@@ -42,7 +42,7 @@ function adminD() {
 	}
 }
 /*---------------------------------------------------------------------------------------*/
-/*Login y Registro*/
+/* Login y Registro */
 var comUser = false;
 var comPwd = false;
 function valuser() {
@@ -50,8 +50,7 @@ function valuser() {
 	var userER = /^([a-zA-Z]|[0-9]){6,50}/;
 	if (userER.test(user)) {
 		document.getElementById('user').style.color = "white";
-	}
-	else {
+	} else {
 		document.getElementById('user').style.color = "red";
 		document.getElementById('caja_error').hidden = false;
 	}
@@ -62,20 +61,18 @@ function valpwd() {
 	if (pwdER.test(pwd)) {
 		document.getElementById('pwd').style.color = "white";
 		comPwd = true;
-	}
-	else {
+	} else {
 		document.getElementById('pwd').style.color = "red";
 	}
 }
 function valf() {
 	if ((comUser == true) && (comPwd == true)) {
 		document.loginform.submit();
-	}
-	else {
+	} else {
 		alert("Algo terrible esta a punto de ocurrir");
 	}
 }
-/*R*/
+/* R */
 var comUser = false;
 var comPwd = false;
 var comCpwd = false;
@@ -89,8 +86,7 @@ function valuser() {
 	if (userER.test(user)) {
 		document.getElementById('user').style.color = "white";
 		comUser = true;
-	}
-	else {
+	} else {
 		document.getElementById('user').style.color = "red";
 	}
 }
@@ -100,8 +96,7 @@ function valpwd() {
 	if (pwdER.test(pwd)) {
 		document.getElementById('pwd').style.color = "white";
 		comPwd = true;
-	}
-	else {
+	} else {
 		document.getElementById('pwd').style.color = "red";
 	}
 }
@@ -112,8 +107,7 @@ function valcpwd() {
 		document.getElementById('cpwd').style.color = "white";
 		comCpwd = true;
 		valpwds();
-	}
-	else {
+	} else {
 		document.getElementById('cpwd').style.color = "red";
 	}
 }
@@ -124,16 +118,14 @@ function valpwds() {
 		comPwd = true;
 		comCpwd = true;
 		console.log('todo flama');
-	}
-	else {
+	} else {
 		alert('No coinciden las dos contraseñas. Asegurese de que es una contraseña que podrá recordar');
 	}
 }
 function pwdError() {
 	if ((comPwd == true) && (comCpwd == true)) {
 		console.log("tamos bien");
-	}
-	else {
+	} else {
 		console.log("No se lo pongamos tan facil a los malos")
 	}
 }
@@ -143,8 +135,7 @@ function valtlf() {
 	if (tlfER.test(tlf)) {
 		document.getElementById('tlf').style.color = "white";
 		comTlf = true;
-	}
-	else {
+	} else {
 		document.getElementById('tlf').style.color = "red";
 	}
 }
@@ -160,8 +151,7 @@ function valdate() {
 	if (hoy > date) {
 		console.log("OK");
 		comDate = true;
-	}
-	else {
+	} else {
 		console.log("Fatal error");
 	}
 }
@@ -172,8 +162,7 @@ function valmail() {
 	if (mailER.test(mail)) {
 		document.getElementById('mail').style.color = "white";
 		comMail = true;
-	}
-	else {
+	} else {
 		document.getElementById('mail').style.color = "red";
 	}
 }
@@ -181,16 +170,15 @@ function valsex() {
 	var sex = document.querySelectorAll('input[name="sex"]');
 	if (sex[0].checked == false && sex[1].checked == false) {
 		return alert("Completa el campo sexo.");
-	}
-	else {
+	} else {
 		comSex = true;
 	}
 }
 function valf() {
-	if ((comUser == true) && (comPwd == true) && (comCpwd == true) && (comTlf == true) && (comMail == true) && (comDate == true)) {
+	if ((comUser == true) && (comPwd == true) && (comCpwd == true)
+		&& (comTlf == true) && (comMail == true) && (comDate == true)) {
 		document.registroform.submit();
-	}
-	else {
+	} else {
 		return false;
 	}
 }
@@ -198,14 +186,14 @@ function valf() {
 var j = 0;
 var auxiliar = false;
 var GG = true;
+var exit=false;
 $(document).ready(function() {
-	caja3();
-});
-function caja3() {
-	if (GG == true) {
 		caja2();
-		GG = false;
-	}
+		categoria();
+});
+function start(){
+	categoria();
+	caja2();
 }
 function caja2() {
 	console.log("entra");
@@ -215,23 +203,29 @@ function caja2() {
 		}
 		auxiliar = true;
 
-	}
-	else if (auxiliar == true) {
+	} else if (auxiliar == true) {
 		for (var z = 0; z < 1; z++) {
 			cajas();
 		}
-
-	}
-	else {
-	}
+		}
 };
 function cajas() {
 	x = 0;
-	var tds = document.getElementsByTagName("td");
+
+	if(document.getElementsByClassName("filtrado").length!=0){
+	var	tds =  document.getElementsByClassName("filtrado");}
+	else{
+		var	tds =  document.getElementsByClassName("Sfiltrar");
+	}
 	var caja = document.getElementById("caja");
 
-	for (j; x < 4; j = j + 6, x++) {
-		var name=tds[j + 1].innerHTML;
+	for (j; x < 4&&exit==false; j = j + 6, x++) {
+	if(j+7>tds.length){
+	x=4;
+	exit=true;
+	}
+	console.log(x);
+		var name = tds[j + 1].innerHTML;
 		var nombre = tds[j + 1].innerHTML;
 		var punt = parseInt(tds[j + 5].innerHTML);
 		var form = document.createElement("form");
@@ -240,23 +234,24 @@ function cajas() {
 		var cartab = document.createElement("div");
 		var title = document.createTextNode(nombre);
 		var submit = document.createElement("input");
-		var textcenter=document.createElement("div");
-		var divpunt=document.createElement("div");
-		var h5=document.createElement("h5");
+		var textcenter = document.createElement("div");
+		var divpunt = document.createElement("div");
+		var h5 = document.createElement("h5");
 		var carta = document.createElement("div");
-		form.action = "/user/infoGame/"+name;
-		submit.className="btn btn-outline-dark mt-auto";
+		form.action = "/user/infoGame/" + name;
+		submit.className = "btn btn-outline-dark mt-auto";
 		col.className = "col mb-5";
 		img.className = "card-img-top";
-		h5.name="juego";
-		textcenter.className="text-center";
+		h5.name = "juego";
+		textcenter.className = "text-center";
 		divpunt.className = "d-flex justify-content-center small text-warning mb-2";
-		h5.className="fw-bolder";
-		cartab.className="card-body p-4";
+		h5.className = "fw-bolder";
+		cartab.className = "card-body p-4";
 		carta.className = "card h-100";
-		submit.type="submit";
+		submit.type = "submit";
 		img.src = "../../img/" + tds[j + 4].innerHTML;
-		submit.value = "opiniones";
+		submit.value = "Opiniones";
+		form.className="mt-2";
 		for (var i = 0; i < 5; i++) {
 			var divstar = document.createElement("div");
 			var puntstar = document.createElement("img");
@@ -265,22 +260,51 @@ function cajas() {
 				puntstar.className = "opinions";
 				divstar.appendChild(puntstar);
 				divpunt.appendChild(divstar);
-			}
-			else {
+			} else {
 				puntstar.src = null;
 			}
-			
+
 			h5.appendChild(title);
 			textcenter.appendChild(h5);
 			textcenter.appendChild(divpunt);
 			cartab.appendChild(textcenter);
 			carta.appendChild(img);
-			
+
 			carta.appendChild(cartab);
 			carta.appendChild(submit);
 			form.appendChild(carta);
 			caja.appendChild(form);
 		}
+	}
 
+}
+function categoria() {
+	var salir = false;
+	var elementos=document.getElementsByClassName("Sfiltrar cat");
+		console.log(elementos.length);
+	let lista = [];
+	for (var j = 0; j < elementos.length; j++) {
+		salir = false;
+		for (var k = 0; k < lista.length && salir == false; k++) {
+			if (elementos[j].innerHTML == lista[k]&&j!=k) {
+
+				salir=true;
+			}
+		}	if(salir==false){
+			lista.push(elementos[j].innerHTML);
+			}
+	}
+	var ul =document.getElementById("categoria");
+	console.log(lista.length);
+	for(var l=0;l<lista.length;l++){
+		var a=document.createElement("a");
+		var li=document.createElement("li");
+		var text=document.createTextNode(lista[l]);
+		li.className="dropdown-item";
+		a.href="/user/categoria/"+lista[l];
+		a.appendChild(text);
+		li.appendChild(a);
+		ul.appendChild(li);
+		
 	}
 }

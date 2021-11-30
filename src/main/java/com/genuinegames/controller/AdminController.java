@@ -2,9 +2,6 @@ package com.genuinegames.controller;
 
 import java.io.File;
 import java.io.IOException;
-
-import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -29,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.genuinegames.entity.Game;
 import com.genuinegames.entity.User;
 import com.genuinegames.repository.GameRepository;
+import com.genuinegames.repository.UserRepository;
 import com.genuinegames.service.IGameService;
 import com.genuinegames.service.IUserService;
 
@@ -42,6 +40,9 @@ public class AdminController {
 	private IGameService iGameService;
 
 	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
 	private GameRepository gameRepository;
 
 	/* REGISTER ADMIN */
@@ -49,6 +50,18 @@ public class AdminController {
 	public String addUserAdmin(@RequestBody User user, Model model) {
 		model.addAttribute("user", iUserService.registerAdmin(user));
 		return "redirect:/auth/login";
+	}
+	/* USERS */
+	@GetMapping("/user/adminPanel/getAllUser")
+	public String getAllUser(Long id, ModelMap model) {
+		model.put("user", userRepository.findAll());
+		return "/user/adminPanel/getAllUser";
+	}
+	
+	@GetMapping("/user/adminPanel/deleteUser/{id}")
+	public String deleteUser(@PathVariable Long id) {
+		new ResponseEntity<>(iUserService.deleteUser(id), HttpStatus.OK);
+		return "redirect:/user/adminPanel/getAllUser";
 	}
 
 	/* GAMES */
@@ -58,6 +71,7 @@ public class AdminController {
 		return "/user/admin/getAllGame";
 	}
 
+	// CREATE
 	@GetMapping("/user/admin/createGame")
 	public String createGame() {
 		return "/user/admin/createGame";
@@ -68,12 +82,14 @@ public class AdminController {
 		new ResponseEntity<>(iGameService.createGame(game), HttpStatus.OK);
 	}
 
+	// DELETE
 	@GetMapping("/user/admin/deleteGame/{id}")
 	public String deleteGame(@PathVariable Long id) {
 		new ResponseEntity<>(iGameService.deleteGame(id), HttpStatus.OK);
 		return "redirect:/user/admin/getAllGame";
 	}
 
+	// UPDATE
 	@GetMapping("/user/admin/updateGame/{id}")
 	public String updateGame(@PathVariable Long id, ModelMap model) {
 		model.addAttribute("game", gameRepository.findById(id));
@@ -86,6 +102,7 @@ public class AdminController {
 		return "redirect:/user/admin/getAllGame";
 	}
 
+	/* UPLOAD IMAGE */
 	@GetMapping("/user/admin/uploadImage/{id}")
 	public String uploadImage(@PathVariable Long id, ModelMap model) {
 		model.addAttribute("game", gameRepository.findById(id));

@@ -1,7 +1,6 @@
 package com.genuinegames.entity;
 
 import java.util.Collection;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,9 +11,6 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.apache.tomcat.jni.File;
-import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "game")
@@ -35,6 +31,7 @@ public class Game {
 
 	@Column(name = "description")
 	private String description;
+
 	@Column(name = "punctuation")
 	private Float punctuation;
 
@@ -45,18 +42,17 @@ public class Game {
 		super();
 	}
 
-
 	public Game(String name, String img, String category, String description, Float punctuation,
 			Collection<Comments> comments) {
 		super();
 		this.name = name;
 		this.img = img;
 		this.category = category;
+		this.category = category;
 		this.description = description;
 		this.punctuation = punctuation;
 		this.comments = comments;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -74,20 +70,20 @@ public class Game {
 		this.name = name;
 	}
 
-	public String getImg() {
-		return img;
-	}
-
-	public void setImg(String img) {
-		this.img = img;
-	}
-
 	public String getCategory() {
 		return category;
 	}
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 	public String getDescription() {
@@ -106,15 +102,12 @@ public class Game {
 		this.punctuation = punctuation;
 	}
 
-
 	public Collection<Comments> getComments() {
 		return comments;
 	}
 
-
 	public void setComments(Collection<Comments> comments) {
 		this.comments = comments;
 	}
-	
 
 }

@@ -1,5 +1,8 @@
 package com.genuinegames.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Base64;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,6 +14,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.genuinegames.entity.Comments;
 import com.genuinegames.entity.Game;
@@ -32,10 +37,10 @@ public class UserService implements IUserService, IGameService {
 
 	@Autowired
 	private GameRepository gameRepository;
-	
+
 	@Autowired
 	private CommentRepository commentRepository;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
@@ -55,7 +60,7 @@ public class UserService implements IUserService, IGameService {
 		String encryptPwd = passwordEncoder.encode(pwd);
 		user.setPwd(encryptPwd);
 		user.setRole(roleAdmin);
-		
+
 		return userRepository.save(user);
 	}
 
@@ -69,8 +74,20 @@ public class UserService implements IUserService, IGameService {
 
 		user.setPwd(passwordEncoder.encode(user.getPwd()));
 		user.setRole(roleUser);
-		
+
 		return userRepository.save(user);
+	}
+
+	@Override
+	public String updateUser(Long id, User user) {
+		if (userRepository.findById(id).isPresent()) {
+			user.setUsername(user.getUsername());
+			user.setPwd(passwordEncoder.encode(user.getPwd()));
+			userRepository.save(user);
+			return "redirect:/";
+		} else {
+			return "No se pudo realizar la acción";
+		}
 	}
 
 	// GAMES
@@ -78,11 +95,11 @@ public class UserService implements IUserService, IGameService {
 	public Game createGame(Game game) {
 		return gameRepository.save(game);
 	}
-	
+
 	@Transactional
 	@Override
 	public String deleteGame(Long id) {
-		if(gameRepository.findById(id).isPresent()) {
+		if (gameRepository.findById(id).isPresent()) {
 			gameRepository.deleteById(id);
 			return "redirect:/";
 		} else {
@@ -92,7 +109,7 @@ public class UserService implements IUserService, IGameService {
 
 	@Override
 	public String updateGame(Long id, Game game) {
-		if(gameRepository.findById(id).isPresent()) {
+		if (gameRepository.findById(id).isPresent()) {
 			game.setName(game.getName());
 			gameRepository.save(game);
 			return "redirect:/";
@@ -100,25 +117,31 @@ public class UserService implements IUserService, IGameService {
 			return "No se pudo realizar la acción";
 		}
 	}
-	@Override
-	public String updateUser(Long id, User user) {
-		if(userRepository.findById(id).isPresent()) {
-			user.setUsername(user.getUsername());
-			userRepository.save(user);
-			return "redirect:/";
-		} else {
-			return "No se pudo realizar la acción";
-		}
-	}
+
 	@Override
 	public Game findByGameName(String game) {
 		return gameRepository.findByName(game);
 	}
 
+	/* COMMENTS */
 	@Override
 	public Comments createComment(Comments comment) {
 		return commentRepository.save(comment);
 	}
-	
+
+	@Override
+	public List<Game>findbyCategory(String name) {
+		return gameRepository.findAllByCategory(name);
+	}
+
+	@Override
+	public String deleteUser(Long id) {
+		if(userRepository.findById(id).isPresent()) {
+			userRepository.deleteById(id);
+			return "redirect:/";
+		} else {
+			return "No se pudo realizar la acción";
+		}
+	}
 
 }
