@@ -40,6 +40,12 @@ public class UserController {
 	}
 
 	/* PROFILE */
+	/* UPDATE USER */
+	/* @PostMapping("/user/ajustes")
+	public String intermedio(HttpSession session, ModelMap model, @RequestParam("user") String user) {
+		return "/user/perfil";
+	}*/
+
 	@GetMapping("/user/perfil")
 	public String perfil(HttpSession session, ModelMap model) {
 		User usuario = (User) session.getAttribute("user");
@@ -78,6 +84,13 @@ public class UserController {
 		new ResponseEntity<>(iUserService.createComment(comment), HttpStatus.OK);
 
 		return "redirect:/user/perfil";
+	}
+	
+	@GetMapping("/user/categoria/{name}")
+	public String categoriaGame(HttpSession session,@PathVariable String name, ModelMap model) {
+		model.put("games", gameRepository.findAll());
+		model.put("gamer", gameRepository.findAllByCategory(name));
+		return "/user/index";
 	}
 
 }

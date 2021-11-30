@@ -89,7 +89,7 @@ public class UserService implements IUserService, IGameService {
 			return "No se pudo realizar la acción";
 		}
 	}
-	
+
 	public String deleteUser(Long id) {
 		if(userRepository.findById(id).isPresent()) {
 			userRepository.deleteById(id);
@@ -136,6 +136,11 @@ public class UserService implements IUserService, IGameService {
 	@Override
 	public Comments createComment(Comments comment) {
 		return commentRepository.save(comment);
+	}
+
+	@Override
+	public List<Game>findbyCategory(String name) {
+		return gameRepository.findAllByCategory(name);
 	}
 
 }

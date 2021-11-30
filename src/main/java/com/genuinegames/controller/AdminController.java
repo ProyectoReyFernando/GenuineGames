@@ -1,5 +1,7 @@
 package com.genuinegames.controller;
 
+import java.io.File;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -36,18 +38,18 @@ public class AdminController {
 	private IGameService iGameService;
 
 	@Autowired
-	private GameRepository gameRepository;
+	private UserRepository userRepository;
 	
 	@Autowired
-	private UserRepository userRepository;
-
+	private GameRepository gameRepository;
+	
 	/* REGISTER ADMIN */
 	@PostMapping("/auth/register/admin")
 	public String addUserAdmin(@RequestBody User user, Model model) {
 		model.addAttribute("user", iUserService.registerAdmin(user));
 		return "redirect:/auth/login";
 	}
-	
+
 	/* USERS */
 	@GetMapping("/user/adminPanel/getAllUser")
 	public String getAllUser(Long id, ModelMap model) {

@@ -8,8 +8,8 @@ body {
 }
 
 .login-box {
-  width: 320px;
-  height: 420px;
+  width: 20rem;
+  height: 27rem;
   background: #000;
   color: #fff;
   top: 50%;
@@ -88,10 +88,10 @@ body {
 }
 
 .registro-box {
-  margin-top: 30%;
-  width: 40%;
-  height: 140%;
+  width: 20rem;
   background: #000;
+  margin-top: 15%;
+  min-height: 100vh;
   color: #fff;
   top: 50%;
   left: 50%;
@@ -103,19 +103,19 @@ body {
 }
 
 .registro-box .logo {
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   position: absolute;
-  top: -50px;
-  left: calc(50% - 50px);
+  top: -25px;
+  left: calc(50% - 25px);
 }
 
-.registro-box h1 {
+.registro-box h2 {
   margin: 0;
-  padding: 0 0 20px;
+  padding: 0 0 5px;
   text-align: center;
-  font-size: 22px;
+  font-size: 20px;
 }
 
 .registro-box label {
@@ -195,4 +195,22 @@ body {
 }
 .error_login{
   hidden: false;
+}
+@media (min-width: 992px) {
+  .login-box, .registro-box{
+    width:40rem;
+    margin-top: 30px;
+  }
+  .registro-box{
+	margin-top: 5%;
+  	min-height: 70%;
+}
+  .registro-box .logo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  top: -50px;
+  left: calc(50% - 50px);
+}
 }
