@@ -32,18 +32,14 @@ public class UserController {
 	@Autowired
 	private IUserService iUserService;
 
+	/* SETTINGS */
 	@GetMapping("/user/ajustes")
 	public String ajustes(ModelMap model, HttpSession session) {
 		model.put("user", session.getAttribute("user"));
 		return "/user/ajustes";
 	}
 
-	/* UPDATE USER */
-	/* @PostMapping("/user/ajustes")
-	public String intermedio(HttpSession session, ModelMap model, @RequestParam("user") String user) {
-		return "/user/perfil";
-	}*/
-
+	/* PROFILE */
 	@GetMapping("/user/perfil")
 	public String perfil(HttpSession session, ModelMap model) {
 		User usuario = (User) session.getAttribute("user");
@@ -81,7 +77,7 @@ public class UserController {
 
 		new ResponseEntity<>(iUserService.createComment(comment), HttpStatus.OK);
 
-		return "/user/index";
+		return "redirect:/user/perfil";
 	}
 
 }

@@ -1,11 +1,9 @@
 package com.genuinegames.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,21 +11,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.genuinegames.entity.Game;
 import com.genuinegames.entity.User;
 import com.genuinegames.exception.DangerException;
-import com.genuinegames.helper.PRG;
 import com.genuinegames.repository.GameRepository;
+import com.genuinegames.repository.UserRepository;
 import com.genuinegames.service.IGameService;
 import com.genuinegames.service.IUserService;
 
@@ -42,12 +37,28 @@ public class AdminController {
 
 	@Autowired
 	private GameRepository gameRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 
 	/* REGISTER ADMIN */
 	@PostMapping("/auth/register/admin")
 	public String addUserAdmin(@RequestBody User user, Model model) {
 		model.addAttribute("user", iUserService.registerAdmin(user));
 		return "redirect:/auth/login";
+	}
+	
+	/* USERS */
+	@GetMapping("/user/adminPanel/getAllUser")
+	public String getAllUser(Long id, ModelMap model) {
+		model.put("user", userRepository.findAll());
+		return "/user/adminPanel/getAllUser";
+	}
+	
+	@GetMapping("/user/adminPanel/deleteUser/{id}")
+	public String deleteUser(@PathVariable Long id) {
+		new ResponseEntity<>(iUserService.deleteUser(id), HttpStatus.OK);
+		return "redirect:/user/adminPanel/getAllUser";
 	}
 
 	/* GAMES */
