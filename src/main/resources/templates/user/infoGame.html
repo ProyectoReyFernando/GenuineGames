@@ -1,5 +1,24 @@
 <div th:replace="/_t/head" />
 <div th:replace="/_t/nav" />
+<table class="table table-dark" style="display: none">
+	<tbody>
+		<tr th:each="game:${games}">
+			<td th:text="${game.id}" id="idjuego" th:value="${game.id}"
+				class="Sfiltrar"></td>
+			<td th:text="${game.name}" id="namejuego" th:value="${game.name}"
+				class="Sfiltrar"></td>
+			<td th:text="${game.category}" id="catjuego"
+				th:value="${game.category}" class="Sfiltrar cat"></td>
+			<td th:text="${game.description}" id="descjuego"
+				th:value="${game.description}" class="Sfiltrar"></td>
+			<td th:text="${game.img}" id="imgjuego" th:value="${game.img}"
+				class="Sfiltrar"></td>
+			<td th:text="${game.punctuation}" id="puncjuego"
+				th:value="${game.punctuation}" class="Sfiltrar"></td>
+		</tr>
+	</tbody>
+</table>
+
 <!-- Section-->
 <table class="table table-dark" style="display: none">
 	<tbody>
@@ -24,7 +43,7 @@
 	<div class="container card col-lg-11 col-md-6">
 		<div class="row container align-items-center justify-content-center">
 			<div class="col-lg-12 m-3 text-center">
-				<div class="container" th:each="game:${games}">
+				<div class="container" th:each="game:${gamers}">
 					<div class="row align-items-start d-flex">
 						<div class="col-lg-6 col-md-12">
 							<img th:src="@{'/img/'+${game.img}}" th:alt="${game.img}"
@@ -49,7 +68,7 @@
 			</div>
 			<div class="col-lg-12 m-3">
 				<h2>Comenta tu opinion</h2>
-				<div class="card mt-1" th:each="game:${games}">
+				<div class="card mt-1" th:each="game:${gamers}">
 					<form action="/user/comment" method="POST">
 						<div class="form-group">
 							<input type="text" name="texto" class="form-control"
