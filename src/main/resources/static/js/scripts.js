@@ -188,8 +188,9 @@ var auxiliar = false;
 var GG = true;
 var exit=false;
 $(document).ready(function() {
-		caja2();
 		categoria();
+		caja2();
+
 });
 function start(){
 	categoria();

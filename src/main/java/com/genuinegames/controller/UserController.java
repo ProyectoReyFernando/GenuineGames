@@ -35,6 +35,7 @@ public class UserController {
 	@GetMapping("/user/ajustes")
 	public String ajustes(ModelMap model, HttpSession session) {
 		model.put("user", session.getAttribute("user"));
+		model.put("games", gameRepository.findAll());
 		return "/user/ajustes";
 	}
 
@@ -50,6 +51,7 @@ public class UserController {
 
 		model.put("user", session.getAttribute("user"));
 		model.put("comments", commentRepository.findByUser(usuario));
+		model.put("games", gameRepository.findAll());
 
 		return "/user/perfil";
 	}
@@ -58,8 +60,8 @@ public class UserController {
 	@GetMapping("/user/infoGame/{name}")
 	public String opinion(HttpSession session, ModelMap model, @PathVariable String name) {
 		Game game = gameRepository.findByName(name);
-
-		model.put("games", gameRepository.findByName(name));
+		model.put("games", gameRepository.findAll());
+		model.put("gamers", gameRepository.findByName(name));
 		model.put("comments", commentRepository.findByGame(game));
 		
 		return "/user/infoGame";
