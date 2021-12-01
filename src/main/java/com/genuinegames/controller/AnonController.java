@@ -56,7 +56,7 @@ public class AnonController {
 
 	@GetMapping("/auth/login")
 	public String loginUser(Model model) {
-		return "redirect:auth/login";
+		return "auth/login";
 	}
 
 	@GetMapping("/user/index")
