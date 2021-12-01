@@ -37,7 +37,7 @@ public class UserController {
 	public String ajustes(ModelMap model, HttpSession session) {
 		model.put("user", session.getAttribute("user"));
 		model.put("games", gameRepository.findAll());
-		return "/user/ajustes";
+		return "user/ajustes";
 	}
 
 	/* PROFILE */
