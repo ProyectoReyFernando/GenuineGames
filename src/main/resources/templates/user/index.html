@@ -172,67 +172,6 @@
 			</div>
 		</div>
 	</section>
-	<table class="table table-dark" style="display: none">
-		<tbody>
-			<tr th:each="game:${games}">
-				<td th:text="${game.id}" id="idjuego" th:value="${game.id}"
-					class="Sfiltrar"></td>
-				<td th:text="${game.name}" id="namejuego" th:value="${game.name}"
-					class="Sfiltrar"></td>
-				<td th:text="${game.category}" id="catjuego"
-					th:value="${game.category}" class="Sfiltrar cat"></td>
-				<td th:text="${game.description}" id="descjuego"
-					th:value="${game.description}" class="Sfiltrar"></td>
-				<td th:text="${game.img}" id="imgjuego" th:value="${game.img}"
-					class="Sfiltrar"></td>
-				<td th:text="${game.punctuation}" id="puncjuego"
-					th:value="${game.punctuation}" class="Sfiltrar"></td>
-			</tr>
-		</tbody>
-	</table>
-	<table class="table table-dark" style="display: none">
-		<tbody>
-			<tr th:each="game:${gamer}">
-				<td th:text="${game.id}" id="idjuego" th:value="${game.id}"
-					class="filtrado"></td>
-				<td th:text="${game.name}" id="namejuego" th:value="${game.name}"
-					class="filtrado"></td>
-				<td th:text="${game.category}" id="catjuego"
-					th:value="${game.category}" class="filtrado cat"></td>
-				<td th:text="${game.description}" id="descjuego"
-					th:value="${game.description}" class="filtrado"></td>
-				<td th:text="${game.img}" id="imgjuego" th:value="${game.img}"
-					class="filtrado"></td>
-				<td th:text="${game.punctuation}" id="puncjuego"
-					th:value="${game.punctuation}" class="filtrado"></td>
-			</tr>
-		</tbody>
-	</table>
-	<header class="bg-dark py-5" onload="start()">
-		<div class="container px-4 px-lg-5 my-5">
-			<div class="text-center text-white">
-				<h1 class="display-4 fw-bolder">Genuine Gamers</h1>
-				<p class="lead fw-normal text-white-50 mb-0">
-					No cumplimos propositos<br> <b>Desbloqueamos Logros</b>
-				</p>
-
-			</div>
-		</div>
-	</header>
-	<!-- Section-->
-	<section class="py-5">
-		<div class="container px-4 px-lg-5 mt-5">
-			<div
-				class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
-				id="caja"></div>
-			<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-				<div class="text-center">
-					<a class="btn btn-outline-dark mt-2" onclick="caja2()">View
-						More</a>
-				</div>
-			</div>
-		</div>
-	</section>
 	<!-- Footer-->
 	<footer class="py-5 bg-dark">
 		<div class="container">
