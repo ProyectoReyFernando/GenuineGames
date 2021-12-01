@@ -73,7 +73,7 @@ public class AnonController {
 			model.put("usuario", user);
 		}
 
-		return "user/index";
+		return "redirect:user/index";
 	}
 
 	@PostMapping("/logout")
