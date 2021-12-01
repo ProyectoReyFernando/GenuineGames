@@ -71,10 +71,9 @@ public class AnonController {
 			user.setPwd(null);
 			session.setAttribute("user", user);
 			model.put("usuario", user);
-			redirect = "user/index";
 		}
 
-		return redirect;
+		return "user/index";
 	}
 
 	@PostMapping("/logout")
