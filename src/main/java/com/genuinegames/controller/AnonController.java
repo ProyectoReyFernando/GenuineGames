@@ -54,12 +54,12 @@ public class AnonController {
 		return "redirect:auth/login";
 	}
 
-	@GetMapping("/auth/login")
+	@GetMapping("auth/login")
 	public String loginUser(Model model) {
-		return "/auth/login";
+		return "auth/login";
 	}
 
-	@GetMapping("/user/index")
+	@GetMapping("user/index")
 	public String userIndex(Authentication auth, HttpSession session, ModelMap model) {
 
 		String username = auth.getName();
@@ -71,7 +71,7 @@ public class AnonController {
 			user.setPwd(null);
 			session.setAttribute("user", user);
 			model.put("usuario", user);
-			redirect = "/user/index";
+			redirect = "user/index";
 		}
 
 		return redirect;
