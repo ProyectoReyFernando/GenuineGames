@@ -34,24 +34,24 @@ public class AnonController {
 	@GetMapping("/")
 	public String index(Model model) {
 		model.addAttribute("games", gameRepository.findAll());
-		return "redirect:index";
+		return "index";
 	}
 
 	@GetMapping("/auth/register")
 	public String registroForm(Model model) {
 		model.addAttribute("user", new User());
-		return "redirect:auth/register";
+		return "auth/register";
 	}
 
 	@PostMapping("/auth/register")
 	public String registerUser(@Valid @ModelAttribute User user, BindingResult result, Model model) throws DangerException {
 		if (result.hasErrors()) {
-			return "redirect:auth/register";
+			return "auth/register";
 		} else {
 			model.addAttribute("user", iUserService.registerUser(user));
 		}
 
-		return "redirect:auth/login";
+		return "auth/login";
 	}
 
 	@GetMapping("/auth/login")
