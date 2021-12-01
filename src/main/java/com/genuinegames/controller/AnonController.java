@@ -46,7 +46,7 @@ public class AnonController {
 	@PostMapping("auth/register")
 	public String registerUser(@Valid @ModelAttribute User user, BindingResult result, Model model) throws DangerException {
 		if (result.hasErrors()) {
-			return "redirect:/auth/register";
+			return "redirect:auth/register";
 		} else {
 			model.addAttribute("user", iUserService.registerUser(user));
 		}
