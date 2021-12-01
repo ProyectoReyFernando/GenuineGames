@@ -34,7 +34,7 @@ public class AnonController {
 	@GetMapping("/")
 	public String index(Model model) {
 		model.addAttribute("games", gameRepository.findAll());
-		return "redirect:index";
+		return "index";
 	}
 
 	@GetMapping("/auth/register")
