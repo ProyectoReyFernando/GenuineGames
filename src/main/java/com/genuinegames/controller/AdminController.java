@@ -131,7 +131,7 @@ public class AdminController {
 			gameRepository.save(game);
 		}
 
-		return "user/admin/getAllGame";
+		return "reditect:user/admin/getAllGame";
 	}
 
 }
