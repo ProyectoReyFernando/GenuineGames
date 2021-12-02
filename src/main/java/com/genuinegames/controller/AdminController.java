@@ -109,7 +109,7 @@ public class AdminController {
 	public String uploadImage(@PathVariable Long id, ModelMap model) {
 		model.addAttribute("game", gameRepository.findById(id));
 		model.put("games", gameRepository.findAll());
-		return "redirect:user/admin/uploadImage";
+		return "user/admin/uploadImage";
 	}
 
 	@PostMapping("/user/admin/uploadImage")
@@ -131,7 +131,7 @@ public class AdminController {
 			gameRepository.save(game);
 		}
 
-		return "redirect:user/admin/getAllGame";
+		return "user/admin/getAllGame";
 	}
 
 }
