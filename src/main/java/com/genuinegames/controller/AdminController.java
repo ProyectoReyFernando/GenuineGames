@@ -109,7 +109,7 @@ public class AdminController {
 	public String uploadImage(@PathVariable Long id, ModelMap model) {
 		model.addAttribute("game", gameRepository.findById(id));
 		model.put("games", gameRepository.findAll());
-		return "user/admin/uploadImage";
+		return "redirect:user/admin/uploadImage";
 	}
 
 	@PostMapping("/user/admin/uploadImage")
