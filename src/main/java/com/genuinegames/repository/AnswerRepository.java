@@ -1,22 +1,17 @@
 package com.genuinegames.repository;
 
 import java.util.Collection;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.genuinegames.entity.Answer;
 import com.genuinegames.entity.Comments;
-import com.genuinegames.entity.Game;
 import com.genuinegames.entity.User;
-
 @Repository
-public interface CommentRepository extends JpaRepository<Comments, Long> {
+public interface AnswerRepository extends JpaRepository<Answer, Long> {
 
-	Collection<Comments> findByGame(Game game);
+	Object findByUserId(Long id);
 
-	Collection<Comments> findByUser(User user);
-	
-	Comments findByid(Long text);
-
+	Collection<Answer> findByUser(User user);
 }

@@ -1,25 +1,5 @@
 <div th:replace="/_t/head" />
 <div th:replace="/_t/nav" />
-<table class="table table-dark" style="display: none">
-	<tbody>
-		<tr th:each="game:${games}">
-			<td th:text="${game.id}" id="idjuego" th:value="${game.id}"
-				class="Sfiltrar"></td>
-			<td th:text="${game.name}" id="namejuego" th:value="${game.name}"
-				class="Sfiltrar"></td>
-			<td th:text="${game.category}" id="catjuego"
-				th:value="${game.category}" class="Sfiltrar cat"></td>
-			<td th:text="${game.description}" id="descjuego"
-				th:value="${game.description}" class="Sfiltrar"></td>
-			<td th:text="${game.img}" id="imgjuego" th:value="${game.img}"
-				class="Sfiltrar"></td>
-			<td th:text="${game.punctuation}" id="puncjuego"
-				th:value="${game.punctuation}" class="Sfiltrar"></td>
-		</tr>
-	</tbody>
-</table>
-
-<!-- Section-->
 <section
 	class="bg-dark py-perfil d-flex flex-row justify-content-center alig-items-center"
 	th:each="usuario:${user}">
@@ -53,3 +33,21 @@
 </section>
 <div th:replace="/_t/footer" />
 <div th:replace="/_t/end" />
+<table class="table table-dark" style="display: none">
+	<tbody>
+		<tr th:each="game:${games}">
+			<td th:text="${game.id}" id="idjuego" th:value="${game.id}"
+				class="Sfiltrar"></td>
+			<td th:text="${game.name}" id="namejuego" th:value="${game.name}"
+				class="Sfiltrar"></td>
+			<td th:text="${game.category}" id="catjuego"
+				th:value="${game.category}" class="Sfiltrar cat"></td>
+			<td th:text="${game.description}" id="descjuego"
+				th:value="${game.description}" class="Sfiltrar"></td>
+			<td th:text="${game.img}" id="imgjuego" th:value="${game.img}"
+				class="Sfiltrar"></td>
+			<td th:text="${game.punctuation}" id="puncjuego"
+				th:value="${game.punctuation}" class="Sfiltrar"></td>
+		</tr>
+	</tbody>
+</table>

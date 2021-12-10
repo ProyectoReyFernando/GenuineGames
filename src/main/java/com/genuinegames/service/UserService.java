@@ -17,13 +17,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.genuinegames.entity.Answer;
 import com.genuinegames.entity.Comments;
 import com.genuinegames.entity.Game;
 import com.genuinegames.entity.Role;
 import com.genuinegames.entity.User;
+import com.genuinegames.entity.Valorar;
+import com.genuinegames.repository.AnswerRepository;
 import com.genuinegames.repository.CommentRepository;
 import com.genuinegames.repository.GameRepository;
 import com.genuinegames.repository.UserRepository;
+import com.genuinegames.repository.ValorarRepository;
 
 /**
  * @author CGonz
@@ -40,6 +44,11 @@ public class UserService implements IUserService, IGameService {
 
 	@Autowired
 	private CommentRepository commentRepository;
+	@Autowired
+	private AnswerRepository answerRepository;
+	@Autowired
+	private ValorarRepository valorarRepository;
+
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -84,6 +93,15 @@ public class UserService implements IUserService, IGameService {
 			user.setUsername(user.getUsername());
 			user.setPwd(passwordEncoder.encode(user.getPwd()));
 			userRepository.save(user);
+			return "redirect:/";
+		} else {
+			return "No se pudo realizar la acción";
+		}
+	}
+
+	public String deleteUser(Long id) {
+		if(userRepository.findById(id).isPresent()) {
+			userRepository.deleteById(id);
 			return "redirect:/";
 		} else {
 			return "No se pudo realizar la acción";
@@ -135,10 +153,32 @@ public class UserService implements IUserService, IGameService {
 	}
 
 	@Override
-	public String deleteUser(Long id) {
-		if(userRepository.findById(id).isPresent()) {
-			userRepository.deleteById(id);
-			return "redirect:/";
+	public Answer createAnswer(Answer answer) {
+		return answerRepository.save(answer);
+	}
+
+	@Override
+	public Valorar puntuar(Valorar valorar) {
+		
+		return valorarRepository.save(valorar);
+
+	}
+
+	@Override
+	public String deleteComment(Long id) {
+		if(commentRepository.findById(id).isPresent()) {
+			commentRepository.deleteById(id);
+			return "redirect:";
+		} else {
+			return "No se pudo realizar la acción";
+		}
+	}
+
+	@Override
+	public String deleteAnswer(Long id) {
+		if(answerRepository.findById(id).isPresent()) {
+			answerRepository.deleteById(id);
+			return "redirect:";
 		} else {
 			return "No se pudo realizar la acción";
 		}

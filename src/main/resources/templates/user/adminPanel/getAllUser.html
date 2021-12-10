@@ -29,6 +29,7 @@
 			<th scope="col">Genre</th>
 			<th scope="col">Rol</th>
 			<th scope="col">Delete</th>
+			<th scope="col">Delete Comments</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -41,6 +42,8 @@
 			<td th:text="${usuario.role.name}"></td>
 			<td><a th:href="@{/user/adminPanel/deleteUser/{id}(id=${usuario.id})}"
 				class="btn btn-danger">Delete</a></td>
+			<td><a th:href="@{/user/adminPanel/goComment/{user}(user=${usuario.username})}"
+				class="btn btn-danger">Delete Comments</a></td>
 	</tbody>
 </table>
 

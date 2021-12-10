@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,16 +27,19 @@ public class Comments {
 
 	@Column(name = "text")
 	private String text;
+	@OneToMany(mappedBy = "comment"/*, cascade=CascadeType.REMOVE*/)
+	private Collection<Answer> respuestas;
 
 	public Comments() {
 		super();
 	}
 
-	public Comments(User user, Game game, String text) {
+	public Comments(User user, Game game, String text, Collection<Answer> respuestas) {
 		super();
 		this.user = user;
 		this.game = game;
 		this.text = text;
+		this.respuestas = respuestas;
 	}
 
 	public Long getId() {
@@ -54,14 +58,6 @@ public class Comments {
 		this.user = user;
 	}
 
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
-
 	public Game getGame() {
 		return game;
 	}
@@ -70,4 +66,19 @@ public class Comments {
 		this.game = game;
 	}
 
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public Collection<Answer> getRespuestas() {
+		return respuestas;
+	}
+
+	public void setRespuestas(Collection<Answer> respuestas) {
+		this.respuestas = respuestas;
+	}
 }

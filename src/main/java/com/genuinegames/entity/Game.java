@@ -37,6 +37,8 @@ public class Game {
 
 	@OneToMany(mappedBy = "game")
 	private Collection<Comments> comments;
+	@OneToMany(mappedBy = "punG")
+	private Collection<Valorar> valoracion;
 
 	public Game() {
 		super();
@@ -109,5 +111,14 @@ public class Game {
 	public void setComments(Collection<Comments> comments) {
 		this.comments = comments;
 	}
+
+	public Collection<Valorar> getValoracion() {
+		return valoracion;
+	}
+
+	public void setValoracion(Collection<Valorar> valoracion) {
+		this.valoracion = valoracion;
+	}
+
 
 }

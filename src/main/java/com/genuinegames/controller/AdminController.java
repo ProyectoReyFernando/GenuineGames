@@ -1,11 +1,12 @@
 package com.genuinegames.controller;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Base64;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,18 +14,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.genuinegames.entity.Game;
 import com.genuinegames.entity.User;
+import com.genuinegames.exception.DangerException;
+import com.genuinegames.repository.AnswerRepository;
+import com.genuinegames.repository.CommentRepository;
 import com.genuinegames.repository.GameRepository;
 import com.genuinegames.repository.UserRepository;
 import com.genuinegames.service.IGameService;
@@ -41,16 +42,21 @@ public class AdminController {
 
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private AnswerRepository answerRepository;
+	@Autowired
+	private CommentRepository commentRepository;
 	
 	@Autowired
 	private GameRepository gameRepository;
-
+	
 	/* REGISTER ADMIN */
 	@PostMapping("/auth/register/admin")
 	public String addUserAdmin(@RequestBody User user, Model model) {
 		model.addAttribute("user", iUserService.registerAdmin(user));
 		return "redirect:/auth/login";
 	}
+
 	/* USERS */
 	@GetMapping("/user/adminPanel/getAllUser")
 	public String getAllUser(Long id, ModelMap model) {
@@ -64,6 +70,26 @@ public class AdminController {
 		new ResponseEntity<>(iUserService.deleteUser(id), HttpStatus.OK);
 		return "redirect:/user/adminPanel/getAllUser";
 	}
+	@GetMapping("/user/adminPanel/goComment/{user}")
+	public String deleteComments(@PathVariable String user, ModelMap model) {
+		User usu=userRepository.findByUsername(user);
+		//User usu=(User)user;
+		model.put("comentarios", commentRepository.findByUser(usu));
+		model.put("respuestas", answerRepository.findByUser(usu));
+		return "user/adminPanel/getUserComment";
+	}
+	@GetMapping("/user/adminPanel/deleteComment/{id}")
+	public String deleteComments(@PathVariable Long id) {
+		new ResponseEntity<>(iUserService.deleteComment(id), HttpStatus.OK);
+		return "redirect:/user/adminPanel/getAllUser";
+	}
+	@GetMapping("/user/adminPanel/deleteanswer/{id}")
+	public String deleteanswer(@PathVariable Long id) {
+		new ResponseEntity<>(iUserService.deleteAnswer(id), HttpStatus.OK);
+		return "redirect:/user/adminPanel/getAllUser";
+	}
+
+
 
 	/* GAMES */
 	@GetMapping("/user/admin/getAllGame")
@@ -79,7 +105,7 @@ public class AdminController {
 	}
 
 	@PostMapping("/user/admin/createGame")
-	public void createGame(@RequestBody Game game) {
+	public void createGame(@RequestBody Game game) throws DangerException {
 		new ResponseEntity<>(iGameService.createGame(game), HttpStatus.OK);
 	}
 

@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.genuinegames.entity.Answer;
 import com.genuinegames.entity.Comments;
 import com.genuinegames.entity.Game;
 import com.genuinegames.entity.User;
+import com.genuinegames.entity.Valorar;
+import com.genuinegames.repository.AnswerRepository;
 import com.genuinegames.repository.CommentRepository;
 import com.genuinegames.repository.GameRepository;
 import com.genuinegames.service.IUserService;
@@ -28,10 +31,13 @@ public class UserController {
 
 	@Autowired
 	private GameRepository gameRepository;
+	@Autowired
+	private AnswerRepository answerRepository;
 
 	@Autowired
 	private IUserService iUserService;
 
+	/* SETTINGS */
 	@GetMapping("/user/ajustes")
 	public String ajustes(ModelMap model, HttpSession session) {
 		model.put("user", session.getAttribute("user"));
@@ -39,6 +45,7 @@ public class UserController {
 		return "/user/ajustes";
 	}
 
+	/* PROFILE */
 	/* UPDATE USER */
 	/* @PostMapping("/user/ajustes")
 	public String intermedio(HttpSession session, ModelMap model, @RequestParam("user") String user) {
@@ -60,10 +67,11 @@ public class UserController {
 	@GetMapping("/user/infoGame/{name}")
 	public String opinion(HttpSession session, ModelMap model, @PathVariable String name) {
 		Game game = gameRepository.findByName(name);
+
 		model.put("games", gameRepository.findAll());
 		model.put("gamers", gameRepository.findByName(name));
 		model.put("comments", commentRepository.findByGame(game));
-		
+		model.put("answers", answerRepository.findAll());
 		return "/user/infoGame";
 	}
 
@@ -83,13 +91,48 @@ public class UserController {
 
 		new ResponseEntity<>(iUserService.createComment(comment), HttpStatus.OK);
 
-		return "/user/index";
+		return "redirect:/user/index";
 	}
+	@PostMapping("/user/answer")
+	public String answerGame(HttpSession session, @RequestParam("texto") String text,
+			@RequestParam("comment") Long comments, ModelMap model, Long id) {
+		User user = (User) session.getAttribute("user");
+		Comments comment = commentRepository.findByid(comments);
+
+		Answer answer = new Answer();
+		answer.setUser(user);
+		answer.setText(text);
+		answer.setComment(comment);
+
+		model.put("games", gameRepository.findAll());
+		model.put("user", session.getAttribute("user"));
+
+		new ResponseEntity<>(iUserService.createAnswer(answer), HttpStatus.OK);
+
+		return "redirect:/user/index";
+	}
+	
 	@GetMapping("/user/categoria/{name}")
 	public String categoriaGame(HttpSession session,@PathVariable String name, ModelMap model) {
 		model.put("games", gameRepository.findAll());
 		model.put("gamer", gameRepository.findAllByCategory(name));
 		return "/user/index";
+	}
+	@GetMapping("/user/infogame/valoration/{valor}/{name}")
+	public String valoration(HttpSession session,@PathVariable int valor,@PathVariable String name, ModelMap model) {
+		User user=(User)session.getAttribute("user");
+		Game game=gameRepository.findByName(name);
+		Valorar valorar= new Valorar();
+		valorar.setPuntuacion(valor);
+		valorar.setPunG(game);
+		valorar.setPunU(user);
+		new ResponseEntity<>(iUserService.puntuar(valorar), HttpStatus.OK);
+		model.put("games", gameRepository.findAll());
+		model.put("gamers", gameRepository.findByName(name));
+		model.put("comments", commentRepository.findByGame(game));
+		model.put("answers", answerRepository.findAll());
+		/*return "redirect:/user/index";*/
+		return "redirect:/user/infoGame/"+name+"?";
 	}
 
 }

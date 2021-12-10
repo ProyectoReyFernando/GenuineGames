@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.genuinegames.entity.User;
+import com.genuinegames.exception.DangerException;
 import com.genuinegames.repository.GameRepository;
 import com.genuinegames.service.IUserService;
 import com.genuinegames.service.UserService;
@@ -43,7 +44,7 @@ public class AnonController {
 	}
 
 	@PostMapping("/auth/register")
-	public String registerUser(@Valid @ModelAttribute User user, BindingResult result, Model model) {
+	public String registerUser(@Valid @ModelAttribute User user, BindingResult result, Model model) throws DangerException {
 		if (result.hasErrors()) {
 			return "redirect:/auth/register";
 		} else {

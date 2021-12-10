@@ -117,16 +117,16 @@ function valpwds() {
 	if (pwd == cpwd) {
 		comPwd = true;
 		comCpwd = true;
-		console.log('todo flama');
 	} else {
 		alert('No coinciden las dos contraseñas. Asegurese de que es una contraseña que podrá recordar');
 	}
 }
+
 function pwdError() {
 	if ((comPwd == true) && (comCpwd == true)) {
 		console.log("tamos bien");
 	} else {
-		console.log("No se lo pongamos tan facil a los malos")
+		alert("Debe poner la misma contraseña en las 2 op")
 	}
 }
 function valtlf() {
@@ -146,13 +146,8 @@ function valdate() {
 	var mhoy = hoy.getMonth();
 	var ahoy = hoy.getFullYear() - 3;
 	var hoy = ahoy + "-" + mhoy + "-" + dhoy;
-	console.log(date);
-	console.log(hoy);
 	if (hoy > date) {
-		console.log("OK");
 		comDate = true;
-	} else {
-		console.log("Fatal error");
 	}
 }
 
@@ -176,7 +171,7 @@ function valsex() {
 }
 function valf() {
 	if ((comUser == true) && (comPwd == true) && (comCpwd == true)
-		&& (comTlf == true) && (comMail == true) && (comDate == true)) {
+			&& (comTlf == true) && (comMail == true) && (comDate == true)) {
 		document.registroform.submit();
 	} else {
 		return false;
@@ -186,18 +181,14 @@ function valf() {
 var j = 0;
 var auxiliar = false;
 var GG = true;
-var exit=false;
+var exit = false;
+var tds={};
 $(document).ready(function() {
-		categoria();
-		caja2();
-
-});
-function start(){
 	categoria();
 	caja2();
-}
+	punct();
+});
 function caja2() {
-	console.log("entra");
 	if (auxiliar == false) {
 		for (var y = 0; y < 2; y++) {
 			cajas();
@@ -208,24 +199,23 @@ function caja2() {
 		for (var z = 0; z < 1; z++) {
 			cajas();
 		}
-		}
+	}
 };
 function cajas() {
 	x = 0;
 
-	if(document.getElementsByClassName("filtrado").length!=0){
-	var	tds =  document.getElementsByClassName("filtrado");}
-	else{
-		var	tds =  document.getElementsByClassName("Sfiltrar");
-	}
+	if (document.getElementsByClassName("filtrado").length != 0) {
+		 tds = document.getElementsByClassName("filtrado");
+	} else {
+		 tds = document.getElementsByClassName("Sfiltrar");
+		 	}
 	var caja = document.getElementById("caja");
 
-	for (j; x < 4&&exit==false; j = j + 6, x++) {
-	if(j+7>tds.length){
-	x=4;
-	exit=true;
-	}
-	console.log(x);
+	for (j; x < 4 && exit == false&&caja!=null; j = j + 6, x++) {
+		if (j + 7 > tds.length) {
+			x = 4;
+			exit = true;
+		}
 		var name = tds[j + 1].innerHTML;
 		var nombre = tds[j + 1].innerHTML;
 		var punt = parseInt(tds[j + 5].innerHTML);
@@ -252,7 +242,7 @@ function cajas() {
 		submit.type = "submit";
 		img.src = "../../img/" + tds[j + 4].innerHTML;
 		submit.value = "Opiniones";
-		form.className="mt-2";
+		form.className = "mt-2";
 		for (var i = 0; i < 5; i++) {
 			var divstar = document.createElement("div");
 			var puntstar = document.createElement("img");
@@ -281,31 +271,77 @@ function cajas() {
 }
 function categoria() {
 	var salir = false;
-	var elementos=document.getElementsByClassName("Sfiltrar cat");
-		console.log(elementos.length);
+	var elementos = document.getElementsByClassName("Sfiltrar cat");
 	let lista = [];
 	for (var j = 0; j < elementos.length; j++) {
 		salir = false;
-		for (var k = 0; k < lista.length && salir == false; k++) {
-			if (elementos[j].innerHTML == lista[k]&&j!=k) {
+		for (var k = 0; k < lista.length && salir == false&&elementos!=0; k++) {
+			if (elementos[j].innerHTML == lista[k] && j != k) {
 
-				salir=true;
+				salir = true;
 			}
-		}	if(salir==false){
+		}
+		if (salir == false) {
 			lista.push(elementos[j].innerHTML);
-			}
+		}
 	}
-	var ul =document.getElementById("categoria");
-	console.log(lista.length);
-	for(var l=0;l<lista.length;l++){
-		var a=document.createElement("a");
-		var li=document.createElement("li");
-		var text=document.createTextNode(lista[l]);
-		li.className="dropdown-item";
-		a.href="/user/categoria/"+lista[l];
+	var ul = document.getElementById("categoria");
+	for (var l = 0; l < lista.length; l++) {
+		var a = document.createElement("a");
+		var li = document.createElement("li");
+		var text = document.createTextNode(lista[l]);
+		li.className = "dropdown-item";
+		a.href = "/user/categoria/" + lista[l];
 		a.appendChild(text);
 		li.appendChild(a);
 		ul.appendChild(li);
-		
+
+	}
+
+}
+	function activar(){
+	var algo=document.getElementById("oculto");
+	algo.style.color="red";
+	algo.style.display="block";
+	}
+function punct() {
+	var punt = document.getElementById("puncjuegos").innerHTML;
+	var punct = document.getElementById("punct");
+	var divstar = document.createElement("div");
+	var text = document.createTextNode(punt);
+	punct.appendChild(text);
+
+	for (var i = 0; i < 5 && punct != null; i++) {
+		var puntstar = document.createElement("img");
+		puntstar.setAttribute("onmouseOver", "puntuarV(" + i + ")");
+		puntstar.setAttribute("onclick", "puntuarS(" + (i+1) + ")");
+
+		if (i < punt) {
+			puntstar.src = "/img/dinamic/star-active.png";
+			puntstar.className = "opinions";
+			punct.appendChild(puntstar)
+		} else {
+			puntstar.src = "/img/dinamic/star-deactive.png";
+			puntstar.className = "opinions "+i;
+			punct.appendChild(puntstar)
+		}
+
 	}
 }
+function puntuarV(i) {
+	var img = document.getElementsByClassName("opinions");
+	var punct = document.getElementById("punct");
+	for (var j = 0; j < 5 && img != null; j++) {
+		if (j <= i) {
+			img[j].src = "/img/dinamic/star-active.png";
+		} else {
+			img[j].src = "/img/dinamic/star-deactive.png";
+		}
+	}
+
+} 
+function puntuarS(valor) {
+	var img = document.getElementsByClassName("opinions "+valor);
+		var nombre = document.getElementById("nombrejuego").innerHTML;
+	window.location.replace("/user/infogame/valoration/"+valor+"/"+nombre);
+	}

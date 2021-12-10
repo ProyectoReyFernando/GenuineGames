@@ -14,6 +14,7 @@ public interface IGameService {
 	public String updateGame(Long id, Game game);
 
 	public Game findByGameName(String name);
+
 	public List<Game> findbyCategory(String name);
 
 }
