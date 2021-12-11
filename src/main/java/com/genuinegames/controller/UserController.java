@@ -139,7 +139,7 @@ public class UserController {
 		model.put("gamers", gameRepository.findByName(name));
 		model.put("comments", commentRepository.findByGame(game));
 		model.put("answers", answerRepository.findAll());
-		return "redirect:user/infoGame/"+name+"?";
+		return "user/infoGame/"+name+"?";
 	}
 
 }
