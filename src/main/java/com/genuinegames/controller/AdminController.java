@@ -56,7 +56,7 @@ public class AdminController {
 	@PostMapping("/auth/register/admin")
 	public String addUserAdmin(@RequestBody User user, Model model) {
 		model.addAttribute("user", iUserService.registerAdmin(user));
-		return "redirect:auth/login";
+		return "auth/login";
 	}
 
 	/* USERS */
@@ -64,44 +64,44 @@ public class AdminController {
 	public String getAllUser(Long id, ModelMap model) {
 		model.put("user", userRepository.findAll());
 		model.put("games", gameRepository.findAll());
-		return "redirect:user/adminPanel/getAllUser";
+		return "user/adminPanel/getAllUser";
 	}
 	
 	@GetMapping("/user/adminPanel/deleteUser/{id}")
 	public String deleteUser(@PathVariable Long id) {
 		new ResponseEntity<>(iUserService.deleteUser(id), HttpStatus.OK);
-		return "redirect:user/adminPanel/getAllUser";
+		return "ruser/adminPanel/getAllUser";
 	}
 	@GetMapping("/user/adminPanel/goComment/{user}")
 	public String deleteComments(@PathVariable String user, ModelMap model) {
 		User usu=userRepository.findByUsername(user);
 		model.put("comentarios", commentRepository.findByUser(usu));
 		model.put("respuestas", answerRepository.findByUser(usu));
-		return "redirect:user/adminPanel/getUserComment";
+		return "user/adminPanel/getUserComment";
 	}
 	
 	@GetMapping("/user/adminPanel/deleteComment/{id}")
 	public String deleteComments(@PathVariable Long id) {
 		new ResponseEntity<>(iUserService.deleteComment(id), HttpStatus.OK);
-		return "redirect:user/adminPanel/getAllUser";
+		return "user/adminPanel/getAllUser";
 	}
 	@GetMapping("/user/adminPanel/deleteanswer/{id}")
 	public String deleteanswer(@PathVariable Long id) {
 		new ResponseEntity<>(iUserService.deleteAnswer(id), HttpStatus.OK);
-		return "redirect:user/adminPanel/getAllUser";
+		return "user/adminPanel/getAllUser";
 	}
 
 	/* GAMES */
 	@GetMapping("/user/admin/getAllGame")
 	public String getAllGame(Long id, ModelMap model) {
 		model.put("games", gameRepository.findAll());
-		return "redirect:user/admin/getAllGame";
+		return "user/admin/getAllGame";
 	}
 
 	// CREATE
 	@GetMapping("/user/admin/createGame")
 	public String createGame() {
-		return "redirect:user/admin/createGame";
+		return "user/admin/createGame";
 	}
 
 	@PostMapping("/user/admin/createGame")
@@ -113,7 +113,7 @@ public class AdminController {
 	@GetMapping("/user/admin/deleteGame/{id}")
 	public String deleteGame(@PathVariable Long id) {
 		new ResponseEntity<>(iGameService.deleteGame(id), HttpStatus.OK);
-		return "redirect:user/admin/getAllGame";
+		return "user/admin/getAllGame";
 	}
 
 	// UPDATE
@@ -121,14 +121,14 @@ public class AdminController {
 	public String updateGame(@PathVariable Long id, ModelMap model) {
 		model.put("games", gameRepository.findAll());
 		model.addAttribute("game", gameRepository.findById(id));
-		return "redirect:user/admin/updateGame";
+		return "user/admin/updateGame";
 	}
 
 	@PostMapping("/user/admin/updateGame/{id}")
 	public String updateGame(ModelMap model,Long id, Game game) {
 		new ResponseEntity<>(iGameService.updateGame(id, game), HttpStatus.OK);
 		model.put("games", gameRepository.findAll());
-		return "redirect:user/admin/getAllGame";
+		return "user/admin/getAllGame";
 	}
 
 	/* UPLOAD IMAGE */
@@ -136,7 +136,7 @@ public class AdminController {
 	public String uploadImage(@PathVariable Long id, ModelMap model) {
 		model.addAttribute("game", gameRepository.findById(id));
 		model.put("games", gameRepository.findAll());
-		return "redirect:user/admin/uploadImage";
+		return "user/admin/uploadImage";
 	}
 
 	@PostMapping("/user/admin/uploadImage")
@@ -158,7 +158,7 @@ public class AdminController {
 			gameRepository.save(game);
 		}
 
-		return "redirect:user/admin/getAllGame";
+		return "/";
 	}
 
 }
