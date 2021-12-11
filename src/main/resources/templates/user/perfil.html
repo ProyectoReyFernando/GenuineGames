@@ -1,5 +1,5 @@
-<div th:replace="/_t/head" />
-<div th:replace="/_t/nav" />
+<div th:replace="_t/head" />
+<div th:replace="_t/nav" />
 <section
 	class="bg-dark py-perfil d-flex flex-row justify-content-center alig-items-center"
 	th:each="usuario:${user}">
@@ -31,8 +31,8 @@
 		</div>
 	</div>
 </section>
-<div th:replace="/_t/footer" />
-<div th:replace="/_t/end" />
+<div th:replace="_t/footer" />
+<div th:replace="_t/end" />
 <table class="table table-dark" style="display: none">
 	<tbody>
 		<tr th:each="game:${games}">
