@@ -101,7 +101,7 @@ public class AdminController {
 	// CREATE
 	@GetMapping("/user/admin/createGame")
 	public String createGame() {
-		return "redirect:user/admin/createGame";
+		return "user/admin/createGame";
 	}
 
 	@PostMapping("/user/admin/createGame")
