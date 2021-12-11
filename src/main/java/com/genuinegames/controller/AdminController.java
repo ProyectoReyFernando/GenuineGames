@@ -83,13 +83,13 @@ public class AdminController {
 	@GetMapping("/user/adminPanel/deleteComment/{id}")
 	public String deleteComments(@PathVariable Long id) {
 		new ResponseEntity<>(iUserService.deleteComment(id), HttpStatus.OK);
-		return "redirect:user/adminPanel/getAllUser";
+		return "user/adminPanel/getAllUser";
 	}
 	
 	@GetMapping("/user/adminPanel/deleteanswer/{id}")
 	public String deleteanswer(@PathVariable Long id) {
 		new ResponseEntity<>(iUserService.deleteAnswer(id), HttpStatus.OK);
-		return "redirect:user/adminPanel/getAllUser";
+		return "user/adminPanel/getAllUser";
 	}
 
 	/* GAMES */
