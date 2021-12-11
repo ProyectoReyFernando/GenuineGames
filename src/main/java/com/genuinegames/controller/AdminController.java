@@ -75,8 +75,8 @@ public class AdminController {
 	@GetMapping("/user/adminPanel/goComment/{user}")
 	public String deleteComments(@PathVariable String user, ModelMap model) {
 		User usu=userRepository.findByUsername(user);
-		model.put("comentarios", commentRepository.findByUser(usu));
-		model.put("respuestas", answerRepository.findByUser(usu));
+		model.addAttribute("comentarios", commentRepository.findByUser(usu));
+		model.addAttribute("respuestas", answerRepository.findByUser(usu));
 		return "user/adminPanel/getUserComment";
 	}
 	
