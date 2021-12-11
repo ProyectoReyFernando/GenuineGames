@@ -37,13 +37,13 @@ public class AnonController {
 	@GetMapping("/")
 	public String index(Model model) {
 		model.addAttribute("games", gameRepository.findAll());
-		return "/index";
+		return "redirect:index";
 	}
 
 	@GetMapping("/auth/register")
 	public String registroForm(Model model) {
 		model.addAttribute("user", new User());
-		return "/auth/register";
+		return "redirect:auth/register";
 	}
 
 	@PostMapping("/auth/register")
@@ -54,12 +54,12 @@ public class AnonController {
 			model.addAttribute("user", iUserService.registerUser(user));
 		}
 
-		return "redirect:/auth/login";
+		return "redirect:auth/login";
 	}
 
 	@GetMapping("/auth/login")
 	public String loginUser(Model model) {
-		return "/auth/login";
+		return "redirect:auth/login";
 	}
 
 	@GetMapping("/user/index")
@@ -75,7 +75,7 @@ public class AnonController {
 			user.setPwd(null);
 			session.setAttribute("user", user);
 			model.put("usuario", user);
-			redirect = "/user/index";
+			redirect = "user/index";
 		}
 
 		return redirect;
@@ -83,7 +83,7 @@ public class AnonController {
 
 	@PostMapping("/logout")
 	public String logout() {
-		return "/";
+		return "redirect:/";
 	}
 
 }
