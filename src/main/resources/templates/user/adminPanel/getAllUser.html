@@ -48,10 +48,10 @@
 						th:href="@{/user/adminPanel/deleteUser/{id}(id=${usuario.id})}"
 						class="btn btn-danger">Delete</a></td>
 					<td><a
-						th:href="@{/user/adminPanel/deleteComment/{id}(id=${usuario.id})}"
+						th:href="@{/user/adminPanel/goComment/{user}(user=${usuario.username})}"
 						class="btn btn-danger">Delete Comments</a></td>
 			</tbody>
 		</table>
 	</div>
-<div th:replace="_t/footer" />
-<div th:replace="_t/end" />
+	<div th:replace="_t/footer" />
+	<div th:replace="_t/end" />

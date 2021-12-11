@@ -70,13 +70,13 @@ public class AdminController {
 	@GetMapping("/user/adminPanel/deleteUser/{id}")
 	public String deleteUser(@PathVariable Long id) {
 		new ResponseEntity<>(iUserService.deleteUser(id), HttpStatus.OK);
-		return "ruser/adminPanel/getAllUser";
+		return "user/adminPanel/getAllUser";
 	}
 	@GetMapping("/user/adminPanel/goComment/{user}")
 	public String deleteComments(@PathVariable String user, ModelMap model) {
 		User usu=userRepository.findByUsername(user);
-		model.addAttribute("comentarios", commentRepository.findByUser(usu));
-		model.addAttribute("respuestas", answerRepository.findByUser(usu));
+		model.put("comentarios", commentRepository.findByUser(usu));
+		model.put("respuestas", answerRepository.findByUser(usu));
 		return "user/adminPanel/getUserComment";
 	}
 	
