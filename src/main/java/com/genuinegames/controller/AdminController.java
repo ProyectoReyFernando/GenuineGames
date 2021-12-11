@@ -101,7 +101,7 @@ public class AdminController {
 	public String updateGame(ModelMap model,Long id, Game game) {
 		new ResponseEntity<>(iGameService.updateGame(id, game), HttpStatus.OK);
 		model.put("games", gameRepository.findAll());
-		return "user/admin/getAllGame";
+		return "redirect:user/admin/getAllGame";
 	}
 
 	/* UPLOAD IMAGE */
