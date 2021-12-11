@@ -44,14 +44,16 @@ public class User implements Serializable {
 
 	@Column(name = "sex")
 	private String sex;
+	
 	@OneToMany(mappedBy = "punU")
 	private Collection<Valorar> valoracion;
 
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Role role;
 
 	@OneToMany(mappedBy = "user")
 	private Collection<Comments> comments;
+
 	@OneToMany(mappedBy = "user")
 	private Collection<Answer> respuestas;
 
@@ -161,5 +163,4 @@ public class User implements Serializable {
 		this.valoracion = valoracion;
 	}
 
-	
 }

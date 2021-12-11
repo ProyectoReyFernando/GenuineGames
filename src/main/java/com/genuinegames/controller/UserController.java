@@ -21,6 +21,7 @@ import com.genuinegames.entity.Valorar;
 import com.genuinegames.repository.AnswerRepository;
 import com.genuinegames.repository.CommentRepository;
 import com.genuinegames.repository.GameRepository;
+import com.genuinegames.repository.ValorarRepository;
 import com.genuinegames.service.IUserService;
 
 @Controller
@@ -33,6 +34,9 @@ public class UserController {
 	private GameRepository gameRepository;
 	@Autowired
 	private AnswerRepository answerRepository;
+	@Autowired
+	private ValorarRepository valorarRepository;
+	
 
 	@Autowired
 	private IUserService iUserService;
@@ -72,6 +76,8 @@ public class UserController {
 		model.put("gamers", gameRepository.findByName(name));
 		model.put("comments", commentRepository.findByGame(game));
 		model.put("answers", answerRepository.findAll());
+		model.put("points", valorarRepository.findAll());
+		model.put("users", session.getAttribute("user"));
 		return "/user/infoGame";
 	}
 
@@ -122,6 +128,12 @@ public class UserController {
 	public String valoration(HttpSession session,@PathVariable int valor,@PathVariable String name, ModelMap model) {
 		User user=(User)session.getAttribute("user");
 		Game game=gameRepository.findByName(name);
+		int votes=game.getVotes();
+		float punct=(game.getPunctuation()!=null)?game.getPunctuation():0;
+		punct=(punct*votes)+valor;
+		punct=punct/(votes+1);
+		game.setPunctuation(punct);
+		game.setVotes(votes+1);
 		Valorar valorar= new Valorar();
 		valorar.setPuntuacion(valor);
 		valorar.setPunG(game);

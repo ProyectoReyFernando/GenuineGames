@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.genuinegames.entity.User;
 import com.genuinegames.exception.DangerException;
 import com.genuinegames.repository.GameRepository;
+import com.genuinegames.repository.ValorarRepository;
 import com.genuinegames.service.IUserService;
 import com.genuinegames.service.UserService;
 
@@ -27,6 +28,8 @@ public class AnonController {
 
 	@Autowired
 	private GameRepository gameRepository;
+	@Autowired
+	private ValorarRepository valorarRepository;
 
 	@Autowired
 	private IUserService iUserService;
@@ -65,6 +68,7 @@ public class AnonController {
 		String username = auth.getName();
 		String redirect = null;
 		model.put("games", gameRepository.findAll());
+		model.put("points", valorarRepository.findAll());
 
 		if (session.getAttribute("user") == null) {
 			User user = userService.findByUsername(username);
