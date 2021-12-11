@@ -114,7 +114,7 @@ public class AdminController {
 	@GetMapping("/user/admin/deleteGame/{id}")
 	public String deleteGame(@PathVariable Long id) {
 		new ResponseEntity<>(iGameService.deleteGame(id), HttpStatus.OK);
-		return "redirect:user/admin/getAllGame";
+		return "user/admin/getAllGame";
 	}
 
 	// UPDATE
@@ -122,14 +122,14 @@ public class AdminController {
 	public String updateGame(@PathVariable Long id, ModelMap model) {
 		model.put("games", gameRepository.findAll());
 		model.addAttribute("game", gameRepository.findById(id));
-		return "redirect:user/admin/updateGame";
+		return "user/admin/updateGame";
 	}
 
 	@PostMapping("/user/admin/updateGame/{id}")
 	public String updateGame(ModelMap model,Long id, Game game) {
 		new ResponseEntity<>(iGameService.updateGame(id, game), HttpStatus.OK);
 		model.put("games", gameRepository.findAll());
-		return "redirect:user/admin/getAllGame";
+		return "user/admin/getAllGame";
 	}
 
 	/* UPLOAD IMAGE */
@@ -159,7 +159,7 @@ public class AdminController {
 			gameRepository.save(game);
 		}
 
-		return "/";
+		return "redirect:user/admin/getAllGame";
 	}
 
 }
