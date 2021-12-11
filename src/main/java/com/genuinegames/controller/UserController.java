@@ -91,7 +91,7 @@ public class UserController {
 
 		new ResponseEntity<>(iUserService.createComment(comment), HttpStatus.OK);
 
-		return "redirect:user/index";
+		return "user/index";
 	}
 	
 	@PostMapping("/user/answer")
@@ -110,7 +110,7 @@ public class UserController {
 
 		new ResponseEntity<>(iUserService.createAnswer(answer), HttpStatus.OK);
 
-		return "redirect:user/index";
+		return "user/index";
 	}
 	
 	@GetMapping("/user/categoria/{name}")
@@ -139,7 +139,7 @@ public class UserController {
 		model.put("gamers", gameRepository.findByName(name));
 		model.put("comments", commentRepository.findByGame(game));
 		model.put("answers", answerRepository.findAll());
-		return "redirect:user/infoGame/"+name+"?";
+		return "user/infoGame/"+name+"?";
 	}
 
 }
