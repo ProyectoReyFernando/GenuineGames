@@ -43,7 +43,7 @@ public class AnonController {
 	@GetMapping("/auth/register")
 	public String registroForm(Model model) {
 		model.addAttribute("user", new User());
-		return "redirect:auth/register";
+		return "auth/register";
 	}
 
 	@PostMapping("/auth/register")
@@ -54,7 +54,7 @@ public class AnonController {
 			model.addAttribute("user", iUserService.registerUser(user));
 		}
 
-		return "redirect:auth/login";
+		return "auth/login";
 	}
 
 	@GetMapping("/auth/login")
@@ -83,7 +83,7 @@ public class AnonController {
 
 	@PostMapping("/logout")
 	public String logout() {
-		return "redirect:/";
+		return "/";
 	}
 
 }
