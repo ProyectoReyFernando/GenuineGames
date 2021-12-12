@@ -122,7 +122,7 @@ public class AdminController {
 	public String updateGame(@PathVariable Long id, ModelMap model) {
 		model.put("games", gameRepository.findAll());
 		model.addAttribute("game", gameRepository.findById(id));
-		return "user/admin/updateGame";
+		return "user/index";
 	}
 
 	@PostMapping("/user/admin/updateGame/{id}")
