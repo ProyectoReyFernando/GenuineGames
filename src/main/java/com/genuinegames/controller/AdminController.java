@@ -114,7 +114,7 @@ public class AdminController {
 	@GetMapping("/user/admin/deleteGame/{id}")
 	public String deleteGame(@PathVariable Long id) {
 		new ResponseEntity<>(iGameService.deleteGame(id), HttpStatus.OK);
-		return "redirect:user/admin/getAllGame";
+		return "user/admin/getAllGame";
 	}
 
 	// UPDATE
