@@ -159,7 +159,7 @@ public class AdminController {
 			gameRepository.save(game);
 		}
 
-		return "redirect:user/index";
+		return "user/index";
 	}
 
 }
