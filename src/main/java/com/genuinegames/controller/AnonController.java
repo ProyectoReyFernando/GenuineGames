@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.genuinegames.entity.User;
 import com.genuinegames.exception.DangerException;
 import com.genuinegames.repository.GameRepository;
+import com.genuinegames.repository.ValorarRepository;
 import com.genuinegames.service.IUserService;
 import com.genuinegames.service.UserService;
 
@@ -27,6 +28,8 @@ public class AnonController {
 
 	@Autowired
 	private GameRepository gameRepository;
+	@Autowired
+	private ValorarRepository valorarRepository;
 
 	@Autowired
 	private IUserService iUserService;
@@ -34,44 +37,45 @@ public class AnonController {
 	@GetMapping("/")
 	public String index(Model model) {
 		model.addAttribute("games", gameRepository.findAll());
-		return "/index";
+		return "index";
 	}
 
-	@GetMapping("/auth/register")
+	@GetMapping("auth/register")
 	public String registroForm(Model model) {
 		model.addAttribute("user", new User());
-		return "/auth/register";
+		return "auth/register";
 	}
 
-	@PostMapping("/auth/register")
+
+	@PostMapping("auth/register")
 	public String registerUser(@Valid @ModelAttribute User user, BindingResult result, Model model) throws DangerException {
 		if (result.hasErrors()) {
-			return "redirect:/auth/register";
+			return "redirect:auth/register";
 		} else {
 			model.addAttribute("user", iUserService.registerUser(user));
 		}
-
-		return "redirect:/auth/login";
+		return "auth/login";
 	}
 
-	@GetMapping("/auth/login")
+	@GetMapping("auth/login")
 	public String loginUser(Model model) {
-		return "/auth/login";
+		return "auth/login";
 	}
 
-	@GetMapping("/user/index")
+	@GetMapping("user/index")
 	public String userIndex(Authentication auth, HttpSession session, ModelMap model) {
 
 		String username = auth.getName();
 		String redirect = null;
 		model.put("games", gameRepository.findAll());
+		model.put("points", valorarRepository.findAll());
 
 		if (session.getAttribute("user") == null) {
 			User user = userService.findByUsername(username);
 			user.setPwd(null);
 			session.setAttribute("user", user);
 			model.put("usuario", user);
-			redirect = "/user/index";
+			redirect = "user/index";
 		}
 
 		return redirect;
@@ -79,7 +83,7 @@ public class AnonController {
 
 	@PostMapping("/logout")
 	public String logout() {
-		return "/";
+		return "redirect:/";
 	}
 
 }

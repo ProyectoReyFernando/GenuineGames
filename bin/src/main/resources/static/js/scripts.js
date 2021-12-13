@@ -117,16 +117,8 @@ function valpwds() {
 	if (pwd == cpwd) {
 		comPwd = true;
 		comCpwd = true;
-		console.log('todo flama');
 	} else {
 		alert('No coinciden las dos contraseñas. Asegurese de que es una contraseña que podrá recordar');
-	}
-}
-function pwdError() {
-	if ((comPwd == true) && (comCpwd == true)) {
-		console.log("tamos bien");
-	} else {
-		console.log("No se lo pongamos tan facil a los malos")
 	}
 }
 function valtlf() {
@@ -146,13 +138,8 @@ function valdate() {
 	var mhoy = hoy.getMonth();
 	var ahoy = hoy.getFullYear() - 3;
 	var hoy = ahoy + "-" + mhoy + "-" + dhoy;
-	console.log(date);
-	console.log(hoy);
 	if (hoy > date) {
-		console.log("OK");
 		comDate = true;
-	} else {
-		console.log("Fatal error");
 	}
 }
 
@@ -196,7 +183,6 @@ function caja3() {
 	}
 }
 function caja2() {
-	console.log("entra");
 	if (auxiliar == false) {
 		for (var y = 0; y < 2; y++) {
 			cajas();
