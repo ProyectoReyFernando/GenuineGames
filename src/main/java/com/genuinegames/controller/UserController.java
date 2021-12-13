@@ -32,13 +32,13 @@ public class UserController {
 
 	@Autowired
 	private GameRepository gameRepository;
-	
+
 	@Autowired
 	private AnswerRepository answerRepository;
-	
+
 	@Autowired
 	private ValorarRepository valorarRepository;
-	
+
 	@Autowired
 	private IUserService iUserService;
 
@@ -93,7 +93,7 @@ public class UserController {
 
 		return "user/index";
 	}
-	
+
 	@PostMapping("/user/answer")
 	public String answerGame(HttpSession session, @RequestParam("texto") String text,
 			@RequestParam("comment") Long comments, ModelMap model, Long id) {
@@ -112,25 +112,25 @@ public class UserController {
 
 		return "user/index";
 	}
-	
+
 	@GetMapping("/user/categoria/{name}")
-	public String categoriaGame(HttpSession session,@PathVariable String name, ModelMap model) {
+	public String categoriaGame(HttpSession session, @PathVariable String name, ModelMap model) {
 		model.put("games", gameRepository.findAll());
 		model.put("gamer", gameRepository.findAllByCategory(name));
 		return "user/index";
 	}
-	
+
 	@GetMapping("/user/infogame/valoration/{valor}/{name}")
-	public String valoration(HttpSession session,@PathVariable int valor,@PathVariable String name, ModelMap model) {
-		User user=(User)session.getAttribute("user");
-		Game game=gameRepository.findByName(name);
-		int votes=game.getVotes();
-		float punct=(game.getPunctuation()!=null)?game.getPunctuation():0;
-		punct=(punct*votes)+valor;
-		punct=punct/(votes+1);
+	public String valoration(HttpSession session, @PathVariable int valor, @PathVariable String name, ModelMap model) {
+		User user = (User) session.getAttribute("user");
+		Game game = gameRepository.findByName(name);
+		int votes = game.getVotes();
+		float punct = (game.getPunctuation() != null) ? game.getPunctuation() : 0;
+		punct = (punct * votes) + valor;
+		punct = punct / (votes + 1);
 		game.setPunctuation(punct);
-		game.setVotes(votes+1);
-		Valorar valorar= new Valorar();
+		game.setVotes(votes + 1);
+		Valorar valorar = new Valorar();
 		valorar.setPuntuacion(valor);
 		valorar.setPunG(game);
 		valorar.setPunU(user);
@@ -139,7 +139,7 @@ public class UserController {
 		model.put("gamers", gameRepository.findByName(name));
 		model.put("comments", commentRepository.findByGame(game));
 		model.put("answers", answerRepository.findAll());
-		return "user/infoGame/"+name+"?";
+		return "user/infoGame/" + name + "?";
 	}
 
 }
