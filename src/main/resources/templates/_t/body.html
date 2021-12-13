@@ -16,6 +16,20 @@
 		</tr>
 	</tbody>
 </table>
+<table class="table table-dark" style="display: none">
+	<tbody>
+		<tr th:each="val:${points}">
+			<td th:text="${val.id}" id="pointid" th:value="${val.id}"></td>
+			<td th:text="${val.puntuacion}" id="pointspoints" th:value="${val.puntuacion}"></td>
+			<td th:text="${val.puntuacion}" id="catjuego"
+			th:value="${val.puntuacion}"></td>
+			<td th:text="${val.punU.username}" id="userpoint"
+				th:value="${val.punU.username}"></td>
+			<!-- <td th:text="${val.punG.name}" id="matchpoint" th:value="${points.punG.name}"></td> -->
+		</tr>
+	</tbody>
+</table>
+
 
 <table class="table table-dark" style="display: none">
 	<tbody>
@@ -35,7 +49,7 @@
 		</tr>
 	</tbody>
 </table>
-<header class="bg-dark py-5" onload="start()">
+<header class="bg-dark py-5" onload="alert()">
 	<div class="container px-4 px-lg-5 my-5">
 		<div class="text-center text-white">
 			<h1 class="display-4 fw-bolder">Genuine Gamers</h1>

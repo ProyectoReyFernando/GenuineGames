@@ -1,0 +1,25 @@
+<div th:replace="_t/head" />
+<div th:replace="_t/nav" />
+<table class="table table-dark">
+	<tbody>
+		<tr th:each="comment:${comentarios}">
+			<td th:text="${comment.id}" id="idjuego" th:value="${comment.id}"></td>
+			<td th:text="${comment.user.username}" id="nmjuego" th:value="${comment.user.username}"></td>
+			<td th:text="${comment.text}" id="nmjuego" th:value="${comment.text}"></td>
+			<td><a th:href="@{/user/adminPanel/deleteComment/{id}(id=${comment.id})}"
+				class="btn btn-danger">Delete Comments</a></td>
+		</tr>
+	</tbody>
+</table>
+<table class="table table-dark">
+	<tbody>
+		<tr th:each="comment:${respuestas}">
+			<td th:text="${comment.id}" id="idjuego" th:value="${comment.id}"></td>
+			<td th:text="${comment.user.username}" id="nmjuego" th:value="${comment.user.username}"></td>
+						<td th:text="${comment.text}" id="nmjuego" th:value="${comment.text}"></td>
+			<td><a th:href="@{/user/adminPanel/deleteanswer/{id}(id=${comment.id})}"
+				class="btn btn-danger">Delete Comments</a></td>
+		</tr>
+	</tbody>
+</table>
+<div th:replace="_t/footer" />

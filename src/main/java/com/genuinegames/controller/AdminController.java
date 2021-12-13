@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.genuinegames.entity.Game;
 import com.genuinegames.entity.User;
 import com.genuinegames.exception.DangerException;
+import com.genuinegames.repository.AnswerRepository;
+import com.genuinegames.repository.CommentRepository;
 import com.genuinegames.repository.GameRepository;
 import com.genuinegames.repository.UserRepository;
 import com.genuinegames.service.IGameService;
@@ -41,13 +42,19 @@ public class AdminController {
 	private UserRepository userRepository;
 	
 	@Autowired
+	private AnswerRepository answerRepository;
+	
+	@Autowired
+	private CommentRepository commentRepository;
+	
+	@Autowired
 	private GameRepository gameRepository;
 	
 	/* REGISTER ADMIN */
 	@PostMapping("auth/register/admin")
 	public String addUserAdmin(@RequestBody User user, Model model) {
 		model.addAttribute("user", iUserService.registerAdmin(user));
-		return "redirect:/auth/login";
+		return "auth/login";
 	}
 
 	/* USERS */
@@ -61,6 +68,26 @@ public class AdminController {
 	@GetMapping("user/adminPanel/deleteUser/{id}")
 	public String deleteUser(@PathVariable Long id) {
 		new ResponseEntity<>(iUserService.deleteUser(id), HttpStatus.OK);
+		return "user/adminPanel/getAllUser";
+	}
+	
+	@GetMapping("/user/adminPanel/goComment/{user}")
+	public String deleteComments(@PathVariable String user, ModelMap model) {
+		User usu=userRepository.findByUsername(user);
+		model.put("comentarios", commentRepository.findByUser(usu));
+		model.put("respuestas", answerRepository.findByUser(usu));
+		return "user/adminPanel/getUserComment";
+	}
+	
+	@GetMapping("/user/adminPanel/deleteComment/{id}")
+	public String deleteComments(@PathVariable Long id) {
+		new ResponseEntity<>(iUserService.deleteComment(id), HttpStatus.OK);
+		return "redirect:/user/adminPanel/getAllUser";
+	}
+	
+	@GetMapping("/user/adminPanel/deleteanswer/{id}")
+	public String deleteanswer(@PathVariable Long id) {
+		new ResponseEntity<>(iUserService.deleteAnswer(id), HttpStatus.OK);
 		return "redirect:/user/adminPanel/getAllUser";
 	}
 
@@ -77,7 +104,7 @@ public class AdminController {
 		return "user/admin/createGame";
 	}
 
-	@PostMapping("user/admin/createGame")
+	@PostMapping("/user/admin/createGame")
 	public void createGame(@RequestBody Game game) throws DangerException {
 		new ResponseEntity<>(iGameService.createGame(game), HttpStatus.OK);
 	}

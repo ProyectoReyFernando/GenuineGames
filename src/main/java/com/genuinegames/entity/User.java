@@ -44,6 +44,9 @@ public class User implements Serializable {
 
 	@Column(name = "sex")
 	private String sex;
+	
+	@OneToMany(mappedBy = "punU")
+	private Collection<Valorar> valoracion;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Role role;
@@ -51,12 +54,15 @@ public class User implements Serializable {
 	@OneToMany(mappedBy = "user")
 	private Collection<Comments> comments;
 
+	@OneToMany(mappedBy = "user")
+	private Collection<Answer> respuestas;
+
 	public User() {
 
 	}
 
 	public User(String username, String pwd, int tlf, String mail, String fnac, String sex, Role role,
-			Collection<Comments> comments) {
+			Collection<Comments> comments, Collection<Answer> respuestas) {
 		super();
 		this.username = username;
 		this.pwd = pwd;
@@ -66,7 +72,7 @@ public class User implements Serializable {
 		this.sex = sex;
 		this.role = role;
 		this.comments = comments;
-
+		this.respuestas = respuestas;
 	}
 
 	public Long getId() {
@@ -139,6 +145,22 @@ public class User implements Serializable {
 
 	public void setComments(Collection<Comments> comments) {
 		this.comments = comments;
+	}
+
+	public Collection<Answer> getRespuestas() {
+		return respuestas;
+	}
+
+	public void setRespuestas(Collection<Answer> respuestas) {
+		this.respuestas = respuestas;
+	}
+
+	public Collection<Valorar> getValoracion() {
+		return valoracion;
+	}
+
+	public void setValoracion(Collection<Valorar> valoracion) {
+		this.valoracion = valoracion;
 	}
 
 }

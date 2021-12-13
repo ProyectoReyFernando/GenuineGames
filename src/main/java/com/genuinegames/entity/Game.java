@@ -34,24 +34,30 @@ public class Game {
 
 	@Column(name = "punctuation")
 	private Float punctuation;
+	@Column(name = "votes",columnDefinition="Decimal(10)default '0'")
+	private int votes;
 
 	@OneToMany(mappedBy = "game")
 	private Collection<Comments> comments;
+	@OneToMany(mappedBy = "punG")
+	private Collection<Valorar> valoracion;
 
 	public Game() {
 		super();
+
 	}
 
-	public Game(String name, String img, String category, String description, Float punctuation,
-			Collection<Comments> comments) {
+	public Game(String name, String img, String category, String description, Float punctuation, int votes,
+			Collection<Comments> comments, Collection<Valorar> valoracion) {
 		super();
 		this.name = name;
 		this.img = img;
 		this.category = category;
-		this.category = category;
 		this.description = description;
 		this.punctuation = punctuation;
+		this.votes = votes;
 		this.comments = comments;
+		this.valoracion = valoracion;
 	}
 
 	public Long getId() {
@@ -108,6 +114,22 @@ public class Game {
 
 	public void setComments(Collection<Comments> comments) {
 		this.comments = comments;
+	}
+
+	public Collection<Valorar> getValoracion() {
+		return valoracion;
+	}
+
+	public void setValoracion(Collection<Valorar> valoracion) {
+		this.valoracion = valoracion;
+	}
+
+	public int getVotes() {
+		return votes;
+	}
+
+	public void setVotes(int votes) {
+		this.votes = votes;
 	}
 
 }

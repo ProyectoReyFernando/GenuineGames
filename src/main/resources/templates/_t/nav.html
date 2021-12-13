@@ -1,91 +1,48 @@
 <body>
-	<div th:if="${session.user.role?.name == 'ADMIN'}">
-		<!--******ADMIN******-->
-		<!-- Navigation-->
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<div class="container px-4 px-lg-5">
-				<a class="navbar-brand" href="/user/index"><img
-					src="/img/logo.png"></a>
-				<button class="navbar-toggler" type="button"
-					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-					aria-controls="navbarSupportedContent" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-						<li class="nav-item"><a class="nav-link active"
-							aria-current="page" href="/user/index">Inicio</a></li>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container px-4 px-lg-5">
+			<a class="navbar-brand" href="/user/index"><img
+				src="/img/logo.png"></a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="/user/index">Inicio</a></li>
 
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" id="navbarDropdown"
-							role="button" data-bs-toggle="dropdown" aria-expanded="false">Categor&iacuteas</a>
-							<ul class="dropdown-menu" aria-labelledby="navbarDropdown"
-								th:each="game:${games}" id="categoria">
-							</ul></li>
-						<li class="nav-item"><a class="nav-link"
-							href="/user/admin/getAllGame">Listado Juegos</a></li>
-						<li class="nave-item"><a class="nav-link"
-							href="/user/adminPanel/getAllUser">Admin Panel</a></li>
-					</ul>
-					<form class="d-flex" method="post" th:action="@{/logout}">
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
-							role="button" data-bs-toggle="dropdown" aria-expanded="false"><img
-								src="/img/perfil.png" class="perfil"></a>
-							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<li><a class="dropdown-item" href="/user/ajustes"><img
-										class="tab-icon icon-ajustes" src="/img/ajustes.png">
-										Ajustes</a></li>
-								<li><a class="dropdown-item" href="/user/perfil"><img
-										class="tab-icon icon-avatar" src="/img/avatar.png">
-										Perfil</a></li>
-								<li><hr class="dropdown-divider" /></li>
-								<li><a class="dropdown-item" href="/logout"><img
-										class="tab-icon icon-logout" src="/img/logout.png">Logout</a></li>
-							</ul></li>
-					</form>
-				</div>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
+						data-bs-toggle="dropdown" aria-expanded="false">Categor&iacuteas</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown"
+							th:each="game:${games}" id="categoria">
+						</ul></li>
+					<li class="nav-item" th:if="${session.user.role?.name == 'ADMIN'}"><a
+						class="nav-link" href="/user/admin/getAllGame">Listado Juegos</a></li>
+					<li class="nave-item" th:if="${session.user.role?.name == 'ADMIN'}"><a
+						class="nav-link" href="/user/adminPanel/getAllUser">Admin
+							Panel</a></li>
+				</ul>
+				<form class="d-flex" method="post" th:action="@{/logout}">
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
+						role="button" data-bs-toggle="dropdown" aria-expanded="false"><img
+							src="/img/perfil.png" class="perfil"></a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="/user/ajustes"><img
+									class="tab-icon icon-ajustes" src="/img/ajustes.png">
+									Ajustes</a></li>
+							<li><a class="dropdown-item" href="/user/perfil"><img
+									class="tab-icon icon-avatar" src="/img/avatar.png">
+									Perfil</a></li>
+							<li><hr class="dropdown-divider" /></li>
+							<li><a class="dropdown-item" href="/logout"><img
+									class="tab-icon icon-logout" src="/img/logout.png">Logout</a></li>
+						</ul></li>
+				</form>
 			</div>
-		</nav>
-	</div>
-	<div th:if="${session.user.role?.name == 'USER'}">
-		<!--******USER******-->
-		<!-- Navigation-->
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<div class="container px-4 px-lg-5">
-				<a class="navbar-brand" href="/user/index"><img
-					src="/img/logo.png"></a>
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-						<li class="nav-item"><a class="nav-link active"
-							aria-current="page" href="/user/index">Inicio</a></li>
-
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
-							role="button" data-bs-toggle="dropdown" aria-expanded="false">Categor&iacuteas</a>
-							<ul class="dropdown-menu" aria-labelledby="navbarDropdown"
-								th:each="game:${games}" id="categoria">
-							</ul></li>
-					</ul>
-					<form class="d-flex" method="post" th:action="@{/logout}">
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
-							role="button" data-bs-toggle="dropdown" aria-expanded="false"><img
-								src="/img/perfil.png" class="perfil"></a>
-							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<li><a class="dropdown-item" href="/user/ajustes"><img
-										class="tab-icon icon-ajustes" src="/img/ajustes.png">
-										Ajustes</a></li>
-								<li><a class="dropdown-item" href="/user/perfil"><img
-										class="tab-icon icon-avatar" src="/img/avatar.png">
-										Perfil</a></li>
-								<li><hr class="dropdown-divider" /></li>
-								<li><a class="dropdown-item" href="/logout"><img
-										class="tab-icon icon-logout" src="/img/logout.png">Logout</a></li>
-							</ul></li>
-					</form>
-				</div>
-			</div>
-		</nav>
-	</div>
+		</div>
+	</nav>

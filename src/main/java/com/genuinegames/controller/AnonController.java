@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.genuinegames.entity.User;
 import com.genuinegames.exception.DangerException;
 import com.genuinegames.repository.GameRepository;
+import com.genuinegames.repository.ValorarRepository;
 import com.genuinegames.service.IUserService;
 import com.genuinegames.service.UserService;
 
@@ -27,6 +28,8 @@ public class AnonController {
 
 	@Autowired
 	private GameRepository gameRepository;
+	@Autowired
+	private ValorarRepository valorarRepository;
 
 	@Autowired
 	private IUserService iUserService;
@@ -34,12 +37,16 @@ public class AnonController {
 	@GetMapping("/")
 	public String index(Model model) {
 		model.addAttribute("games", gameRepository.findAll());
-		return "redirect:index";
+		return "index";
 	}
 
 	@GetMapping("auth/register")
 	public String registroForm(Model model) {
 		model.addAttribute("user", new User());
+		return "auth/register";
+	}
+
+	@PostMapping("/auth/register")
 		return "redirect:auth/register";
 	}
 
@@ -50,13 +57,12 @@ public class AnonController {
 		} else {
 			model.addAttribute("user", iUserService.registerUser(user));
 		}
-
-		return "redirect:auth/login";
+		return "auth/login";
 	}
 
 	@GetMapping("auth/login")
 	public String loginUser(Model model) {
-		return "redirect:auth/login";
+		return "auth/login";
 	}
 
 	@GetMapping("user/index")
@@ -65,6 +71,7 @@ public class AnonController {
 		String username = auth.getName();
 		String redirect = null;
 		model.put("games", gameRepository.findAll());
+		model.put("points", valorarRepository.findAll());
 
 		if (session.getAttribute("user") == null) {
 			User user = userService.findByUsername(username);
