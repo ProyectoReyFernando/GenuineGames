@@ -87,7 +87,6 @@ function valpwds() {
 
 function pwdError() {
 	if ((comPwd == true) && (comCpwd == true)) {
-		console.log("tamos bien");
 	} else {
 		alert("Debe poner la misma contraseña en las 2 op")
 	}
@@ -207,7 +206,6 @@ function cajas() {
 		img.src = "../../img/" + tds[j + 4].innerHTML;
 		submit.value = "Opiniones";
 		form.className = "mt-2";
-		console.log("hola " + punt);
 		for (var i = 0; i < 5; i++) {
 			var divstar = document.createElement("div");
 			var puntstar = document.createElement("img");
@@ -281,7 +279,6 @@ function punct() {
 	if (punct != null) {
 		punct.appendChild(text);
 	}
-	console.log(punt);
 
 	for (var i = 0; i < 5 && punct != null; i++) {
 		var puntstar = document.createElement("img");
@@ -308,7 +305,6 @@ function punc() {
 	if (punct != null) {
 		punct.appendChild(text);
 	}
-	console.log(punt);
 
 	for (var i = 0; i < 5 && punct != null; i++) {
 		var puntstar = document.createElement("img");
@@ -340,7 +336,4 @@ function puntuarS(valor) {
 	var img = document.getElementsByClassName("opinions " + valor);
 	var nombre = document.getElementById("nombrejuego").innerHTML;
 	window.location.replace("/user/infogame/valoration/" + valor + "/" + nombre);
-}
-function alerta() {
-console.log("alerta");
 }

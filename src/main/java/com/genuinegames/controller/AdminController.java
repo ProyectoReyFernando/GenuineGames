@@ -68,7 +68,7 @@ public class AdminController {
 	@GetMapping("user/adminPanel/deleteUser/{id}")
 	public String deleteUser(@PathVariable Long id) {
 		new ResponseEntity<>(iUserService.deleteUser(id), HttpStatus.OK);
-		return "user/adminPanel/getAllUser";
+		return "redirect:/user/adminPanel/getAllUser";
 	}
 	
 	@GetMapping("/user/adminPanel/goComment/{user}")

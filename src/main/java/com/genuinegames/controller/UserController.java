@@ -145,11 +145,4 @@ public class UserController {
     return "redirect:/user/infoGame/" + name + "?";
 	}
 	
-	@GetMapping("user/categoria/{name}")
-	public String categoriaGame(HttpSession session,@PathVariable String name, ModelMap model) {
-		model.put("games", gameRepository.findAll());
-		model.put("gamer", gameRepository.findAllByCategory(name));
-		return "user/index";
-	}
-
 }

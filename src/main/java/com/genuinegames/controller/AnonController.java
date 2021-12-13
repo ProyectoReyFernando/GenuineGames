@@ -46,6 +46,7 @@ public class AnonController {
 		return "auth/register";
 	}
 
+
 	@PostMapping("auth/register")
 	public String registerUser(@Valid @ModelAttribute User user, BindingResult result, Model model) throws DangerException {
 		if (result.hasErrors()) {
