@@ -25,8 +25,8 @@
 			th:object="${user}">
 			<label for="user">Usuario</label> <input type="text"
 				th:field="*{username}" placeholder="Introduzca Usuario" id="user"
-				onkeyup="valuser()" required minlength="6" maxlength="50"> <label
-				for="pwd">Contraseña</label> <input type="password"
+				onkeyup="valuser()" required minlength="6" maxlength="50">
+			<label for="pwd">Contraseña</label> <input type="password"
 				th:field="*{pwd}" placeholder="Introduzca Contraseña"
 				onkeyup="valpwd()" id="pwd" required minlength="6" maxlength="14">
 			<label for="cpwd">Vuelva a introducir la contraseña</label> <input
@@ -35,9 +35,10 @@
 				minlength="6" maxlength="14"> <label for="tlf">Teléfono</label>
 			<input type="text" th:field="*{tlf}"
 				placeholder="Introduzca Teléfono" onkeyup="valtlf()" id="tlf"
-				required minlength="9" maxlength="9"> <label for="mail">E-mail</label>
-			<input type="text" th:field="*{mail}" placeholder="Introduzca E-mail"
-				onkeyup="valmail()" id="mail" required minlength="3" maxlength="50">
+				required minlength="9" maxlength="9"> <label
+				for="mail">E-mail</label> <input type="text" th:field="*{mail}"
+				placeholder="Introduzca E-mail" onkeyup="valmail()" id="mail"
+				required minlength="3" maxlength="50">
 			<label for="fnac">Fecha de Nacimiento</label> <input type="date"
 				th:field="*{fnac}" placeholder="Introduzca su Fecha de Nacimiento"
 				onblur="valdate()" id="date"> <label for="sex">Sexo</label>
@@ -52,7 +53,8 @@
 			</div>
 			<button id="submit" value="Registrate" onclick="valf()">Registrate</button>
 			<br> <a th:href="@{/auth/login}" class="mt-2">Volver al
-				Login</a> <br> <a th:href="@{/index}" class="mt-2">Inicio</a>
+				Login</a>
+			<br> <a th:href="@{index}" class="mt-2">Inicio</a>
 		</form>
 	</div>
 </body>
