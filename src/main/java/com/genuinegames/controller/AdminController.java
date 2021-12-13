@@ -72,6 +72,7 @@ public class AdminController {
 		new ResponseEntity<>(iUserService.deleteUser(id), HttpStatus.OK);
 		return "user/adminPanel/getAllUser";
 	}
+	
 	@GetMapping("/user/adminPanel/goComment/{user}")
 	public String deleteComments(@PathVariable String user, ModelMap model) {
 		User usu=userRepository.findByUsername(user);
@@ -83,7 +84,7 @@ public class AdminController {
 	@GetMapping("/user/adminPanel/deleteComment/{id}")
 	public String deleteComments(@PathVariable Long id) {
 		new ResponseEntity<>(iUserService.deleteComment(id), HttpStatus.OK);
-		return "user/adminPanel/getAllUser";
+		return "redirect:/user/adminPanel/getAllUser";
 	}
 	
 	@GetMapping("/user/adminPanel/deleteanswer/{id}")
