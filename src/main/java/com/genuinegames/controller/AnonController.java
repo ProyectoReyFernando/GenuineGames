@@ -40,29 +40,32 @@ public class AnonController {
 		return "index";
 	}
 
-	@GetMapping("/auth/register")
+	@GetMapping("auth/register")
 	public String registroForm(Model model) {
 		model.addAttribute("user", new User());
 		return "auth/register";
 	}
 
 	@PostMapping("/auth/register")
+		return "redirect:auth/register";
+	}
+
+	@PostMapping("auth/register")
 	public String registerUser(@Valid @ModelAttribute User user, BindingResult result, Model model) throws DangerException {
 		if (result.hasErrors()) {
-			return "redirect:/auth/register";
+			return "redirect:auth/register";
 		} else {
 			model.addAttribute("user", iUserService.registerUser(user));
 		}
-
 		return "auth/login";
 	}
 
-	@GetMapping("/auth/login")
+	@GetMapping("auth/login")
 	public String loginUser(Model model) {
 		return "auth/login";
 	}
 
-	@GetMapping("/user/index")
+	@GetMapping("user/index")
 	public String userIndex(Authentication auth, HttpSession session, ModelMap model) {
 
 		String username = auth.getName();
@@ -83,7 +86,7 @@ public class AnonController {
 
 	@PostMapping("/logout")
 	public String logout() {
-		return "/";
+		return "redirect:/";
 	}
 
 }

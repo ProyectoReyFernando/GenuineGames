@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,21 +51,21 @@ public class AdminController {
 	private GameRepository gameRepository;
 	
 	/* REGISTER ADMIN */
-	@PostMapping("/auth/register/admin")
+	@PostMapping("auth/register/admin")
 	public String addUserAdmin(@RequestBody User user, Model model) {
 		model.addAttribute("user", iUserService.registerAdmin(user));
 		return "auth/login";
 	}
 
 	/* USERS */
-	@GetMapping("/user/adminPanel/getAllUser")
+	@GetMapping("user/adminPanel/getAllUser")
 	public String getAllUser(Long id, ModelMap model) {
 		model.put("user", userRepository.findAll());
 		model.put("games", gameRepository.findAll());
 		return "user/adminPanel/getAllUser";
 	}
 	
-	@GetMapping("/user/adminPanel/deleteUser/{id}")
+	@GetMapping("user/adminPanel/deleteUser/{id}")
 	public String deleteUser(@PathVariable Long id) {
 		new ResponseEntity<>(iUserService.deleteUser(id), HttpStatus.OK);
 		return "user/adminPanel/getAllUser";
@@ -94,14 +92,14 @@ public class AdminController {
 	}
 
 	/* GAMES */
-	@GetMapping("/user/admin/getAllGame")
+	@GetMapping("user/admin/getAllGame")
 	public String getAllGame(Long id, ModelMap model) {
 		model.put("games", gameRepository.findAll());
 		return "user/admin/getAllGame";
 	}
 
 	// CREATE
-	@GetMapping("/user/admin/createGame")
+	@GetMapping("user/admin/createGame")
 	public String createGame() {
 		return "user/admin/createGame";
 	}
@@ -112,21 +110,21 @@ public class AdminController {
 	}
 
 	// DELETE
-	@GetMapping("/user/admin/deleteGame/{id}")
+	@GetMapping("user/admin/deleteGame/{id}")
 	public String deleteGame(@PathVariable Long id) {
 		new ResponseEntity<>(iGameService.deleteGame(id), HttpStatus.OK);
 		return "redirect:/user/admin/getAllGame";
 	}
 
 	// UPDATE
-	@GetMapping("/user/admin/updateGame/{id}")
+	@GetMapping("user/admin/updateGame/{id}")
 	public String updateGame(@PathVariable Long id, ModelMap model) {
 		model.put("games", gameRepository.findAll());
 		model.addAttribute("game", gameRepository.findById(id));
 		return "user/admin/updateGame";
 	}
 
-	@PostMapping("/user/admin/updateGame/{id}")
+	@PostMapping("user/admin/updateGame/{id}")
 	public String updateGame(ModelMap model,Long id, Game game) {
 		new ResponseEntity<>(iGameService.updateGame(id, game), HttpStatus.OK);
 		model.put("games", gameRepository.findAll());
@@ -134,14 +132,14 @@ public class AdminController {
 	}
 
 	/* UPLOAD IMAGE */
-	@GetMapping("/user/admin/uploadImage/{id}")
+	@GetMapping("user/admin/uploadImage/{id}")
 	public String uploadImage(@PathVariable Long id, ModelMap model) {
 		model.addAttribute("game", gameRepository.findById(id));
 		model.put("games", gameRepository.findAll());
 		return "user/admin/uploadImage";
 	}
 
-	@PostMapping("/user/admin/uploadImage")
+	@PostMapping("user/admin/uploadImage")
 	public String uploadImage(@RequestPart("file") MultipartFile img, Game game) {
 		if (!img.isEmpty()) {
 			Path directory = Paths.get("src//main//resources//static/img/");

@@ -50,7 +50,7 @@ public class UserController {
 		return "user/ajustes";
 	}
 
-	@GetMapping("/user/perfil")
+	@GetMapping("user/perfil")
 	public String perfil(HttpSession session, ModelMap model) {
 		User usuario = (User) session.getAttribute("user");
 
@@ -62,7 +62,7 @@ public class UserController {
 	}
 
 	/* OPINION GAMES */
-	@GetMapping("/user/infoGame/{name}")
+	@GetMapping("user/infoGame/{name}")
 	public String opinion(HttpSession session, ModelMap model, @PathVariable String name) {
 		Game game = gameRepository.findByName(name);
 
@@ -72,10 +72,11 @@ public class UserController {
 		model.put("answers", answerRepository.findAll());
 		model.put("points", valorarRepository.findAll());
 		model.put("users", session.getAttribute("user"));
+    
 		return "user/infoGame";
 	}
 
-	@PostMapping("/user/comment")
+	@PostMapping("user/comment")
 	public String commentGame(HttpSession session, @RequestParam("texto") String text,
 			@RequestParam("nombre") String name, ModelMap model, Long id) {
 		User user = (User) session.getAttribute("user");
@@ -90,7 +91,7 @@ public class UserController {
 		model.put("user", session.getAttribute("user"));
 
 		new ResponseEntity<>(iUserService.createComment(comment), HttpStatus.OK);
-
+    
 		return "user/index";
 	}
 
@@ -122,7 +123,8 @@ public class UserController {
 
 	@GetMapping("/user/infogame/valoration/{valor}/{name}")
 	public String valoration(HttpSession session, @PathVariable int valor, @PathVariable String name, ModelMap model) {
-		User user = (User) session.getAttribute("user");
+	
+    User user = (User) session.getAttribute("user");
 		Game game = gameRepository.findByName(name);
 		int votes = game.getVotes();
 		float punct = (game.getPunctuation() != null) ? game.getPunctuation() : 0;
@@ -139,7 +141,15 @@ public class UserController {
 		model.put("gamers", gameRepository.findByName(name));
 		model.put("comments", commentRepository.findByGame(game));
 		model.put("answers", answerRepository.findAll());
-		return "redirect:/user/infoGame/" + name + "?";
+		
+    return "redirect:/user/infoGame/" + name + "?";
+	}
+	
+	@GetMapping("user/categoria/{name}")
+	public String categoriaGame(HttpSession session,@PathVariable String name, ModelMap model) {
+		model.put("games", gameRepository.findAll());
+		model.put("gamer", gameRepository.findAllByCategory(name));
+		return "user/index";
 	}
 
 }

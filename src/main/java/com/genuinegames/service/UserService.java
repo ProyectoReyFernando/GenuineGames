@@ -159,7 +159,6 @@ public class UserService implements IUserService, IGameService {
 
 	@Override
 	public Valorar puntuar(Valorar valorar) {
-		
 		return valorarRepository.save(valorar);
 
 	}
@@ -183,5 +182,4 @@ public class UserService implements IUserService, IGameService {
 			return "No se pudo realizar la acción";
 		}
 	}
-
 }
