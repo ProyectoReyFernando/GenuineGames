@@ -90,7 +90,7 @@ public class AdminController {
 	@GetMapping("/user/adminPanel/deleteanswer/{id}")
 	public String deleteanswer(@PathVariable Long id) {
 		new ResponseEntity<>(iUserService.deleteAnswer(id), HttpStatus.OK);
-		return "user/adminPanel/getAllUser";
+		return "redirect:/user/adminPanel/getAllUser";
 	}
 
 	/* GAMES */
