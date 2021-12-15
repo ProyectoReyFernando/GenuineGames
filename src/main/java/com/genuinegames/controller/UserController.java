@@ -124,12 +124,12 @@ public class UserController {
 	@GetMapping("/user/infogame/valoration/{valor}/{name}")
 	public String valoration(HttpSession session, @PathVariable int valor, @PathVariable String name, ModelMap model) {
 	
-    User user = (User) session.getAttribute("user");
+		User user = (User) session.getAttribute("user");
 		Game game = gameRepository.findByName(name);
 		int votes = game.getVotes();
 		float punct = (game.getPunctuation() != null) ? game.getPunctuation() : 0;
 		punct = (punct * votes) + valor;
-		punct = punct / (votes + 1);
+		punct = (Math.round(punct / (votes + 1)));
 		game.setPunctuation(punct);
 		game.setVotes(votes + 1);
 		Valorar valorar = new Valorar();
