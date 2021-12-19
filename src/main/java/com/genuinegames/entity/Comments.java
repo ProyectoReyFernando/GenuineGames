@@ -27,7 +27,8 @@ public class Comments {
 
 	@Column(name = "text")
 	private String text;
-	@OneToMany(mappedBy = "comment"/*, cascade=CascadeType.REMOVE*/)
+	
+	@OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private Collection<Answer> respuestas;
 
 	public Comments() {
