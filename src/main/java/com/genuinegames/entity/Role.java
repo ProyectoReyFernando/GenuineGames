@@ -2,6 +2,7 @@ package com.genuinegames.entity;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +22,7 @@ public class Role {
 	@Column(name = "name")
 	private String name;
 
-	@OneToMany(mappedBy = "role")
+	@OneToMany(mappedBy = "role", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private Collection<User> user;
 
 	public Role() {

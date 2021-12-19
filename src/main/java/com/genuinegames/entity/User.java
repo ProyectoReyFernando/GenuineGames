@@ -45,16 +45,16 @@ public class User implements Serializable {
 	@Column(name = "sex")
 	private String sex;
 	
-	@OneToMany(mappedBy = "punU")
+	@OneToMany(mappedBy = "punU", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private Collection<Valorar> valoracion;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Role role;
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private Collection<Comments> comments;
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private Collection<Answer> respuestas;
 
 	public User() {

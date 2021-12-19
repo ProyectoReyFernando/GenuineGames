@@ -18,12 +18,16 @@ public class Valorar {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column(name = "puntuacion")
 	private int puntuacion;
+	
 	@ManyToOne(cascade = CascadeType.MERGE)
 	private User punU;
+	
 	@ManyToOne(cascade = CascadeType.MERGE)
 	private Game punG;
+	
 	public Valorar( User punU, int puntuacion,Game punG) {
 		super();
 		this.puntuacion = puntuacion;
