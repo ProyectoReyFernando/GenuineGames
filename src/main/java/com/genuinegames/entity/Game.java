@@ -38,10 +38,10 @@ public class Game {
 	@Column(name = "votes",columnDefinition="Decimal(10)default '0'")
 	private int votes;
 
-	@OneToMany(mappedBy = "game")
+	@OneToMany(mappedBy = "game", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private Collection<Comments> comments;
 	
-	@OneToMany(mappedBy = "punG")
+	@OneToMany(mappedBy = "punG", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private Collection<Valorar> valoracion;
 
 	public Game() {
