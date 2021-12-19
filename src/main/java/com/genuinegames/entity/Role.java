@@ -22,7 +22,7 @@ public class Role {
 	@Column(name = "name")
 	private String name;
 
-	@OneToMany(mappedBy = "role", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OneToMany(mappedBy = "role")
 	private Collection<User> user;
 
 	public Role() {
